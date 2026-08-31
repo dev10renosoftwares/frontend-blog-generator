@@ -1,0 +1,367 @@
+<div class="query-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+
+    <div>
+      <h1>Raise a Query</h1>
+      <p>
+        Have an issue or question? Submit a query and track its progress here.
+      </p>
+    </div>
+
+    <button
+      class="new-query-btn"
+      (click)="openQueryModal()">
+
+      <span>+</span>
+      Raise New Query
+
+    </button>
+
+  </div>
+
+
+  <!-- STATISTICS -->
+  <div class="stats-container">
+
+  
+
+
+    <div class="stat-card">
+      <div class="stat-icon pending-icon">⏳</div>
+
+      <div>
+        <p>Pending</p>
+        <h2>{{ getCount('Pending') }}</h2>
+      </div>
+    </div>
+
+     <div class="stat-card">
+      <div class="stat-icon progress-icon">🔃</div>
+
+      <div>
+        <p>In progress</p>
+        <h2>{{ getCount('In progress') }}</h2>
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-icon resolved-icon">✓</div>
+
+      <div>
+        <p>Resolved</p>
+        <h2>{{ getCount('Resolved') }}</h2>
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-icon rejected-icon">!</div>
+
+      <div>
+        <p>Reach Soon</p>
+        <h2>{{ getCount('Reach Soon') }}</h2>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- QUERY SECTION -->
+  <div class="query-section">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Previous Queries</h2>
+
+        <p>
+          View and manage all your submitted queries.
+        </p>
+      </div>
+
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          placeholder="Search queries..."
+          [(ngModel)]="searchText">
+
+      </div>
+
+    </div>
+
+
+    <!-- FILTER -->
+    <div class="filter-container">
+
+      <button
+        [class.active]="selectedStatus === 'All'"
+        (click)="filterQueries('All')">
+        All
+      </button>
+
+
+      <button
+        [class.active]="selectedStatus === 'Pending'"
+        (click)="filterQueries('Pending')">
+        Pending
+      </button>
+
+       <button
+        [class.active]="selectedStatus === 'In-progress'"
+        (click)="filterQueries('In-progress')">
+        In progress
+      </button>
+
+      <button
+        [class.active]="selectedStatus === 'Resolved'"
+        (click)="filterQueries('Resolved')">
+        Resolved
+      </button>
+
+      <button
+        [class.active]="selectedStatus === 'Reach Soon'"
+        (click)="filterQueries('Reach Soon')">
+        Reach Soon
+      </button>
+
+    </div>
+
+
+    <!-- QUERY LIST -->
+    <div class="queries-list">
+
+      <div
+        class="query-card"
+        *ngFor="let query of filteredQueries()">
+
+        <div class="query-main">
+
+          <!-- TOP -->
+          <div class="query-top">
+
+            <div>
+
+              <span class="query-id">
+                {{ query.id }}
+              </span>
+
+              <h3>
+                {{ query.title }}
+              </h3>
+
+            </div>
+
+
+            <!-- STATUS -->
+            <span
+              class="status"
+              [ngClass]="getStatusClass(query.status)">
+
+              <span class="status-dot"></span>
+
+              {{ query.status }}
+
+            </span>
+
+          </div>
+
+
+          <!-- DESCRIPTION -->
+          <p class="query-description">
+            {{ query.description }}
+          </p>
+
+
+          <!-- FOOTER -->
+          <div class="query-footer">
+
+
+
+            <div class="query-info">
+
+              <span>Submitted:</span>
+
+              <strong>
+                {{ query.date }}
+              </strong>
+
+            </div>
+
+
+            <!-- EDIT / DELETE -->
+            <div class="query-actions">
+
+              <button
+                type="button"
+                class="edit-btn"
+                (click)="editQuery(query)">
+
+                Edit
+
+              </button>
+
+
+            
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- EMPTY -->
+      <div
+        class="empty-state"
+        *ngIf="filteredQueries().length === 0">
+
+        <div class="empty-icon">
+          ⌕
+        </div>
+
+        <h3>
+          No queries found
+        </h3>
+
+        <p>
+          Try changing your search or filter.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- ADD / EDIT QUERY MODAL -->
+<!-- ===================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showModal"
+  (click)="closeQueryModal()">
+
+
+  <div
+    class="query-modal"
+    (click)="$event.stopPropagation()">
+
+
+    <!-- HEADER -->
+    <div class="modal-header">
+
+      <div>
+
+        <h2>
+          {{ isEditing ? 'Edit Query' : 'Raise a New Query' }}
+        </h2>
+
+        <p>
+          {{
+            isEditing
+              ? 'Update the details of your query.'
+              : 'Tell us about the issue you are facing.'
+          }}
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeQueryModal()">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <!-- FORM -->
+    <form (ngSubmit)="submitQuery()">
+
+
+      <!-- TITLE -->
+      <div class="form-group">
+
+        <label>
+          Query Title
+        </label>
+
+        <input
+          type="text"
+          name="title"
+          placeholder="Enter your query title"
+          [(ngModel)]="newQuery.title"
+          required>
+
+      </div>
+
+
+
+
+      <!-- DESCRIPTION -->
+      <div class="form-group">
+
+        <label>
+          Describe your issue
+        </label>
+
+        <textarea
+          name="description"
+          rows="5"
+          placeholder="Explain your issue in detail..."
+          [(ngModel)]="newQuery.description"
+          required>
+        </textarea>
+
+      </div>
+
+
+      <!-- ACTIONS -->
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeQueryModal()">
+
+          Cancel
+
+        </button>
+
+
+        <button
+          type="submit"
+          class="submit-btn">
+
+          {{ isEditing ? 'Save Changes' : 'Submit Query' }}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+

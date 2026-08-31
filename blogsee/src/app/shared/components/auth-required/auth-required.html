@@ -1,0 +1,43 @@
+@if (authService.showAuthRequired) {
+
+  <div class="auth-overlay">
+
+    <div class="auth-card">
+
+      <button class="close-btn" (click)="close()">
+        ×
+      </button>
+
+      <div class="auth-icon">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+
+      <div class="auth-content">
+        <h2>Login Required</h2>
+
+        <p>
+          Please login or register to create your blog.
+        </p>
+      </div>
+
+      <div class="auth-actions">
+
+        <button
+          class="login-btn"
+          (click)="login()">
+          Login
+        </button>
+
+        <button
+          class="register-btn"
+          (click)="register()">
+          Register
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

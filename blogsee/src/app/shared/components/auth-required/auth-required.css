@@ -1,0 +1,214 @@
+/* =========================
+   OVERLAY
+========================= */
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 99999;
+
+  background: rgba(7, 13, 25, 0.72);
+
+  font-family: 'Inter', sans-serif;
+
+  backdrop-filter: blur(1px);
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.auth-card {
+  position:relative;
+
+  width: 420px;
+  max-width: calc(100% - 40px);
+
+  padding: 34px;
+
+  background: #151E2F;
+
+  border: 1px solid #31405A;
+  border-radius: 18px;
+
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+
+  text-align: center;
+
+  z-index: 999999;
+}
+
+
+/* =========================
+   CLOSE
+========================= */
+
+.close-btn {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #9FAEC7;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #24344E;
+  color: #F4F7FD;
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.auth-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 4px auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: #24344E;
+
+  border: 1px solid #3A4D70;
+
+  color: #9CB8FF;
+
+  font-size: 22px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.auth-content h2 {
+  margin: 0;
+
+  color: #F4F7FD;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.auth-content p {
+  margin: 12px auto 0;
+
+  max-width: 320px;
+
+  color: #A5B2C9;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.auth-actions {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 28px;
+}
+
+.auth-actions button {
+  flex: 1;
+
+  height: 44px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-btn {
+  background: transparent;
+
+  border: 1px solid #526B9B;
+
+  color: #DDE7FF;
+}
+
+.login-btn:hover {
+  background: #24344E;
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-btn {
+  border: 1px solid #7896D1;
+
+  background: #324A78;
+
+  color: #FFFFFF;
+}
+
+.register-btn:hover {
+  background: #405E94;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+  .auth-card {
+    padding: 28px 22px;
+  }
+
+  .auth-actions {
+    flex-direction: column;
+  }
+}

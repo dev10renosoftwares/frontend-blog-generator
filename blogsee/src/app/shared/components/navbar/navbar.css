@@ -1,0 +1,1611 @@
+/* =========================================================
+   BLOGSEE — CLEAN LIGHT AI THEME
+========================================================= */
+
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+.blogsee-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* =========================
+   ROBOT
+========================= */
+
+.ai-robot {
+  position: relative;
+  width: 48px;
+  height: 54px;
+  animation: robotFloat 2s ease-in-out infinite;
+}
+
+/* Antenna */
+
+.antenna {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 9px;
+  background: #8b5cf6;
+  transform: translateX(-50%);
+}
+
+.antenna span {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a78bfa;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px #8b5cf6;
+
+  animation: antennaBlink 1.5s infinite;
+}
+
+/* Head */
+
+.robot-head {
+  position: absolute;
+  top: 9px;
+  left: 7px;
+  width: 34px;
+  height: 27px;
+
+  background: linear-gradient(
+    145deg,
+    #34304d,
+    #171525
+  );
+
+  border: 2px solid #8b5cf6;
+  border-radius: 10px;
+
+  box-shadow:
+    0 0 12px rgba(139, 92, 246, 0.45),
+    inset 0 0 8px rgba(139, 92, 246, 0.15);
+}
+
+/* Ears */
+
+.robot-ear {
+  position: absolute;
+  top: 7px;
+  width: 5px;
+  height: 12px;
+  border-radius: 3px;
+  background: #8b5cf6;
+}
+
+.robot-ear.left {
+  left: -6px;
+}
+
+.robot-ear.right {
+  right: -6px;
+}
+
+/* Face */
+
+.robot-face {
+  position: absolute;
+  inset: 5px;
+  border-radius: 6px;
+}
+
+/* Eyes */
+
+.robot-eye {
+  position: absolute;
+  top: 5px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: white;
+
+  box-shadow:
+    0 0 7px #8b5cf6;
+
+  animation: eyeBlink 3s infinite;
+}
+
+.left-eye {
+  left: 6px;
+}
+
+.right-eye {
+  right: 6px;
+}
+
+/* Mouth */
+
+.robot-mouth {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+
+  width: 11px;
+  height: 3px;
+
+  border-radius: 5px;
+  background: #8b5cf6;
+
+  transform: translateX(-50%);
+}
+
+/* Body */
+
+.robot-body {
+  position: absolute;
+
+  left: 12px;
+  top: 37px;
+
+  width: 24px;
+  height: 15px;
+
+  border-radius: 6px 6px 8px 8px;
+
+  background: linear-gradient(
+    145deg,
+    #34304d,
+    #171525
+  );
+
+  border: 2px solid #8b5cf6;
+
+  box-shadow:
+    0 0 10px rgba(139, 92, 246, 0.35);
+}
+
+/* AI chest */
+
+.robot-chest {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 13px;
+  height: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background: #8b5cf6;
+
+  box-shadow: 0 0 7px rgba(139, 92, 246, 0.8);
+}
+
+.robot-chest span {
+  font-size: 5px;
+  font-weight: 800;
+  color: white;
+}
+
+/* Arms */
+
+.robot-arm {
+  position: absolute;
+
+  top: 39px;
+
+  width: 5px;
+  height: 13px;
+
+  border-radius: 5px;
+
+  background: #8b5cf6;
+
+  transform-origin: top center;
+}
+
+.left-arm {
+  left: 7px;
+  transform: rotate(15deg);
+}
+
+.right-arm {
+  right: 7px;
+  transform: rotate(-15deg);
+}
+
+/* =========================
+   BLOGSEE TEXT
+========================= */
+
+.blogsee-text {
+  font-size: 21px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  color: #ffffff;
+
+  transition:
+    letter-spacing 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+.blogsee-logo:hover .blogsee-text {
+  letter-spacing: 2.5px;
+
+  text-shadow:
+    0 0 10px rgba(139, 92, 246, 0.7);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes robotFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(-3px) rotate(2deg);
+  }
+}
+
+@keyframes antennaBlink {
+
+  0%,
+  40%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes eyeBlink {
+
+  0%,
+  45%,
+  48%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  46%,
+  47% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e8ebf2;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 24px;
+
+    z-index: 1000;
+
+    box-shadow: 0 2px 10px rgba(40, 55, 80, 0.05);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+
+    transition: transform 0.25s ease;
+}
+
+.logo:hover {
+    transform: translateY(-1px);
+}
+
+.logo i {
+    color: #596ee0;
+    font-size: 22px;
+}
+
+.logo img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.logo span {
+    color: #273142;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: .4px;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification-btn {
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    background: transparent;
+
+    color: #687386;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    padding: 0;
+
+    border-radius: 9px;
+
+    transition: all 0.25s ease;
+}
+
+.notification-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.notification-btn:hover {
+    color: #5369d5;
+    background: #f1f4ff;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-btn {
+    background: none;
+    border: none;
+
+    color: #536075;
+
+    cursor: pointer;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    transition: all 0.25s ease;
+}
+
+.login-btn:hover {
+    color: #5369d5;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON
+========================================================= */
+
+.register-btn {
+    background: linear-gradient(
+        135deg,
+        #596fe4,
+        #6f5ce7
+    );
+
+    color: #ffffff;
+
+    border: none;
+
+    padding: 10px 22px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 14px rgba(89, 111, 228, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(89, 111, 228, 0.32);
+
+    filter: brightness(1.05);
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    cursor: pointer;
+
+    padding: 5px 8px;
+
+    border-radius: 10px;
+
+    transition: background 0.25s ease;
+}
+
+.profile:hover {
+    background: #f4f6fa;
+}
+
+.profile-initial {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #596fe4,
+        #725fe7
+    ) !important;
+
+    color: #ffffff !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    box-shadow:
+        0 4px 10px rgba(89, 111, 228, 0.20);
+}
+
+.username {
+    color: #354052 !important;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DROPDOWN ARROW
+========================================================= */
+
+.dropdown-arrow {
+    display: inline-block !important;
+
+    width: 9px;
+    height: 9px;
+
+    border-right: 2px solid #687386;
+    border-bottom: 2px solid #687386;
+
+    transform: rotate(45deg);
+
+    margin-left: 4px;
+    margin-top: -5px;
+
+    transition: all 0.25s ease;
+}
+
+.profile:hover .dropdown-arrow {
+    border-color: #596fe4;
+}
+
+
+/* =========================================================
+   BLOGSEE — AI CREDIT DASHBOARD
+========================================================= */
+
+.credit-widget {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    position: relative;
+
+    padding: 10px 13px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #faf9ff
+    );
+
+    border: 1px solid #e6e1f2;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(83, 63, 130, 0.05);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* ---------------------------------------------------------
+   SOFT AI GLOW
+--------------------------------------------------------- */
+
+.credit-widget::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    top: -65px;
+    left: -35px;
+
+    background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.12),
+        transparent 70%
+    );
+
+    border-radius: 50%;
+
+    animation: creditGlow 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   MOVING SCAN LIGHT
+--------------------------------------------------------- */
+
+.credit-widget::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -80px;
+
+    width: 55px;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(139, 92, 246, 0.07),
+        transparent
+    );
+
+    transform: skewX(-18deg);
+
+    animation: creditScan 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   HOVER
+--------------------------------------------------------- */
+
+.credit-widget:hover {
+
+    transform: translateY(-2px);
+
+    border-color: #d8cfee;
+
+    box-shadow:
+        0 8px 24px rgba(83, 63, 130, 0.09),
+        0 0 20px rgba(139, 92, 246, 0.05);
+}
+
+
+/* =========================================================
+   CREDIT TITLE
+========================================================= */
+
+.credit-title {
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 13px;
+
+    color: #817b91;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* AI indicator */
+
+.credit-title::before {
+
+    content: "✦";
+
+    width: 19px;
+    height: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: #f0ebfb;
+
+    color: #8058dc;
+
+    font-size: 11px;
+
+    box-shadow:
+        0 0 8px rgba(139, 92, 246, 0.12);
+
+    animation: aiSpark 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   CREDIT COUNT
+========================================================= */
+
+.credit-count {
+
+    display: flex;
+    align-items: baseline;
+
+    gap: 5px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #303044;
+
+    letter-spacing: 0.1px;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.progress-bar {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 8px;
+
+    margin-top: 1px;
+
+    background: #eeebf4;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 1px 2px rgba(50, 40, 70, 0.05);
+}
+
+
+/* =========================================================
+   PROGRESS FILL
+========================================================= */
+
+.progress-fill {
+
+    position: relative;
+
+    width: 75.4%;
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #7352d5,
+        #8b5cf6,
+        #a78bfa
+    );
+
+    box-shadow:
+        0 0 8px rgba(139, 92, 246, 0.28),
+        0 0 15px rgba(139, 92, 246, 0.10);
+
+    overflow: hidden;
+
+    animation:
+        progressAnimation 1.2s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+}
+
+
+/* ---------------------------------------------------------
+   MOVING LIGHT INSIDE PROGRESS
+--------------------------------------------------------- */
+
+.progress-fill::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -50px;
+
+    width: 45px;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.65),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    animation: progressScan 2.2s linear infinite;
+}
+
+
+/* ---------------------------------------------------------
+   GLOWING ENERGY POINT
+--------------------------------------------------------- */
+
+.progress-fill::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 1px;
+
+    top: 50%;
+
+    width: 6px;
+    height: 6px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 5px #ffffff,
+        0 0 10px rgba(139, 92, 246, 0.8);
+
+    animation: energyPoint 1.4s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes creditGlow {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: scale(1.25);
+        opacity: 0.9;
+    }
+}
+
+
+@keyframes creditScan {
+
+    0% {
+        left: -80px;
+    }
+
+    45%,
+    100% {
+        left: 120%;
+    }
+}
+
+
+@keyframes aiSpark {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.75;
+    }
+
+    50% {
+        transform: scale(1.18) rotate(8deg);
+        opacity: 1;
+    }
+}
+
+
+@keyframes progressScan {
+
+    0% {
+        left: -50px;
+    }
+
+    100% {
+        left: 110%;
+    }
+}
+
+
+@keyframes energyPoint {
+
+    0%,
+    100% {
+        transform: translateY(-50%) scale(0.8);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(-50%) scale(1.25);
+        opacity: 1;
+    }
+}
+
+
+@keyframes progressAnimation {
+
+    from {
+        width: 0;
+        opacity: 0.4;
+    }
+
+    to {
+        width: 75.4%;
+        opacity: 1;
+    }
+}
+/* =========================================================
+   LOGIN OVERLAY
+========================================================= */
+
+.login-overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(33, 43, 61, 0.30);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    animation: fadeIn 0.25s ease;
+}
+
+
+/* =========================================================
+   LOGIN WINDOW
+========================================================= */
+
+.login-window {
+    position: relative;
+
+    width: 400px;
+
+    padding: 32px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 14px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 20px 60px rgba(35, 50, 75, 0.15);
+
+    animation: modalIn 0.3s ease;
+}
+
+
+/* =========================================================
+   CLOSE LOGIN
+========================================================= */
+
+.close-login {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    background: transparent;
+
+    border: none;
+
+    color: #8b95a5;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+    transition: all 0.25s ease;
+}
+
+.close-login:hover {
+    color: #3d485a;
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   LOGIN HEADER
+========================================================= */
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.login-header h2 {
+    margin: 0 0 8px;
+
+    color: #283346;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+.login-header p {
+    margin: 0;
+
+    color: #8993a3;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #465267;
+
+    font-size: 15px;
+
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+
+    height: 43px;
+
+    padding: 0 12px;
+
+    background: #fafbfc;
+
+    border: 1px solid #dfe4ec;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-weight: 400;
+
+    color: #303b4e;
+
+    font-size: 14px;
+
+    transition: all 0.25s ease;
+}
+
+.form-group input::placeholder {
+    color: #a1a9b6;
+}
+
+.form-group input:hover {
+    border-color: #cbd3e0;
+}
+
+.form-group input:focus {
+    background: #ffffff;
+
+    border-color: #6579db;
+
+    box-shadow:
+        0 0 0 3px rgba(89, 111, 228, 0.10);
+}
+
+
+/* =========================================================
+   LOGIN BUTTON — VIBRANT
+========================================================= */
+
+.modal-login-btn {
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #566ee5,
+        #735ee7
+    );
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(86, 110, 229, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+.modal-login-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(86, 110, 229, 0.32);
+
+    filter: brightness(1.05);
+}
+
+.modal-login-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   REGISTER OPTION
+========================================================= */
+
+.register-option {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 22px;
+
+    font-size: 13px;
+
+    color: #8993a3;
+}
+
+.register-link {
+    background: transparent;
+
+    border: none;
+
+    padding: 0;
+
+    color: #566bd3;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: #3f55bd;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   REGISTER OVERLAY
+========================================================= */
+
+.register-overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(33, 43, 61, 0.30);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    animation: fadeIn 0.25s ease;
+}
+
+
+/* =========================================================
+   REGISTER WINDOW
+========================================================= */
+
+.register-window {
+    position: relative;
+
+    width: 400px;
+
+    padding: 32px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 14px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 20px 60px rgba(35, 50, 75, 0.15);
+
+    animation: modalIn 0.3s ease;
+}
+
+
+/* =========================================================
+   CLOSE REGISTER
+========================================================= */
+
+.close-register {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    background: transparent;
+
+    border: none;
+
+    color: #8b95a5;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+    transition: all 0.25s ease;
+}
+
+.close-register:hover {
+    color: #3d485a;
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   REGISTER HEADER
+========================================================= */
+
+.register-header {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.register-header h2 {
+    margin: 0 0 8px;
+
+    color: #283346;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+.register-header p {
+    margin: 0;
+
+    color: #8993a3;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON — VIBRANT
+========================================================= */
+
+.modal-register-btn {
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #566ee5,
+        #735ee7
+    );
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(86, 110, 229, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+.modal-register-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(86, 110, 229, 0.32);
+
+    filter: brightness(1.05);
+}
+
+.modal-register-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   LOGIN OPTION
+========================================================= */
+
+.login-option {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 22px;
+
+    font-size: 13px;
+
+    color: #8993a3;
+}
+
+.login-link {
+    background: transparent;
+
+    border: none;
+
+    padding: 0;
+
+    color: #566bd3;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.login-link:hover {
+    color: #3f55bd;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.error-message {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #d75f69;
+
+    font-size: 12px;
+}
+
+.form-group input.ng-invalid.ng-touched {
+    border-color: #dc6973;
+
+    box-shadow:
+        0 0 0 3px rgba(220, 105, 115, 0.07);
+}
+
+.form-group input.ng-valid.ng-touched {
+    border-color: #55a485;
+
+    box-shadow:
+        0 0 0 3px rgba(85, 164, 133, 0.06);
+}
+
+
+/* =========================================================
+   USER DROPDOWN
+========================================================= */
+
+.user-dropdown {
+    position: absolute;
+
+    top: 55px;
+    right: 0;
+
+    width: 160px;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 12px 30px rgba(35, 50, 75, 0.12);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    z-index: 1000;
+
+    animation: dropdownIn 0.2s ease;
+}
+
+
+/* =========================================================
+   DROPDOWN BUTTONS
+========================================================= */
+
+.user-dropdown button {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    background: transparent;
+
+    border: none;
+
+    border-radius: 7px;
+
+    color: #4c586b;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.user-dropdown button:hover {
+    background: #f0f3ff;
+
+    color: #5066c4;
+
+    transform: translateX(2px);
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.user-dropdown button:last-child {
+    color: #d8626c;
+}
+
+.user-dropdown button:last-child:hover {
+    background: #fff1f2;
+
+    color: #d34e59;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+@keyframes dropdownIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes progressAnimation {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 75.4%;
+    }
+
+}
