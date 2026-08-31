@@ -1,0 +1,551 @@
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+.feedback-page {
+  font-family: 'Inter', sans-serif;
+}
+/* =========================================
+   FEEDBACK PAGE
+   ========================================= */
+
+.feedback-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #0F1726;
+  color: #FFFFFF;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   TOP HEADER
+   ========================================= */
+
+.feedback-header {
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background: #151E2F;
+
+  border-bottom: 1px solid #31405A;
+}
+
+
+/* Back */
+
+.back-btn {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  color: #FFFFFF;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  color: #9CB8FF;
+}
+
+
+/* Divider */
+
+.header-divider {
+  width: 1px;
+  height: 25px;
+
+  margin: 0 10px;
+
+  background: #31405A;
+}
+
+
+/* App Icon */
+
+.app-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  background: #FFFFFF;
+
+  color: #0F1726;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+/* App Name */
+
+.app-name {
+  margin-left: 8px;
+
+  color: #FFFFFF;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.feedback-layout {
+  display: flex;
+
+  gap: 26px;
+
+  padding: 24px 26px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.feedback-sidebar {
+  width: 150px;
+  min-width: 150px;
+
+  min-height: 380px;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  background: #151E2F;
+
+  border: 1px solid #31405A;
+  border-radius: 7px;
+}
+
+
+/* Sidebar title */
+
+.sidebar-title {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 14px;
+
+  color: #FFFFFF;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* History */
+
+.feedback-history {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.history-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 9px;
+
+  border-radius: 5px;
+
+  background: #0F1726;
+
+  border: 1px solid #24344E;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.history-item:hover {
+  background: #24344E;
+
+  border-color: #526B9B;
+}
+
+.history-item span {
+  color: #A5B2C9;
+
+  font-size: 10px;
+}
+
+.history-item small {
+  color: #9CB8FF;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   MAIN FEEDBACK
+   ========================================= */
+
+.feedback-main {
+  flex: 1;
+
+  max-width: 720px;
+
+  margin: 0 auto;
+
+  padding-top: 20px;
+}
+
+
+/* Heading */
+
+.feedback-main h1 {
+  margin: 0 0 4px;
+
+  color: #FFFFFF;
+
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.feedback-subtitle {
+  margin: 0 0 14px;
+
+  color: #8F9DB5;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   FEEDBACK CARD
+   ========================================= */
+
+.feedback-card {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  background: #151E2F;
+
+  border: 1px solid #31405A;
+  border-radius: 9px;
+}
+
+
+/* =========================================
+   RATING
+   ========================================= */
+
+.rating-section {
+  margin-bottom: 18px;
+}
+
+.rating-section label,
+.feedback-input label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #FFFFFF;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* Stars */
+
+.stars {
+  display: flex;
+
+  gap: 5px;
+}
+
+.stars button {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #31405A;
+  border-radius: 5px;
+
+  background: #24344E;
+
+  color: #596780;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.stars button:hover,
+.stars button:focus {
+  background: #324A78;
+
+  border-color: #526B9B;
+
+  color: #9CB8FF;
+}
+
+
+/* =========================================
+   TEXTAREA
+   ========================================= */
+
+.feedback-input {
+  width: 100%;
+}
+
+.feedback-input textarea {
+  width: 100%;
+
+  min-height: 180px;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  resize: vertical;
+
+  border: 1px solid #31405A;
+  border-radius: 7px;
+
+  background: #0F1726;
+
+  color: #FFFFFF;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.feedback-input textarea::placeholder {
+  color: #596780;
+}
+
+.feedback-input textarea:focus {
+  border-color: #526B9B;
+
+  background: #111B2C;
+}
+
+
+/* =========================================
+   SUBMIT
+   ========================================= */
+
+.submit-area {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 12px;
+}
+
+.submit-btn {
+  padding: 9px 18px;
+
+  border: 1px solid #526B9B;
+  border-radius: 6px;
+
+  background: #324A78;
+
+  color: #FFFFFF;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #3A578C;
+}
+
+.submit-btn:active {
+  background: #2C426C;
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
+
+button:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #9CB8FF;
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  .feedback-layout {
+    flex-direction: column;
+
+    padding: 16px;
+  }
+
+  .feedback-sidebar {
+    width: 100%;
+    min-width: 0;
+
+    min-height: auto;
+  }
+
+  .feedback-history {
+    flex-direction: row;
+
+    overflow-x: auto;
+  }
+
+  .history-item {
+    min-width: 130px;
+  }
+
+  .feedback-main {
+    padding-top: 5px;
+  }
+}
+
+
+@media (max-width: 450px) {
+
+  .feedback-card {
+    padding: 15px;
+  }
+
+  .feedback-main h1 {
+    font-size: 19px;
+  }
+
+  .stars button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .submit-area {
+    justify-content: stretch;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+/* Header */
+
+.app-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* Sidebar */
+
+.sidebar-title {
+  font-size: 12px;
+}
+
+.history-item span {
+  font-size: 11px;
+}
+
+.history-item small {
+  font-size: 11px;
+}
+
+
+/* Main heading */
+
+.feedback-main h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.feedback-subtitle {
+  font-size: 14px;
+}
+
+
+/* Feedback card */
+
+.rating-section label,
+.feedback-input label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* Stars */
+
+.stars button {
+  font-size: 20px;
+}
+
+
+/* Textarea */
+
+.feedback-input textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* Submit button */
+
+.submit-btn {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* Sidebar */
+
+.feedback-sidebar {
+  font-family: 'Inter', sans-serif;
+}

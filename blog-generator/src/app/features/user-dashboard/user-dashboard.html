@@ -1,0 +1,267 @@
+<div class="user-dashboard">
+
+  <!-- Back Button -->
+
+  <button class="back-btn" (click)="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Home
+  </button>
+
+
+  <!-- Profile Section -->
+
+  <section class="profile-section">
+
+    <div class="profile-info">
+
+      <div class="profile-initial">
+        {{ username.charAt(0).toUpperCase() }}
+      </div>
+
+      <div class="profile-details">
+        <h1>{{ username }}</h1>
+        <p>Welcome back to your dashboard</p>
+      </div>
+
+    </div>
+
+
+    <button class="edit-profile-btn" routerLink="/update-profile">
+      <i class="fa-solid fa-pen"></i>
+      Update Profile
+    </button>
+
+  </section>
+
+
+  <!-- Dashboard Heading -->
+
+  <div class="dashboard-heading">
+
+    <div>
+      <h2>Your Dashboard</h2>
+      <p>Manage your blogs, profile and account activity.</p>
+    </div>
+
+  </div>
+
+
+  <!-- Dashboard Cards -->
+
+  <section class="dashboard-cards">
+
+    <!-- My Blogs -->
+
+    <div class="dashboard-card">
+
+      <div class="card-icon">
+        <i class="fa-solid fa-file-lines"></i>
+      </div>
+
+      <div class="card-content">
+        <p class="card-label">My Blogs</p>
+        <h3>0</h3>
+        <span>Blogs created</span>
+      </div>
+
+    </div>
+
+
+    <!-- Published Blogs -->
+
+    <div class="dashboard-card">
+
+      <div class="card-icon">
+        <i class="fa-solid fa-globe"></i>
+      </div>
+
+      <div class="card-content">
+        <p class="card-label">My Payments</p>
+        <h3>3</h3>
+        <span>Payments made</span>
+      </div>
+
+    </div>
+
+
+    <!-- Credits -->
+
+    <div class="dashboard-card">
+
+      <div class="card-icon">
+        <i class="fa-solid fa-coins"></i>
+      </div>
+
+      <div class="card-content">
+        <p class="card-label">Credits</p>
+        <h3>100</h3>
+        <span>Available credits</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Account Section -->
+
+  <section class="account-section">
+
+    <div class="section-header">
+      <h2>My Activity</h2>
+      <p>Manage your Activities</p>
+    </div>
+
+
+    <div class="account-item">
+
+      <div class="account-item-info">
+
+        <div class="account-icon">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div>
+          <h3>Followers</h3>
+          <p>Manage your followers and connections.</p>
+        </div>
+
+      </div>
+
+      <button class="account-action" routerLink="/followers">
+
+        See all
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+    <div class="account-item">
+
+      <div class="account-item-info">
+
+        <div class="account-icon">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div>
+          <h3>Following</h3>
+          <p>Manage your following list and connections.</p>
+        </div>
+
+      </div>
+
+      <button class="account-action" routerLink="/following">
+
+        See all
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+    <div class="account-item">
+
+      <div class="account-item-info">
+
+        <div class="account-icon">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <div>
+          <h3>Liked Blogs</h3>
+          <p>View and manage your liked blogs.</p>
+        </div>
+
+      </div>
+
+      <button class="account-action" routerLink="/likedblog">
+
+        See all
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+    <div class="account-item">
+
+      <div class="account-item-info">
+
+        <div class="account-icon">
+          <i class="fa-solid fa-comment"></i>
+        </div>
+
+        <div>
+          <h3>Commented Blogs</h3>
+          <p>View and manage your commented blogs.</p>
+        </div>
+
+      </div>
+
+      <button class="account-action">
+
+        See all
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+    <div class="account-item">
+
+      <div class="account-item-info">
+
+        <div class="account-icon">
+          <i class="fa-solid fa-retweet"></i>
+        </div>
+
+        <div>
+          <h3>My Reposts</h3>
+          <p>View and manage your reposted content.</p>
+        </div>
+
+      </div>
+
+      <button class="account-action">
+
+        See all
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+    <div class="account-item">
+
+      <div class="account-item-info">
+
+        <div class="account-icon">
+          <i class="fa-solid fa-bookmark"></i>
+        </div>
+
+        <div>
+          <h3>Saved Blogs</h3>
+          <p>View and manage your saved blogs.</p>
+        </div>
+
+      </div>
+
+      <button class="account-action">
+
+        See all
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+  </section>
+
+</div>

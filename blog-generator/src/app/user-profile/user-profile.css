@@ -1,0 +1,1015 @@
+/* =========================================
+   USER PROFILE PAGE
+========================================= */
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* =========================================
+   USER PROFILE PAGE
+========================================= */
+
+.user-profile-page {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 80% 5%,
+      rgba(123, 92, 255, 0.08),
+      transparent 30%
+    ),
+    #070b14;
+
+  color: #ffffff;
+
+  padding-bottom: 60px;
+}
+/* =========================================
+   AVATAR
+========================================= */
+
+.avatar-wrapper {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+
+.profile-avatar {
+  width: 125px;
+  height: 125px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 5px solid #0b101b;
+
+  background: #111827;
+}
+
+
+.online-dot {
+  position: absolute;
+
+  right: 10px;
+  bottom: 12px;
+
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  background: #38d996;
+
+  border: 3px solid #0b101b;
+}
+
+
+/* =========================================
+   USER DETAILS
+========================================= */
+
+.user-details {
+  flex: 1;
+
+  padding-top: 55px;
+}
+
+
+.name-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.name-row h1 {
+  margin: 0;
+
+  font-size: 27px;
+
+  font-weight: 700;
+}
+
+
+.verified {
+  color: #8b6cff;
+
+  font-size: 19px;
+}
+
+
+.handle {
+  margin: 5px 0 10px;
+
+  color: #7d8599;
+
+  font-size: 14px;
+}
+
+
+.bio {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: #aeb5c5;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   FOLLOW BUTTON
+========================================= */
+
+.profile-actions {
+  padding-top: 55px;
+}
+
+
+.follow-btn {
+  height: 43px;
+
+  padding: 0 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: linear-gradient(
+    135deg,
+    #8061ee,
+    #6744d3
+  );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+
+.follow-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(119, 81, 230, 0.3);
+}
+
+
+.follow-btn.following {
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  color: #c8cdd9;
+}
+
+
+/* =========================================
+   PROFILE STATS
+========================================= */
+
+.profile-stats {
+  display: flex;
+
+  gap: 45px;
+
+  padding: 0 0 25px 150px;
+}
+
+
+.stat {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.stat strong {
+  font-size: 18px;
+
+  color: #ffffff;
+}
+
+
+.stat span {
+  font-size: 12px;
+
+  color: #777f92;
+}
+
+
+.clickable {
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.clickable:hover strong {
+  color: #9274ff;
+}
+/* =========================================
+   PROFILE BODY
+========================================= */
+
+.profile-body {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 35px 30px;
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+.about-section {
+  padding: 25px;
+
+  margin-bottom: 30px;
+
+  border-radius: 14px;
+
+  background: #0c121e;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+.section-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+
+.section-heading i {
+  color: #8d6cff;
+
+  font-size: 18px;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: 17px;
+}
+
+
+.about-section p {
+  margin: 0;
+
+  color: #929aaa;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   PROFILE HEADER
+========================================= */
+
+.profile-header {
+  position: relative;
+
+  background: #0b101b;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.cover {
+  height: 190px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #121a2c,
+      #1a1530,
+      #11182a
+    );
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.cover::after {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -100px;
+  top: -250px;
+
+  border-radius: 50%;
+
+  background: rgba(128, 91, 255, 0.12);
+
+  filter: blur(40px);
+}
+
+
+.profile-content {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 0 30px;
+}
+
+
+.profile-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+  position: relative;
+
+  margin-top: -55px;
+
+  padding-bottom: 25px;
+}
+
+
+/* =========================================
+   BLOG SECTION
+========================================= */
+
+.blogs-section {
+  margin-top: 30px;
+}
+
+
+.blogs-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+
+.blogs-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+}
+
+
+.blogs-header p {
+  margin: 5px 0 0;
+
+  color: #747c90;
+
+  font-size: 13px;
+}
+
+
+/* SEARCH */
+
+.blog-search {
+  position: relative;
+
+  width: 280px;
+}
+
+
+.blog-search i {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #6f778a;
+}
+
+
+.blog-search input {
+  width: 100%;
+
+  height: 42px;
+
+  padding: 0 15px 0 40px;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #0d131f;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  font-size: 13px;
+}
+
+
+.blog-search input:focus {
+  border-color: rgba(130, 94, 245, 0.6);
+}
+
+
+/* =========================================
+   BLOG LIST
+========================================= */
+
+.blogs-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+/* =========================================
+   BLOG CARD
+========================================= */
+
+.blog-card {
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d131f,
+      #0b101a
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 13px;
+
+  transition: 0.25s;
+}
+
+
+.blog-card:hover {
+  border-color: rgba(130, 94, 245, 0.35);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   BLOG TOP
+========================================= */
+
+.blog-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.category {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  padding: 5px 9px;
+
+  border-radius: 5px;
+
+  background: rgba(128, 91, 255, 0.1);
+
+  color: #a78cff;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+.blog-top h3 {
+  margin: 0;
+
+  font-size: 19px;
+
+  font-weight: 650;
+
+  color: #ffffff;
+}
+
+
+.blog-date {
+  white-space: nowrap;
+
+  color: #697185;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   BLOG INFO
+========================================= */
+
+.blog-info {
+  display: flex;
+
+  gap: 18px;
+
+  margin-top: 10px;
+
+  color: #70798d;
+
+  font-size: 11px;
+}
+
+
+.blog-info span {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+
+.blog-info i {
+  color: #8263eb;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.blog-description {
+  max-width: 850px;
+
+  margin: 15px 0;
+
+  color: #969eaf;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   READ BUTTON
+========================================= */
+
+.read-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 13px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: rgba(128, 91, 255, 0.1);
+
+  color: #9a7cff;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.read-btn:hover {
+  background: rgba(128, 91, 255, 0.18);
+}
+
+
+/* =========================================
+   BLOG ACTIONS
+========================================= */
+
+.blog-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 18px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.blog-actions button {
+  width: 36px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #737b8e;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.blog-actions button:hover {
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #b7bdca;
+}
+
+
+.blog-actions button.active {
+  color: #9475ff;
+
+  background: rgba(128, 91, 255, 0.08);
+}
+
+
+.blog-actions button:first-child.active {
+  color: #ff6681;
+
+  background: rgba(255, 102, 129, 0.08);
+}
+
+
+.blog-actions .save-btn {
+  margin-left: auto;
+}
+
+
+/* =========================================
+   FULL BLOG MODAL
+========================================= */
+
+.blog-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(3, 6, 12, 0.82);
+
+  backdrop-filter: blur(8px);
+}
+
+
+.blog-modal {
+  width: min(900px, 100%);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  border-radius: 16px;
+
+  background: #0c121e;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.modal-header {
+  display: flex;
+
+  justify-content: flex-end;
+
+  padding: 16px 18px 0;
+}
+
+
+.close-btn {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: #8991a3;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+
+  color: white;
+}
+
+
+/* =========================================
+   FULL BLOG
+========================================= */
+
+.full-blog {
+  padding: 15px 55px 45px;
+}
+
+
+.full-category {
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  border-radius: 6px;
+
+  background: rgba(128, 91, 255, 0.1);
+
+  color: #a78cff;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.full-blog h1 {
+  margin: 18px 0 14px;
+
+  font-size: 31px;
+
+  line-height: 1.3;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   FULL BLOG META
+========================================= */
+
+.full-blog-meta {
+  display: flex;
+
+  gap: 20px;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+  color: #737c90;
+
+  font-size: 12px;
+}
+
+
+.full-blog-meta span {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+.full-blog-meta i {
+  color: #8868f0;
+}
+
+
+/* =========================================
+   FULL CONTENT
+========================================= */
+
+.full-blog-content {
+  padding-top: 28px;
+}
+
+
+.full-blog-content p {
+  margin: 0;
+
+  color: #b5bbc8;
+
+  font-size: 15px;
+
+  line-height: 2;
+
+  white-space: pre-line;
+}
+
+
+/* =========================================
+   FULL BLOG ACTIONS
+========================================= */
+
+.full-blog-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 35px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+.full-blog-actions button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 14px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  color: #8991a3;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.full-blog-actions button:hover {
+  color: white;
+
+  border-color: rgba(130, 94, 245, 0.3);
+}
+
+
+.full-blog-actions button.active {
+  color: #9678ff;
+
+  border-color: rgba(130, 94, 245, 0.3);
+}
+
+
+.full-blog-actions button:first-child.active {
+  color: #ff6681;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.no-blogs {
+  text-align: center;
+
+  padding: 70px 20px;
+
+  color: #777f91;
+}
+
+
+.no-blogs i {
+  font-size: 35px;
+
+  color: #8262eb;
+}
+
+
+.no-blogs h3 {
+  margin: 15px 0 6px;
+
+  color: white;
+}
+
+
+.no-blogs p {
+  margin: 0;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .blogs-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 15px;
+  }
+
+  .blog-search {
+    width: 100%;
+  }
+
+  .blog-top {
+    flex-direction: column;
+  }
+
+  .blog-date {
+    order: -1;
+  }
+
+  .full-blog {
+    padding: 10px 25px 30px;
+  }
+
+  .full-blog h1 {
+    font-size: 24px;
+  }
+
+  .full-blog-meta {
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+  .full-blog-actions {
+    flex-wrap: wrap;
+  }
+
+}

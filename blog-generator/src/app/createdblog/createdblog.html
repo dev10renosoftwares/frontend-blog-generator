@@ -1,0 +1,158 @@
+<div class="generated-blog-page">
+
+  <div class="blog-card">
+<!-- Version -->
+<div class="version">
+  Version: Original
+</div>
+    <!-- Header -->
+    <div class="blog-header">
+
+      <div class="title-area">
+
+        <h1>
+          {{ blog.title }}
+        </h1>
+
+        <div class="blog-meta">
+
+          <span>
+            Word Count:
+            <strong>{{ blog.wordCount }}</strong>
+          </span>
+
+          <span>
+            Category:
+            <strong>{{ blog.category }}</strong>
+          </span>
+
+          <span>
+            Language:
+            <strong>{{ blog.language }}</strong>
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- Status -->
+      <div class="status-area">
+
+        <span
+          class="status draft"
+          *ngIf="isDraft"
+        >
+          Draft
+        </span>
+
+        <span
+          class="status published"
+          *ngIf="isPublished"
+        >
+          Published
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+
+    <!-- Blog Content -->
+    <article class="blog-content">
+
+      <p
+        *ngFor="let paragraph of blog.content.trim().split('\n\n')"
+      >
+        {{ paragraph }}
+      </p>
+
+    </article>
+
+
+    <!-- Editing Actions -->
+    <div class="editing-actions">
+
+      <button
+        type="button"
+        (click)="aiImage()"
+      >
+        <span class="action-icon">✦</span>
+        AI Image
+      </button>
+
+      <button
+        type="button"
+        (click)="shortenBlog()"
+      >
+        Shorten
+      </button>
+
+      <button
+        type="button"
+        (click)="expandBlog()"
+      >
+        Expand
+      </button>
+
+      <button
+        type="button"
+        (click)="regenerateBlog()"
+      >
+        Re-generate
+      </button>
+
+    </div>
+
+
+    <!-- Publish / Draft -->
+    <div class="publish-section">
+
+      <div class="publish-info">
+
+        <h3>Ready to publish?</h3>
+
+        <p>
+          Save your blog as a draft or publish it for others to read.
+        </p>
+
+      </div>
+
+
+      <div class="publish-actions">
+
+        <button
+          type="button"
+          class="draft-btn"
+          (click)="saveDraft()"
+        >
+          Keep as Draft
+        </button>
+
+        <button
+          type="button"
+          class="publish-btn"
+          (click)="publishBlog()"
+        >
+          Publish
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Message -->
+    <div
+      class="action-message"
+      *ngIf="actionMessage"
+    >
+      {{ actionMessage }}
+    </div>
+
+  </div>
+
+</div>

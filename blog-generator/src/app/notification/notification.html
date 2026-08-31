@@ -1,0 +1,327 @@
+<div class="notifications-page">
+
+  <!-- Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Notifications</h1>
+
+      <p>
+        Stay updated with everything happening in your account.
+      </p>
+    </div>
+
+    <button
+      class="mark-all-btn"
+      (click)="markAllAsRead()"
+      [disabled]="unreadCount === 0"
+    >
+      ✓ Mark all as read
+    </button>
+
+  </div>
+
+
+  <!-- Notification Summary -->
+  <div class="notification-summary">
+
+    <div class="summary-icon">
+      🔔
+    </div>
+
+    <div class="summary-content">
+      <span class="summary-title">
+        Notifications
+      </span>
+
+      <span class="summary-text">
+
+        @if (unreadCount > 0) {
+          You have {{ unreadCount }} unread notification{{ unreadCount > 1 ? 's' : '' }}.
+        } @else {
+          You're all caught up.
+        }
+
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- Filters -->
+  <div class="notification-toolbar">
+
+    <div class="filters">
+
+      <button
+        [class.active]="activeFilter === 'all'"
+        (click)="setFilter('all')"
+      >
+        All
+
+        <span class="filter-count">
+          {{ notifications.length }}
+        </span>
+      </button>
+
+
+      <button
+        [class.active]="activeFilter === 'unread'"
+        (click)="setFilter('unread')"
+      >
+        Unread
+
+        @if (unreadCount > 0) {
+          <span class="filter-count unread-count">
+            {{ unreadCount }}
+          </span>
+        }
+      </button>
+
+
+      <button
+        [class.active]="activeFilter === 'read'"
+        (click)="setFilter('read')"
+      >
+        Read
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Notifications -->
+  <div class="notification-list">
+
+    @if (filteredNotifications.length > 0) {
+
+      @for (notification of filteredNotifications; track notification.id) {
+
+        <div
+  class="notification-card"
+  [class.unread]="!notification.isRead"
+  [class.read]="notification.isRead"
+  (click)="openNotification(notification)"
+>
+
+          <!-- Unread Indicator -->
+          @if (!notification.isRead) {
+            <span class="unread-dot"></span>
+          }
+
+
+          <!-- Icon -->
+          <div
+            class="notification-icon"
+            [class.query-icon]="notification.type === 'query'"
+            [class.reply-icon]="notification.type === 'reply'"
+            [class.announcement-icon]="notification.type === 'announcement'"
+            [class.update-icon]="notification.type === 'update'"
+          >
+            {{ getIcon(notification.type) }}
+          </div>
+
+
+          <!-- Content -->
+          <div class="notification-content">
+
+            <div class="notification-title-row">
+
+              <h3>
+                {{ notification.title }}
+              </h3>
+
+              @if (!notification.isRead) {
+                <span class="new-badge">
+                  NEW
+                </span>
+              }
+
+            </div>
+
+
+            <p>
+              {{ notification.message }}
+            </p>
+
+
+            <span class="notification-time">
+              {{ notification.time }}
+            </span>
+
+          </div>
+
+
+          <!-- Action -->
+          @if (!notification.isRead) {
+
+            <button
+              class="read-btn"
+              (click)="markAsRead(notification); $event.stopPropagation()"
+            >
+              Mark as read
+            </button>
+
+          }
+
+        </div>
+
+      }
+
+    } @else {
+
+      <!-- Empty State -->
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          🔔
+        </div>
+
+        @if (activeFilter === 'unread') {
+
+          <h2>No unread notifications</h2>
+
+          <p>
+            You're all caught up. There are no unread notifications.
+          </p>
+
+        } @else if (activeFilter === 'read') {
+
+          <h2>No read notifications</h2>
+
+          <p>
+            You don't have any read notifications yet.
+          </p>
+
+        } @else {
+
+          <h2>No notifications</h2>
+
+          <p>
+            You're all caught up. New notifications will appear here.
+          </p>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+<!-- Notification Detail Overlay -->
+
+@if (selectedNotification) {
+
+  <div
+    class="notification-overlay"
+    (click)="closeNotification()"
+  >
+
+    <div
+      class="notification-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- Modal Header -->
+
+      <div class="modal-header">
+
+        <span class="modal-label">
+          Notification
+        </span>
+
+        <button
+          class="close-btn"
+          (click)="closeNotification()"
+          aria-label="Close notification"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- Notification Icon -->
+
+      <div
+        class="modal-icon"
+        [class.query-icon]="selectedNotification.type === 'query'"
+        [class.reply-icon]="selectedNotification.type === 'reply'"
+        [class.announcement-icon]="selectedNotification.type === 'announcement'"
+        [class.update-icon]="selectedNotification.type === 'update'"
+      >
+        {{ getIcon(selectedNotification.type) }}
+      </div>
+
+
+      <!-- Notification Information -->
+
+      <div class="modal-content">
+
+        <h2>
+          {{ selectedNotification.title }}
+        </h2>
+
+        <span class="modal-time">
+          {{ selectedNotification.time }}
+        </span>
+
+        <p>
+          {{ selectedNotification.message }}
+        </p>
+
+
+        <!-- Notification Type -->
+
+        <div class="notification-info">
+
+          <div class="info-item">
+
+            <span class="info-label">
+              Type
+            </span>
+
+            <span class="info-value">
+              {{ selectedNotification.type | titlecase }}
+            </span>
+
+          </div>
+
+
+          @if (selectedNotification.type === 'query') {
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Status
+              </span>
+
+              <span class="resolved-status">
+                Resolved
+              </span>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- Footer -->
+
+      <div class="modal-footer">
+
+       
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

@@ -1,0 +1,276 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.sidebar{
+
+    width:270px;
+
+    height:calc(100vh - 64px);
+
+    position:fixed;
+
+    top:64px;
+
+    left:0;
+
+    background:#151E2F;
+
+    border-right:1px solid #2B3652;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+}
+
+/* ====================== */
+/* TOP */
+/* ====================== */
+
+.sidebar-top{
+
+    padding:22px 14px;
+
+}
+
+/* User */
+
+.user-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:40px;
+
+}
+
+.user-image{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    border:none;
+
+}
+
+.user-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.user-info h4{
+
+    color:#F8FAFC;
+
+    font-size:22px;
+
+    font-weight:500;
+
+    margin-bottom:4px;
+
+}
+
+.user-info span{
+
+    color:#AAB8D3;
+
+    font-size:15px;
+
+}
+
+/* Menu */
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.menu-item{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    background:none;
+
+    border:none;
+
+    color:#F5F7FD;
+
+    padding:12px 8px;
+
+    cursor:pointer;
+
+    border-radius:10px;
+
+    transition:.25s;
+
+    font-size:17px;
+
+}
+
+.menu-item:hover{
+
+    background:#202D46;
+
+}
+
+.menu-item i{
+
+    width:22px;
+
+    color:#D5E0F5;
+
+}
+
+/* Create */
+
+.create-btn{
+
+    margin-top:290px;
+
+    width:100%;
+
+    height:48px;
+
+    background:#2E4371;
+
+    border:none;
+
+    border-radius:8px;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.create-btn:hover{
+
+    background:#3B5692;
+
+}
+
+/* ===================== */
+/* Bottom */
+/* ===================== */
+
+.sidebar-bottom{
+
+    padding:5px;
+    border-top:1px solid #26344E;
+
+}
+
+/* Credit Button */
+
+.credit-btn{
+
+    width:100%;
+
+    height:42px;
+
+    background:transparent;
+
+    border:1px solid #5572AA;
+
+    border-radius:8px;
+
+    color:#EAF1FF;
+
+    cursor:pointer;
+
+    margin-bottom:18px;
+
+    transition:.3s;
+
+}
+
+.credit-btn:hover{
+
+    background:#243653;
+
+}
+
+/* Bottom Items */
+
+.bottom-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    width:100%;
+
+    padding:15px 9px;
+
+    background:none;
+
+    border:none;
+
+    color:#D7E0F0;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    border-radius:8px;
+
+    transition:.25s;
+
+}
+
+.bottom-item:hover{
+
+    background:#202D46;
+
+}
+
+.bottom-item i{
+
+    width:22px;
+
+}

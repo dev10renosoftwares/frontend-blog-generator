@@ -1,0 +1,475 @@
+<div class="user-profile-page">
+
+  <!-- ================= PROFILE HEADER ================= -->
+
+  <section class="profile-header">
+
+    <div class="cover"></div>
+
+    <div class="profile-content">
+
+      <div class="profile-top">
+
+        <!-- Profile Image -->
+        <div class="avatar-wrapper">
+
+          <img
+            [src]="user.profileImage"
+            [alt]="user.username"
+            class="profile-avatar"
+          />
+
+          <span
+            class="online-dot"
+            *ngIf="user.online">
+          </span>
+
+        </div>
+
+
+        <!-- User Information -->
+        <div class="user-details">
+
+          <div class="name-row">
+
+            <h1>{{ user.username }}</h1>
+
+            <i
+              *ngIf="user.verified"
+              class="bi bi-patch-check-fill verified">
+            </i>
+
+          </div>
+
+          <p class="handle">
+            @{{ user.handle }}
+          </p>
+
+          <p class="bio">
+            {{ user.bio }}
+          </p>
+
+        </div>
+
+
+        <!-- Follow -->
+        <div class="profile-actions">
+
+          <button
+            class="follow-btn"
+            [class.following]="isFollowing"
+            (click)="toggleFollow()">
+
+            <i
+              class="bi"
+              [class.bi-person-plus-fill]="!isFollowing"
+              [class.bi-person-check-fill]="isFollowing">
+            </i>
+
+            {{ isFollowing ? 'Following' : 'Follow' }}
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Statistics -->
+
+      <div class="profile-stats">
+
+        <div class="stat">
+
+          <strong>{{ user.blogs }}</strong>
+
+          <span>Blogs</span>
+
+        </div>
+
+
+        <div
+          class="stat clickable"
+          (click)="openFollowers()">
+
+          <strong>{{ user.followers }}</strong>
+
+          <span>Followers</span>
+
+        </div>
+
+
+        <div
+          class="stat clickable"
+          (click)="openFollowing()">
+
+          <strong>{{ user.following }}</strong>
+
+          <span>Following</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= BODY ================= -->
+
+  <main class="profile-body">
+
+
+    <!-- About -->
+
+    <section class="about-section">
+
+      <div class="section-heading">
+
+        <i class="bi bi-person-lines-fill"></i>
+
+        <h2>About</h2>
+
+      </div>
+
+      <p>
+        {{ user.about }}
+      </p>
+
+    </section>
+
+
+
+    <!-- ================= BLOGS ================= -->
+
+    <section class="blogs-section">
+
+      <div class="blogs-header">
+
+        <div>
+
+          <h2>Blogs</h2>
+
+          <p>
+            Explore {{ user.username }}'s latest thoughts and articles
+          </p>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="blog-search">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Search blogs..."
+            [value]="searchBlog"
+            (input)="searchBlog = $any($event.target).value"
+          />
+
+        </div>
+
+      </div>
+
+
+
+      <!-- BLOG LIST -->
+
+      <div class="blogs-list">
+
+        <article
+          class="blog-card"
+          *ngFor="let blog of filteredBlogs">
+
+
+          <!-- Blog Header -->
+
+          <div class="blog-top">
+
+            <div>
+
+              <span class="category">
+                {{ blog.category }}
+              </span>
+
+              <h3>
+                {{ blog.title }}
+              </h3>
+
+            </div>
+
+            <span class="blog-date">
+              {{ blog.date }}
+            </span>
+
+          </div>
+
+
+          <!-- Blog Information -->
+
+          <div class="blog-info">
+
+            <span>
+              <i class="bi bi-clock"></i>
+              {{ blog.readTime }} min read
+            </span>
+
+            <span>
+              <i class="bi bi-person"></i>
+              {{ user.username }}
+            </span>
+
+          </div>
+
+
+          <!-- Blog Preview -->
+
+          <p class="blog-description">
+            {{ blog.description }}
+          </p>
+
+
+          <!-- Read Full Blog -->
+
+          <button
+            class="read-btn"
+            (click)="openBlog(blog)">
+
+            Read Full Blog
+
+            <i class="bi bi-arrow-right"></i>
+
+          </button>
+
+
+          <!-- Actions -->
+
+          <div class="blog-actions">
+
+            <!-- Like -->
+
+            <button
+              [class.active]="blog.liked"
+              (click)="likeBlog(blog)"
+              title="Like">
+
+              <i
+                class="bi"
+                [class.bi-heart-fill]="blog.liked"
+                [class.bi-heart]="!blog.liked">
+              </i>
+
+            </button>
+
+
+            <!-- Comment -->
+
+            <button
+              (click)="commentBlog(blog)"
+              title="Comment">
+
+              <i class="bi bi-chat"></i>
+
+            </button>
+
+
+            <!-- Repost -->
+
+            <button
+              [class.active]="blog.reposted"
+              (click)="repostBlog(blog)"
+              title="Repost">
+
+              <i class="bi bi-repeat"></i>
+
+            </button>
+
+
+            <!-- Save -->
+
+            <button
+              class="save-btn"
+              [class.active]="blog.saved"
+              (click)="saveBlog(blog)"
+              title="Save">
+
+              <i
+                class="bi"
+                [class.bi-bookmark-fill]="blog.saved"
+                [class.bi-bookmark]="!blog.saved">
+              </i>
+
+            </button>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- No blogs -->
+
+      <div
+        class="no-blogs"
+        *ngIf="filteredBlogs.length === 0">
+
+        <i class="bi bi-journal-x"></i>
+
+        <h3>No blogs found</h3>
+
+        <p>
+          Try searching for something else.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ==================================================
+       FULL BLOG MODAL
+  ================================================== -->
+
+  <div
+    class="blog-modal-overlay"
+    *ngIf="selectedBlog"
+    (click)="closeBlog()">
+
+
+    <div
+      class="blog-modal"
+      (click)="$event.stopPropagation()">
+
+
+      <!-- Modal Header -->
+
+      <div class="modal-header">
+
+        <button
+          class="close-btn"
+          (click)="closeBlog()">
+
+          <i class="bi bi-x-lg"></i>
+
+        </button>
+
+      </div>
+
+
+      <!-- Blog Content -->
+
+      <div class="full-blog">
+
+        <span class="full-category">
+          {{ selectedBlog.category }}
+        </span>
+
+
+        <h1>
+          {{ selectedBlog.title }}
+        </h1>
+
+
+        <div class="full-blog-meta">
+
+          <span>
+            <i class="bi bi-person-circle"></i>
+
+            {{ user.username }}
+          </span>
+
+          <span>
+            <i class="bi bi-calendar3"></i>
+
+            {{ selectedBlog.date }}
+          </span>
+
+          <span>
+            <i class="bi bi-clock"></i>
+
+            {{ selectedBlog.readTime }} min read
+          </span>
+
+        </div>
+
+
+        <div class="full-blog-content">
+
+          <p>
+            {{ selectedBlog.content }}
+          </p>
+
+        </div>
+
+
+        <!-- Full Blog Actions -->
+
+        <div class="full-blog-actions">
+
+          <button
+            [class.active]="selectedBlog.liked"
+            (click)="likeBlog(selectedBlog)">
+
+            <i
+              class="bi"
+              [class.bi-heart-fill]="selectedBlog.liked"
+              [class.bi-heart]="!selectedBlog.liked">
+            </i>
+
+            Like
+
+          </button>
+
+
+          <button
+            (click)="commentBlog(selectedBlog)">
+
+            <i class="bi bi-chat"></i>
+
+            Comment
+
+          </button>
+
+
+          <button
+            [class.active]="selectedBlog.reposted"
+            (click)="repostBlog(selectedBlog)">
+
+            <i class="bi bi-repeat"></i>
+
+            Repost
+
+          </button>
+
+
+          <button
+            [class.active]="selectedBlog.saved"
+            (click)="saveBlog(selectedBlog)">
+
+            <i
+              class="bi"
+              [class.bi-bookmark-fill]="selectedBlog.saved"
+              [class.bi-bookmark]="!selectedBlog.saved">
+            </i>
+
+            Save
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,119 @@
+<div class="subscription-page">
+
+  <!-- Back Button -->
+
+  <button
+    class="back-btn"
+    (click)="goBack()"
+    aria-label="Go back"
+  >
+    <span class="back-arrow">←</span>
+  </button>
+
+
+  <!-- Header -->
+
+  <div class="subscription-header">
+
+    <!-- Icon -->
+
+    <div class="subscription-icon">
+      <span>✣</span>
+    </div>
+
+
+    <h1>
+      Subscription Plans
+    </h1>
+
+
+    <!-- Credits -->
+
+   
+
+  </div>
+
+
+  <!-- Plans -->
+
+  <div class="plans-container">
+
+    @for (plan of plans; track plan.id) {
+
+      <div class="plan-card">
+
+        <!-- Left Content -->
+
+        <div class="plan-content">
+
+          <h2>
+            {{ plan.name }}
+          </h2>
+
+
+          <div class="plan-price">
+            {{ plan.price }} /rs
+          </div>
+
+
+          <div class="plan-divider"></div>
+
+
+          <!-- Features -->
+
+          <div class="plan-features">
+
+            @for (feature of plan.features; track feature) {
+
+              <div class="feature">
+
+                <span class="feature-check">
+                  ✓
+                </span>
+
+                <span>
+                  {{ feature }}
+                </span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- Right Side -->
+
+        <div class="plan-action">
+
+          <!-- Credit Circle -->
+
+          <div class="credit-circle">
+
+            <span>
+              {{ plan.credits }}
+            </span>
+
+          </div>
+
+
+          <!-- Buy -->
+
+          <button
+            class="buy-btn"
+            (click)="buyPlan(plan)"
+          >
+            Buy
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>]
