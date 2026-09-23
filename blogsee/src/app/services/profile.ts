@@ -1,21 +1,18 @@
 
 import { Injectable } from '@angular/core';
-
-import {
-  HttpClient,
-  HttpHeaders
-} from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment.development';
+import { UserProfileDto } from '../ServiceModels/v1/Profile/UserProfileDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  private apiUrl =
-    'http://192.168.29.71:5229';
+  private readonly apiUrl =
+    `${environment.apiUrl}/Profile`;
 
 
   constructor(
@@ -23,39 +20,15 @@ export class ProfileService {
   ) {}
 
 
-  getProfile(): Observable<any> {
+  // ============================================================
+  // GET PROFILE
+  // ============================================================
 
-    const token =
-      localStorage.getItem(
-        'accessToken'
-      );
+  getProfile(): Observable<UserProfileDto> {
 
-
-    console.log(
-      'Profile JWT exists:',
-      !!token
+    return this.http.get<UserProfileDto>(
+      this.apiUrl
     );
-
-
-    const headers =
-      new HttpHeaders({
-
-        Authorization:
-          `Bearer ${token}`
-
-      });
-
-
-    return this.http.get<any>(
-
-      `${this.apiUrl}/api/v1/Profile`,
-
-      {
-        headers
-      }
-
-    );
-
   }
 
 }

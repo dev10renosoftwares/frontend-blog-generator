@@ -1,0 +1,318 @@
+<form
+  (ngSubmit)="generateBlog()"
+  #blogForm="ngForm"
+  novalidate
+  class="blog-generator-card"
+>
+
+  <!-- Header -->
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="title-section">
+
+        <h1>Blog Generator</h1>
+
+        <p>
+          Powered by
+          <span>BlogSee</span>
+        </p>
+
+      </div>
+
+      <!-- Language -->
+      <div class="language-selector">
+
+        <label for="language">
+          Language <span>*</span>
+        </label>
+
+        <select
+          id="language"
+          name="language"
+          [(ngModel)]="blog.language"
+          #language="ngModel"
+          required
+          [class.invalid]="language.invalid && language.touched"
+        >
+
+          <option value="" disabled>
+            Select language...
+          </option>
+
+          <option value="English">English</option>
+          <option value="Hindi">Hindi</option>
+          <option value="Urdu">Urdu</option>
+          <option value="Arabic">Arabic</option>
+
+        </select>
+
+        <small
+          class="error"
+          *ngIf="language.invalid && language.touched"
+        >
+          Please select a language.
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Category + Tone -->
+  <div class="form-row">
+
+    <!-- Category -->
+    <div class="form-group">
+
+      <label for="category">
+        Category <span>*</span>
+      </label>
+
+      <select
+        id="category"
+        name="category"
+        [(ngModel)]="blog.category"
+        #category="ngModel"
+        required
+        [class.invalid]="category.invalid && category.touched"
+      >
+
+        <option value="" disabled>
+          Select category...
+        </option>
+
+        <option
+          *ngFor="let item of categories"
+          [value]="item"
+        >
+          {{ item }}
+        </option>
+
+      </select>
+
+      <small
+        class="error"
+        *ngIf="category.invalid && category.touched"
+      >
+        Please select a category.
+      </small>
+
+    </div>
+
+
+    <!-- Tone -->
+    <div class="form-group">
+
+      <label for="tone">
+        Writing Tone <span>*</span>
+      </label>
+
+      <select
+        id="tone"
+        name="tone"
+        [(ngModel)]="blog.tone"
+        #tone="ngModel"
+        required
+        [class.invalid]="tone.invalid && tone.touched"
+      >
+
+        <option value="" disabled>
+          Choose tone...
+        </option>
+
+        <option
+          *ngFor="let item of tones"
+          [value]="item"
+        >
+          {{ item }}
+        </option>
+
+      </select>
+
+      <small
+        class="error"
+        *ngIf="tone.invalid && tone.touched"
+      >
+        Please select a writing tone.
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- Blog Topic -->
+  <div class="form-group full-width">
+
+    <label for="topic">
+      Blog Topic <span>*</span>
+    </label>
+
+    <input
+      id="topic"
+      type="text"
+      name="topic"
+      [(ngModel)]="blog.topic"
+      #topic="ngModel"
+      required
+      minlength="5"
+      maxlength="150"
+      placeholder="e.g; Artificial Intelligence etc...."
+      [class.invalid]="topic.invalid && topic.touched"
+    />
+
+    <small
+      class="error"
+      *ngIf="topic.errors?.['required'] && topic.touched"
+    >
+      Blog topic is required.
+    </small>
+
+    <small
+      class="error"
+      *ngIf="topic.errors?.['minlength'] && topic.touched"
+    >
+      Blog topic must contain at least 5 characters.
+    </small>
+
+    <small
+      class="error"
+      *ngIf="topic.errors?.['maxlength'] && topic.touched"
+    >
+      Blog topic cannot exceed 150 characters.
+    </small>
+
+  </div>
+
+
+  <!-- Audience + Word Count -->
+  <div class="form-row">
+
+    <!-- Audience -->
+    <div class="form-group">
+
+      <label for="audience">
+        Target Audience <span>*</span>
+      </label>
+
+      <input
+        id="audience"
+        type="text"
+        name="audience"
+        [(ngModel)]="blog.audience"
+        #audience="ngModel"
+        required
+        minlength="3"
+        maxlength="100"
+        placeholder="e.g; students, professionals etc..."
+        [class.invalid]="audience.invalid && audience.touched"
+      />
+
+      <small
+        class="error"
+        *ngIf="audience.errors?.['required'] && audience.touched"
+      >
+        Target audience is required.
+      </small>
+
+      <small
+        class="error"
+        *ngIf="audience.errors?.['minlength'] && audience.touched"
+      >
+        Please enter at least 3 characters.
+      </small>
+
+      <small
+        class="error"
+        *ngIf="audience.errors?.['maxlength'] && audience.touched"
+      >
+        Target audience cannot exceed 100 characters.
+      </small>
+
+    </div>
+
+
+    <!-- Word Count -->
+    <div class="form-group">
+
+      <label for="wordCount">
+        Word Count <span>*</span>
+      </label>
+
+      <input
+        id="wordCount"
+        type="number"
+        name="wordCount"
+        [(ngModel)]="blog.wordCount"
+        #wordCount="ngModel"
+        required
+        min="100"
+        max="5000"
+        placeholder="e.g; 100 words....."
+        [class.invalid]="wordCount.invalid && wordCount.touched"
+      />
+
+      <small
+        class="error"
+        *ngIf="wordCount.errors?.['required'] && wordCount.touched"
+      >
+        Word count is required.
+      </small>
+
+      <small
+        class="error"
+        *ngIf="wordCount.errors?.['min'] && wordCount.touched"
+      >
+        Word count must be at least 100.
+      </small>
+
+      <small
+        class="error"
+        *ngIf="wordCount.errors?.['max'] && wordCount.touched"
+      >
+        Word count cannot exceed 5000.
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- Generate -->
+  <div class="button-container">
+
+    <button
+      type="submit"
+      class="generate-btn"
+      [disabled]="blogForm.invalid || isGenerating"
+      (click)="generateBlog()"
+  
+    >
+
+      <span *ngIf="!isGenerating">
+        Generate
+        <span class="sparkle">✦</span>
+      </span>
+
+      <span *ngIf="isGenerating">
+        Generating...
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- Temporary message -->
+  <div
+    class="success-message"
+    *ngIf="showMessage"
+  >
+    Blog details saved temporarily. API integration will be added later.
+  </div>
+
+</form>

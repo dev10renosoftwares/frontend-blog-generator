@@ -1,0 +1,152 @@
+<div class="following-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="title-wrapper">
+        <div class="title-icon">
+          <i class="bi bi-person-plus"></i>
+        </div>
+
+        <div>
+          <h1>Following</h1>
+          <p>People who you follow </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="following-count">
+      <i class="bi bi-people"></i>
+      <span>{{ following.length }} Following</span>
+    </div>
+  </div>
+
+
+  <!-- Search & Filter -->
+  <div class="toolbar">
+
+    <div class="search-box">
+      <i class="bi bi-search"></i>
+
+      <input
+        type="text"
+        placeholder="Search people you follow..."
+        [value]="searchText"
+        (input)="searchText = $any($event.target).value"
+      />
+
+      <button
+        *ngIf="searchText"
+        class="clear-btn"
+        (click)="searchText = ''">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <select
+      class="sort-select"
+      [value]="sortBy"
+      (change)="sortBy = $any($event.target).value">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+      <option value="name">Name</option>
+    </select>
+
+  </div>
+
+
+  <!-- Followers Grid -->
+  <div class="following-grid">
+
+    <div
+      class="following-card"
+      *ngFor="let following of filteredFollowing">
+
+      <!-- Profile Image -->
+      <div class="profile-image-wrapper">
+
+        <img
+          [src]="following.image"
+          [alt]="following.username"
+          class="profile-image"
+        />
+
+        <div class="verified-badge" *ngIf="following.verified">
+          <i class="bi bi-check"></i>
+        </div>
+
+      </div>
+
+
+      <!-- User Information -->
+      <div class="user-info">
+
+        <h2>{{ following.username }}</h2>
+
+        <p class="handle">
+          @{{ following.handle }}
+        </p>
+
+        <p class="bio">
+          {{ following.bio }}
+        </p>
+
+      </div>
+
+
+      <!-- Follow Date -->
+      <div class="follow-date">
+        <i class="bi bi-calendar3"></i>
+
+        <span>
+          Followed on {{ following.followedDate }}
+        </span>
+      </div>
+
+
+      <!-- Actions -->
+      <div class="card-actions">
+
+        <button
+          class="view-btn"
+          (click)="viewProfile(following)" routerLink="/userprofile">
+
+          <i class="bi bi-person"></i>
+          View Profile
+
+        </button>
+
+        <button
+          class="remove-btn"
+          (click)="removeuser(following)">
+
+          <i class="bi bi-person-dash"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Empty State -->
+  <div
+    class="empty-state"
+    *ngIf="filteredFollowing.length === 0">
+
+    <div class="empty-icon">
+      <i class="bi bi-people"></i>
+    </div>
+
+    <h3>No Users found</h3>
+
+    <p>
+      Try searching with a different username.
+    </p>
+
+  </div>
+
+</div>
+

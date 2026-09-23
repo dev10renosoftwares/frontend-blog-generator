@@ -1,16 +1,4 @@
 <div class="user-dashboard">
-
-
-
-
-<!-- =====================================================
-     PROFILE HEADER
-====================================================== -->
-<section class="profile-section">
-<!-- =====================================================
-     FLOATING HOME NAVIGATION
-====================================================== -->
-
 <div class="home-navigation">
 
   <button
@@ -28,6 +16,18 @@
   </button>
 
 </div>
+
+
+
+<!-- =====================================================
+     PROFILE HEADER
+====================================================== -->
+<section class="profile-section">
+<!-- =====================================================
+     FLOATING HOME NAVIGATION
+====================================================== -->
+
+
 
 
 
@@ -145,7 +145,7 @@
       </div>
 
 
-      <div class="card-content">
+      <div class="card-content" routerLink="/userblogs">
 
         <p class="card-label">
           My Blogs
@@ -221,35 +221,7 @@
 
 
         <h3>
-
-
-          <!-- Loading -->
-
-          <ng-container *ngIf="loading">
-
-            ...
-
-          </ng-container>
-
-
-          <!-- Credits -->
-
-          <ng-container *ngIf="!loading && profile">
-
-            {{ profile.availableCredits }}
-
-          </ng-container>
-
-
-          <!-- Error -->
-
-          <ng-container *ngIf="profileError && !loading">
-
-            --
-
-          </ng-container>
-
-
+          {{ availableCredits }}
         </h3>
 
 

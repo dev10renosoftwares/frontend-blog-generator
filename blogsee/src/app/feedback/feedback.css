@@ -1,551 +1,1523 @@
+/* ============================================================
+   BLOGSEE FEEDBACK PAGE
+   LIGHT ROBOTIC + PURPLE
+   CHATGPT-STYLE HISTORY SIDEBAR
+============================================================ */
+
 * {
-  font-family: 'Inter', sans-serif;
-}
-
-.feedback-page {
-  font-family: 'Inter', sans-serif;
-}
-/* =========================================
-   FEEDBACK PAGE
-   ========================================= */
-
-.feedback-page {
-  min-height: 100vh;
-  width: 100%;
-
-  background: #0F1726;
-  color: #FFFFFF;
-
-  box-sizing: border-box;
-}
-
-
-/* =========================================
-   TOP HEADER
-   ========================================= */
-
-.feedback-header {
-  height: 52px;
-
-  display: flex;
-  align-items: center;
-
-  padding: 0 18px;
-
   box-sizing: border-box;
 
-  background: #151E2F;
-
-  border-bottom: 1px solid #31405A;
+  font-family:
+    'Inter',
+    'Segoe UI',
+    Arial,
+    sans-serif;
 }
-
-
-/* Back */
-
 .back-btn {
-  width: 32px;
-  height: 32px;
+  position: absolute;
+
+  top: 100px;
+  left: 250px;
+
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: none;
-  background: transparent;
+  border:
+    1px solid #ddd7ea;
 
-  color: #FFFFFF;
+  border-radius: 9px;
 
-  font-size: 22px;
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  color:
+    #6f6a7e;
 
   cursor: pointer;
+
+  z-index: 5;
+
+  box-shadow:
+    0 5px 16px
+    rgba(77, 49, 110, 0.05);
+
+  transition:
+    transform 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.back-arrow {
+  font-size: 22px;
+  line-height: 1;
 }
 
 .back-btn:hover {
-  color: #9CB8FF;
+  color: #7c3aed;
+
+  border-color: #c9b8e9;
+
+  transform:
+    translateX(-3px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(124, 58, 237, 0.10);
 }
 
+/* ============================================================
+   PAGE
+============================================================ */
 
-/* Divider */
+.feedback-page {
+  position: relative;
 
-.header-divider {
-  width: 1px;
-  height: 25px;
-
-  margin: 0 10px;
-
-  background: #31405A;
-}
-
-
-/* App Icon */
-
-.app-icon {
-  width: 25px;
-  height: 25px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 4px;
-
-  background: #FFFFFF;
-
-  color: #0F1726;
-
-  font-size: 16px;
-  font-weight: bold;
-}
-
-
-/* App Name */
-
-.app-name {
-  margin-left: 8px;
-
-  color: #FFFFFF;
-
-  font-size: 13px;
-  font-weight: 600;
-}
-
-
-/* =========================================
-   MAIN LAYOUT
-   ========================================= */
-
-.feedback-layout {
-  display: flex;
-
-  gap: 26px;
-
-  padding: 24px 26px;
-
-  box-sizing: border-box;
-}
-
-
-/* =========================================
-   SIDEBAR
-   ========================================= */
-
-.feedback-sidebar {
-  width: 150px;
-  min-width: 150px;
-
-  min-height: 380px;
-
-  padding: 14px;
-
-  box-sizing: border-box;
-
-  background: #151E2F;
-
-  border: 1px solid #31405A;
-  border-radius: 7px;
-}
-
-
-/* Sidebar title */
-
-.sidebar-title {
-  display: flex;
-  align-items: center;
-
-  gap: 6px;
-
-  margin-bottom: 14px;
-
-  color: #FFFFFF;
-
-  font-size: 11px;
-  font-weight: 600;
-}
-
-
-/* History */
-
-.feedback-history {
-  display: flex;
-  flex-direction: column;
-
-  gap: 8px;
-}
-
-.history-item {
-  display: flex;
-  flex-direction: column;
-
-  gap: 5px;
-
-  padding: 9px;
-
-  border-radius: 5px;
-
-  background: #0F1726;
-
-  border: 1px solid #24344E;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-.history-item:hover {
-  background: #24344E;
-
-  border-color: #526B9B;
-}
-
-.history-item span {
-  color: #A5B2C9;
-
-  font-size: 10px;
-}
-
-.history-item small {
-  color: #9CB8FF;
-
-  font-size: 10px;
-}
-
-
-/* =========================================
-   MAIN FEEDBACK
-   ========================================= */
-
-.feedback-main {
-  flex: 1;
-
-  max-width: 720px;
-
-  margin: 0 auto;
-
-  padding-top: 20px;
-}
-
-
-/* Heading */
-
-.feedback-main h1 {
-  margin: 0 0 4px;
-
-  color: #FFFFFF;
-
-  font-size: 21px;
-  font-weight: 600;
-}
-
-.feedback-subtitle {
-  margin: 0 0 14px;
-
-  color: #8F9DB5;
-
-  font-size: 12px;
-}
-
-
-/* =========================================
-   FEEDBACK CARD
-   ========================================= */
-
-.feedback-card {
   width: 100%;
 
-  box-sizing: border-box;
+  min-height:
+    calc(100vh - 72px);
 
-  padding: 20px;
+  background:
+    radial-gradient(
+      circle at 45% 5%,
+      rgba(124, 58, 237, 0.065),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 85%,
+      rgba(168, 85, 247, 0.045),
+      transparent 28%
+    ),
+    #f7f5fc;
 
-  background: #151E2F;
+  color:
+    #2c273a;
 
-  border: 1px solid #31405A;
-  border-radius: 9px;
+  overflow:
+    hidden;
+
+  isolation:
+    isolate;
 }
 
 
-/* =========================================
+/* ============================================================
+   LIGHT ROBOTIC GRID
+============================================================ */
+
+.feedback-page::before {
+  content: '';
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    -2;
+
+  pointer-events:
+    none;
+
+  background-image:
+    linear-gradient(
+      rgba(124, 58, 237, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(124, 58, 237, 0.022) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    56px 56px;
+}
+
+
+/* ============================================================
+   SUBTLE SCANNER LINE
+============================================================ */
+
+.feedback-page::after {
+  content: '';
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  left:
+    -20%;
+
+  width:
+    140%;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(124, 58, 237, 0.18),
+      transparent
+    );
+
+  animation:
+    scannerLine 8s linear infinite;
+
+  pointer-events:
+    none;
+}
+
+
+/* ============================================================
+   TOP HEADER
+============================================================ */
+
+.feedback-header {
+  position:
+    relative;
+
+  height:
+    80px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  padding:
+    0 22px;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  border-bottom:
+    1px solid #e3ddec;
+
+  box-shadow:
+    0 3px 15px
+    rgba(46, 34, 64, 0.045);
+
+  backdrop-filter:
+    blur(12px);
+
+  z-index:
+    10;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+
+.back-btn {
+  width:
+    36px;
+
+  height:
+    36px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    1px solid #ddd6e8;
+
+  border-radius:
+    8px;
+
+  background:
+    #ffffff;
+
+  color:
+    #756d81;
+
+  font-size:
+    21px;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.back-btn:hover {
+  color:
+    #7c3aed;
+
+  border-color:
+    #cbb9e2;
+
+  transform:
+    translateX(-2px);
+
+  box-shadow:
+    0 5px 14px
+    rgba(124, 58, 237, 0.08);
+}
+
+
+/* ============================================================
+   HEADER DIVIDER
+============================================================ */
+
+.header-divider {
+  width:
+    1px;
+
+  height:
+    24px;
+
+  margin:
+    0 12px;
+
+  background:
+    #e1dae9;
+}
+
+
+/* ============================================================
+   APP ICON
+============================================================ */
+
+.app-icon {
+  width:
+    30px;
+
+  height:
+    30px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    1px solid #d8cbea;
+
+  border-radius:
+    8px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f3edfb
+    );
+
+  color:
+    #7c3aed;
+
+  font-size:
+    16px;
+
+  font-weight:
+    700;
+
+  box-shadow:
+    0 4px 12px
+    rgba(124, 58, 237, 0.08);
+}
+
+
+/* ============================================================
+   APP NAME
+============================================================ */
+
+.app-name {
+  margin-left:
+    9px;
+
+  color:
+    #353043;
+
+  font-size:
+    14px;
+
+  font-weight:
+    650;
+}
+
+
+/* ============================================================
+   MAIN LAYOUT
+   SIDEBAR + CENTER WORKSPACE
+============================================================ */
+
+.feedback-layout {
+  width:
+    100%;
+
+  height:
+    calc(100vh - 60px);
+
+  display:
+    grid;
+
+  grid-template-columns:
+    235px minmax(0, 1fr);
+
+  align-items:
+    stretch;
+
+  gap:
+    0;
+
+  padding:
+    0;
+
+  animation:
+    pageEnter 0.5s ease-out both;
+}
+
+
+/* ============================================================
+   SIDEBAR
+   CHATGPT-STYLE
+============================================================ */
+
+.feedback-sidebar {
+  width:
+    235px;
+
+  min-width:
+    235px;
+
+  height:
+    100%;
+
+  padding:
+    20px 12px;
+
+  background:
+    rgba(250, 249, 253, 0.94);
+
+  border-right:
+    1px solid #e1dbe9;
+
+  overflow:
+    hidden;
+
+  animation:
+    sidebarEnter 0.5s ease-out both;
+}
+
+
+/* ============================================================
+   SIDEBAR TITLE
+============================================================ */
+
+.sidebar-title {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    4px 10px 12px;
+
+  margin:
+    0;
+
+  color:
+    #40384d;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+}
+
+
+.sidebar-title::before {
+  content:
+    '';
+
+  width:
+    6px;
+
+  height:
+    6px;
+
+  flex-shrink:
+    0;
+
+  border-radius:
+    50%;
+
+  background:
+    #7c3aed;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(124, 58, 237, 0.08);
+}
+
+
+/* ============================================================
+   HISTORY
+============================================================ */
+
+.feedback-history {
+  height:
+    calc(100% - 35px);
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+
+  overflow-y:
+    auto;
+
+  padding-right:
+    4px;
+}
+
+
+/* ============================================================
+   SIDEBAR SCROLLBAR
+============================================================ */
+
+.feedback-history::-webkit-scrollbar {
+  width:
+    5px;
+}
+
+.feedback-history::-webkit-scrollbar-track {
+  background:
+    transparent;
+}
+
+.feedback-history::-webkit-scrollbar-thumb {
+  background:
+    #d8cee5;
+
+  border-radius:
+    10px;
+}
+
+.feedback-history::-webkit-scrollbar-thumb:hover {
+  background:
+    #bba8d0;
+}
+
+
+/* ============================================================
+   HISTORY ITEM
+============================================================ */
+
+.history-item {
+  width:
+    100%;
+
+  min-height:
+    58px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  gap:
+    4px;
+
+  padding:
+    9px 11px;
+
+  border:
+    1px solid transparent;
+
+  border-radius:
+    8px;
+
+  background:
+    transparent;
+
+  cursor:
+    pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.history-item:hover {
+  background:
+    #f0eafa;
+
+  border-color:
+    #e3d8ef;
+
+  transform:
+    translateX(2px);
+}
+
+
+/*
+ * Optional selected state.
+ * Works if Angular adds .active or .selected.
+ */
+
+.history-item.active,
+.history-item.selected {
+  background:
+    #eee7f8;
+
+  border-color:
+    #d9c9e9;
+
+  box-shadow:
+    inset 2px 0 0 #7c3aed;
+}
+
+
+/* ============================================================
+   HISTORY TEXT
+============================================================ */
+
+.history-item span {
+  max-width:
+    100%;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+
+  color:
+    #5f576b;
+
+  font-size:
+    11px;
+
+  line-height:
+    1.4;
+}
+
+
+.history-item small {
+  color:
+    #91879d;
+
+  font-size:
+    9px;
+
+  line-height:
+    1.3;
+}
+
+
+/* ============================================================
+   MAIN FEEDBACK WORKSPACE
+============================================================ */
+
+.feedback-main {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  overflow-y:
+    auto;
+
+  padding:
+    11px 35px 60px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  animation:
+    mainEnter 0.6s ease-out 0.08s both;
+}
+
+
+/* ============================================================
+   MAIN SCROLLBAR
+============================================================ */
+
+.feedback-main::-webkit-scrollbar {
+  width:
+    6px;
+}
+
+.feedback-main::-webkit-scrollbar-track {
+  background:
+    transparent;
+}
+
+.feedback-main::-webkit-scrollbar-thumb {
+  background:
+    #ddd5e8;
+
+  border-radius:
+    10px;
+}
+
+
+/* ============================================================
+   MAIN CONTENT WIDTH
+============================================================ */
+
+.feedback-main > * {
+  width:
+    100%;
+
+  max-width:
+    760px;
+}
+
+
+/* ============================================================
+   MAIN HEADING
+============================================================ */
+
+.feedback-main h1 {
+  margin:
+    0;
+
+  text-align:
+    center;
+
+  color:
+    #2b2639;
+
+  font-size:
+    32px;
+
+  line-height:
+    1.2;
+
+  font-weight:
+    720;
+
+  letter-spacing:
+    -0.8px;
+}
+
+
+.feedback-main h1::before {
+  content:
+    '// ';
+
+  color:
+    #7c3aed;
+
+  font-weight:
+    500;
+}
+
+
+/* ============================================================
+   SUBTITLE
+============================================================ */
+
+.feedback-subtitle {
+  margin:
+    9px auto 24px;
+
+  text-align:
+    center;
+
+  color:
+    #898196;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.6;
+}
+
+
+/* ============================================================
+   FEEDBACK CARD
+============================================================ */
+
+.feedback-card {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  padding:
+    28px 30px 25px;
+
+  background:
+    rgba(255, 255, 255, 0.97);
+
+  border:
+    1px solid #ddd6e7;
+
+  border-radius:
+    16px;
+
+  box-shadow:
+    0 18px 44px
+    rgba(52, 36, 73, 0.075);
+
+  overflow:
+    hidden;
+
+  animation:
+    cardEnter 0.6s ease-out 0.16s both;
+}
+
+
+/* ============================================================
+   ROBOTIC TOP LINE
+============================================================ */
+
+.feedback-card::before {
+  content:
+    '';
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  left:
+    0;
+
+  width:
+    100%;
+
+  height:
+    3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7c3aed,
+      #8b5cf6,
+      #a855f7,
+      #7c3aed
+    );
+
+  background-size:
+    240% 100%;
+
+  animation:
+    purpleFlow 5s linear infinite;
+}
+
+
+/* ============================================================
    RATING
-   ========================================= */
+============================================================ */
 
 .rating-section {
-  margin-bottom: 18px;
+  margin-bottom:
+    23px;
 }
+
 
 .rating-section label,
 .feedback-input label {
-  display: block;
+  display:
+    block;
 
-  margin-bottom: 9px;
+  margin-bottom:
+    10px;
 
-  color: #FFFFFF;
+  color:
+    #40384d;
 
-  font-size: 12px;
-  font-weight: 500;
+  font-size:
+    14px;
+
+  font-weight:
+    650;
 }
 
 
-/* Stars */
+/* ============================================================
+   STARS
+============================================================ */
 
 .stars {
-  display: flex;
+  display:
+    flex;
 
-  gap: 5px;
+  gap:
+    8px;
 }
+
 
 .stars button {
-  width: 32px;
-  height: 32px;
+  width:
+    40px;
 
-  border: 1px solid #31405A;
-  border-radius: 5px;
+  height:
+    40px;
 
-  background: #24344E;
+  display:
+    flex;
 
-  color: #596780;
+  align-items:
+    center;
 
-  font-size: 18px;
+  justify-content:
+    center;
 
-  cursor: pointer;
+  border:
+    1px solid #ddd6e7;
 
-  transition: 0.2s ease;
+  border-radius:
+    9px;
+
+  background:
+    #faf9fd;
+
+  color:
+    #aea5b7;
+
+  font-size:
+    21px;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.stars button:hover,
-.stars button:focus {
-  background: #324A78;
 
-  border-color: #526B9B;
+.stars button:hover {
+  transform:
+    translateY(-2px);
 
-  color: #9CB8FF;
+  background:
+    #f2ebfb;
+
+  border-color:
+    #c8b4df;
+
+  color:
+    #8b5cf6;
+
+  box-shadow:
+    0 6px 14px
+    rgba(124, 58, 237, 0.09);
 }
 
 
-/* =========================================
+.stars button.active,
+.stars button.selected {
+  background:
+    #efe7fa;
+
+  border-color:
+    #bca2d9;
+
+  color:
+    #7c3aed;
+}
+
+
+/* ============================================================
    TEXTAREA
-   ========================================= */
+============================================================ */
 
 .feedback-input {
-  width: 100%;
+  width:
+    100%;
 }
+
 
 .feedback-input textarea {
-  width: 100%;
+  width:
+    100%;
 
-  min-height: 180px;
+  min-height:
+    180px;
 
-  padding: 12px;
+  padding:
+    14px 15px;
 
-  box-sizing: border-box;
+  resize:
+    vertical;
 
-  resize: vertical;
+  border:
+    1px solid #ddd6e8;
 
-  border: 1px solid #31405A;
-  border-radius: 7px;
+  border-radius:
+    10px;
 
-  background: #0F1726;
+  background:
+    #fbfafe;
 
-  color: #FFFFFF;
+  color:
+    #393343;
 
-  font-family: inherit;
+  font-family:
+    inherit;
 
-  font-size: 12px;
+  font-size:
+    14px;
 
-  outline: none;
+  line-height:
+    1.65;
 
-  transition: 0.2s ease;
+  outline:
+    none;
+
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-.feedback-input textarea::placeholder {
-  color: #596780;
+
+.feedback-input textarea:hover {
+  background:
+    #ffffff;
+
+  border-color:
+    #cbb9e0;
 }
+
 
 .feedback-input textarea:focus {
-  border-color: #526B9B;
+  background:
+    #ffffff;
 
-  background: #111B2C;
+  border-color:
+    #9b72c7;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(124, 58, 237, 0.08);
 }
 
 
-/* =========================================
+.feedback-input textarea::placeholder {
+  color:
+    #aaa2b1;
+}
+
+
+/* ============================================================
    SUBMIT
-   ========================================= */
+============================================================ */
 
 .submit-area {
-  display: flex;
+  display:
+    flex;
 
-  justify-content: flex-end;
+  justify-content:
+    flex-end;
 
-  margin-top: 12px;
+  margin-top:
+    14px;
 }
+
 
 .submit-btn {
-  padding: 9px 18px;
+  position:
+    relative;
 
-  border: 1px solid #526B9B;
-  border-radius: 6px;
+  min-width:
+    140px;
 
-  background: #324A78;
+  min-height:
+    41px;
 
-  color: #FFFFFF;
+  padding:
+    9px 19px;
 
-  font-size: 12px;
-  font-weight: 600;
+  border:
+    1px solid #7c3aed;
 
-  cursor: pointer;
+  border-radius:
+    8px;
 
-  transition: 0.2s ease;
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #8b5cf6
+    );
+
+  color:
+    #ffffff;
+
+  font-family:
+    inherit;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+
+  cursor:
+    pointer;
+
+  overflow:
+    hidden;
+
+  box-shadow:
+    0 8px 18px
+    rgba(124, 58, 237, 0.18);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
+
+
+.submit-btn::before {
+  content:
+    '';
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  left:
+    -120%;
+
+  width:
+    65%;
+
+  height:
+    100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.25),
+      transparent
+    );
+
+  transform:
+    skewX(-20deg);
+
+  transition:
+    left 0.5s ease;
+}
+
+
+.submit-btn:hover::before {
+  left:
+    145%;
+}
+
 
 .submit-btn:hover {
-  background: #3A578C;
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 11px 24px
+    rgba(124, 58, 237, 0.23);
 }
 
-.submit-btn:active {
-  background: #2C426C;
-}
 
-
-/* =========================================
+/* ============================================================
    ACCESSIBILITY
-   ========================================= */
+============================================================ */
 
 button:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #9CB8FF;
+  outline:
+    3px solid
+    rgba(124, 58, 237, 0.12);
 
-  outline-offset: 2px;
+  outline-offset:
+    2px;
 }
 
 
-/* =========================================
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+
+@keyframes pageEnter {
+  from {
+    opacity:
+      0;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+}
+
+
+@keyframes sidebarEnter {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateX(-12px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateX(0);
+  }
+}
+
+
+@keyframes mainEnter {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(14px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes cardEnter {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(12px)
+      scale(0.99);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes purpleFlow {
+  0% {
+    background-position:
+      0% 50%;
+  }
+
+  100% {
+    background-position:
+      240% 50%;
+  }
+}
+
+
+@keyframes scannerLine {
+  0% {
+    transform:
+      translateX(-10%);
+  }
+
+  100% {
+    transform:
+      translateX(10%);
+  }
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 850px) {
+
+  .feedback-layout {
+    grid-template-columns:
+      205px minmax(0, 1fr);
+  }
+
+  .feedback-sidebar {
+    width:
+      205px;
+
+    min-width:
+      205px;
+  }
+
+  .feedback-main {
+    padding:
+      40px 25px 55px;
+  }
+
+}
+
+
+/* ============================================================
    MOBILE
-   ========================================= */
+============================================================ */
 
 @media (max-width: 700px) {
 
   .feedback-layout {
-    flex-direction: column;
+    display:
+      flex;
 
-    padding: 16px;
+    flex-direction:
+      column;
+
+    height:
+      auto;
+
+    min-height:
+      calc(100vh - 60px);
   }
+
 
   .feedback-sidebar {
-    width: 100%;
-    min-width: 0;
+    width:
+      100%;
 
-    min-height: auto;
+    min-width:
+      0;
+
+    height:
+      auto;
+
+    max-height:
+      190px;
+
+    padding:
+      14px;
+
+    border-right:
+      none;
+
+    border-bottom:
+      1px solid #e1dbe9;
   }
+
 
   .feedback-history {
-    flex-direction: row;
+    display:
+      flex;
 
-    overflow-x: auto;
+    flex-direction:
+      row;
+
+    height:
+      auto;
+
+    max-height:
+      120px;
+
+    overflow-x:
+      auto;
   }
+
 
   .history-item {
-    min-width: 130px;
+    min-width:
+      155px;
   }
+
 
   .feedback-main {
-    padding-top: 5px;
+    height:
+      auto;
+
+    overflow:
+      visible;
+
+    padding:
+      30px 15px 45px;
   }
+
+
+  .feedback-main h1 {
+    font-size:
+      27px;
+  }
+
 }
 
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
 
 @media (max-width: 450px) {
 
-  .feedback-card {
-    padding: 15px;
+  .feedback-header {
+    padding:
+      0 13px;
   }
+
+
+  .feedback-main {
+    padding:
+      26px 11px 35px;
+  }
+
 
   .feedback-main h1 {
-    font-size: 19px;
+    font-size:
+      24px;
   }
+
+
+  .feedback-subtitle {
+    font-size:
+      12px;
+  }
+
+
+  .feedback-card {
+    padding:
+      22px 16px 19px;
+  }
+
+
+  .rating-section label,
+  .feedback-input label {
+    font-size:
+      12px;
+  }
+
+
+  .stars {
+    gap:
+      6px;
+  }
+
 
   .stars button {
-    width: 30px;
-    height: 30px;
+    width:
+      35px;
+
+    height:
+      35px;
+
+    font-size:
+      18px;
   }
+
+
+  .feedback-input textarea {
+    min-height:
+      155px;
+
+    font-size:
+      13px;
+  }
+
 
   .submit-area {
-    justify-content: stretch;
+    justify-content:
+      stretch;
   }
+
 
   .submit-btn {
-    width: 100%;
+    width:
+      100%;
   }
 }
-/* Header */
-
-.app-name {
-  font-size: 14px;
-  font-weight: 600;
-}
 
 
-/* Sidebar */
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
 
-.sidebar-title {
-  font-size: 12px;
-}
+@media (prefers-reduced-motion: reduce) {
 
-.history-item span {
-  font-size: 11px;
-}
+  .feedback-page::after,
+  .feedback-layout,
+  .feedback-sidebar,
+  .feedback-main,
+  .feedback-card,
+  .feedback-card::before {
+    animation:
+      none;
+  }
 
-.history-item small {
-  font-size: 11px;
-}
-
-
-/* Main heading */
-
-.feedback-main h1 {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-
-.feedback-subtitle {
-  font-size: 14px;
-}
-
-
-/* Feedback card */
-
-.rating-section label,
-.feedback-input label {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-
-/* Stars */
-
-.stars button {
-  font-size: 20px;
-}
-
-
-/* Textarea */
-
-.feedback-input textarea {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-
-/* Submit button */
-
-.submit-btn {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-
-/* Sidebar */
-
-.feedback-sidebar {
-  font-family: 'Inter', sans-serif;
+  .history-item:hover,
+  .back-btn:hover,
+  .stars button:hover,
+  .submit-btn:hover {
+    transform:
+      none;
+  }
 }

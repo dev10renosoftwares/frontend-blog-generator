@@ -1,358 +1,279 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment.development';
+
+import { AuthResponseDto } from '../../ServiceModels/v1/Authentication/AuthResponseDto';
+import { RegisterRequestDto } from '../../ServiceModels/v1/Authentication/RegisterRequestDto';
+import { LoginRequestDto } from '../../ServiceModels/v1/Authentication/LoginRequestDto';
+import { RefreshTokenRequestDto } from '../../ServiceModels/v1/Authentication/RefreshTokenRequestDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // =====================================================
-  // API URL
-  // =====================================================
+  private readonly apiUrl = `${environment.apiUrl}/Auth`;
 
-  private apiUrl =
-    'http://192.168.29.71:5229/api/v1/Auth';
+  private usernameSubject = new BehaviorSubject<string>(
+    localStorage.getItem('username') || ''
+  );
 
+  username$ = this.usernameSubject.asObservable();
 
-  // =====================================================
-  // USER STATE
-  // =====================================================
-
-  private usernameSubject =
-    new BehaviorSubject<string>(
-      localStorage.getItem('username') || ''
-    );
-
-  username$ =
-    this.usernameSubject.asObservable();
-
-
-  public username =
-    localStorage.getItem('username') || '';
-
-  public userEmail =
-    localStorage.getItem('userEmail') || '';
-
+  public username = localStorage.getItem('username') || '';
+  public userEmail = localStorage.getItem('userEmail') || '';
   public showAuthRequired = false;
 
-
-  // =====================================================
-  // CONSTRUCTOR
-  // =====================================================
-
-  constructor(
-    private http: HttpClient
-  ) {
-
+  constructor(private http: HttpClient) {
     this.restoreUser();
-
   }
-
-
-  // =====================================================
-  // RESTORE USER AFTER PAGE REFRESH
-  // =====================================================
 
   private restoreUser(): void {
-
-    const savedUsername =
-      localStorage.getItem('username');
-
-    const savedEmail =
-      localStorage.getItem('userEmail');
-
-    const savedUser =
-      localStorage.getItem('user');
-
-
-    // -----------------------------
-    // Restore username
-    // -----------------------------
+    const savedUsername = localStorage.getItem('username') || '';
+    const savedEmail = localStorage.getItem('userEmail') || '';
+    const savedUser = localStorage.getItem('user');
 
     if (savedUsername) {
-
-      this.username =
-        savedUsername;
-
-      this.usernameSubject.next(
-        savedUsername
-      );
-
+      this.username = savedUsername;
+      this.usernameSubject.next(savedUsername);
     }
-
-
-    // -----------------------------
-    // Restore email
-    // -----------------------------
 
     if (savedEmail) {
-
-      this.userEmail =
-        savedEmail;
-
+      this.userEmail = savedEmail;
     }
 
+    if (!savedUser) {
+      return;
+    }
 
-    // -----------------------------
-    // Restore complete user
-    // -----------------------------
+    try {
+      const parsedUser = JSON.parse(savedUser);
+      const user = parsedUser?.user || parsedUser?.data?.user || parsedUser?.data || parsedUser;
 
-    if (savedUser) {
+      const restoredUsername =
+        user?.userName || user?.username || parsedUser?.userName || parsedUser?.username || savedUsername;
 
-      try {
+      const restoredEmail =
+        user?.email || parsedUser?.email || savedEmail;
 
-        const user =
-          JSON.parse(savedUser);
-
-
-        this.username =
-          user.userName ||
-          user.username ||
-          savedUsername ||
-          '';
-
-
-        this.userEmail =
-          user.email ||
-          savedEmail ||
-          '';
-
-
-        this.usernameSubject.next(
-          this.username
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          'Error restoring saved user:',
-          error
-        );
-
+      if (restoredUsername) {
+        this.username = restoredUsername;
+        localStorage.setItem('username', restoredUsername);
+        this.usernameSubject.next(restoredUsername);
       }
 
+      if (restoredEmail) {
+        this.userEmail = restoredEmail;
+        localStorage.setItem('userEmail', restoredEmail);
+      }
+    } catch (error) {
+      console.error('Unable to restore saved user:', error);
     }
-
   }
 
+  login(email: string, password: string): Observable<AuthResponseDto> {
+    const request: LoginRequestDto = { email, password };
 
-  // =====================================================
-  // LOGIN
-  // =====================================================
+    return this.http.post<AuthResponseDto>(`${this.apiUrl}/login`, request).pipe(
+      tap((response) => this.saveAuthentication(response, email))
+    );
+  }
 
-  login(
-    email: string,
-    password: string
-  ): Observable<any> {
-
-    const loginData = {
-
-      email: email,
-
-      password: password
-
+  register(username: string, email: string, password: string): Observable<AuthResponseDto> {
+    const request: RegisterRequestDto = {
+      userName: username,
+      email,
+      password
     };
 
-
-    console.log(
-      'LOGIN REQUEST:',
-      loginData
+    return this.http.post<AuthResponseDto>(`${this.apiUrl}/register`, request).pipe(
+      tap((response) => this.saveAuthentication(response, email, username))
     );
+  }
+
+private saveAuthentication(
+  response: AuthResponseDto,
+  fallbackEmail: string = '',
+  fallbackUsername: string = ''
+): void {
+
+  // ============================================================
+  // SUPPORT BOTH RESPONSE FORMATS
+  // ============================================================
+
+  // Format 1:
+  // {
+  //   accessToken: "...",
+  //   refreshToken: "...",
+  //   user: { ... }
+  // }
+
+  // Format 2:
+  // {
+  //   data: {
+  //     accessToken: "...",
+  //     refreshToken: "...",
+  //     user: { ... }
+  //   }
+  // }
+
+  const responseData: any =
+    (response as any)?.data ??
+    response;
 
 
-    return this.http.post<any>(
-      `${this.apiUrl}/login`,
-      loginData
-    ).pipe(
+  // ============================================================
+  // USER OBJECT
+  // ============================================================
 
-      tap((response: any) => {
-
-        console.log(
-          'LOGIN RESPONSE:',
-          response
-        );
+  const user: any =
+    responseData?.user ??
+    responseData?.User ??
+    responseData;
 
 
-        this.saveAuthentication(
-          response,
-          email
-        );
+  // ============================================================
+  // TOKENS
+  // ============================================================
 
-      })
+  const accessToken: string =
+    responseData?.accessToken ??
+    responseData?.AccessToken ??
+    (response as any)?.accessToken ??
+    (response as any)?.AccessToken ??
+    '';
 
+  const refreshToken: string =
+    responseData?.refreshToken ??
+    responseData?.RefreshToken ??
+    (response as any)?.refreshToken ??
+    (response as any)?.RefreshToken ??
+    '';
+
+  const expiresAt: string =
+    responseData?.expiresAt ??
+    responseData?.ExpiresAt ??
+    (response as any)?.expiresAt ??
+    (response as any)?.ExpiresAt ??
+    '';
+
+
+  // ============================================================
+  // USERNAME
+  // ============================================================
+
+  const username: string =
+    user?.userName ??
+    user?.UserName ??
+    user?.username ??
+    user?.Username ??
+    responseData?.userName ??
+    responseData?.UserName ??
+    fallbackUsername ??
+    '';
+
+
+  // ============================================================
+  // EMAIL
+  // ============================================================
+
+  const email: string =
+    user?.email ??
+    user?.Email ??
+    responseData?.email ??
+    responseData?.Email ??
+    fallbackEmail ??
+    '';
+
+
+  // ============================================================
+  // AVAILABLE CREDITS
+  // ============================================================
+
+  const availableCredits =
+    user?.availableCredits ??
+    user?.AvailableCredits ??
+    responseData?.availableCredits ??
+    responseData?.AvailableCredits;
+
+
+  // ============================================================
+  // SAVE ACCESS TOKEN
+  // ============================================================
+
+  if (accessToken) {
+
+    localStorage.setItem(
+      'accessToken',
+      accessToken
     );
 
   }
 
 
-  // =====================================================
-  // REGISTER
-  // =====================================================
+  // ============================================================
+  // SAVE REFRESH TOKEN
+  // ============================================================
 
-  register(
-    username: string,
-    email: string,
-    password: string
-  ): Observable<any> {
+  if (refreshToken) {
 
-    const registerData = {
-
-      username: username,
-
-      email: email,
-
-      password: password
-
-    };
-
-
-    console.log(
-      'REGISTER REQUEST:',
-      registerData
-    );
-
-
-    return this.http.post<any>(
-      `${this.apiUrl}/register`,
-      registerData
-    ).pipe(
-
-      tap((response: any) => {
-
-        console.log(
-          'REGISTRATION RESPONSE:',
-          response
-        );
-
-
-        this.saveAuthentication(
-          response,
-          email,
-          username
-        );
-
-      })
-
+    localStorage.setItem(
+      'refreshToken',
+      refreshToken
     );
 
   }
 
 
-  // =====================================================
-  // SAVE LOGIN / REGISTER DATA
-  // =====================================================
+  // ============================================================
+  // SAVE EXPIRATION
+  // ============================================================
 
-  private saveAuthentication(
-    response: any,
-    fallbackEmail: string,
-    fallbackUsername: string = ''
-  ): void {
+  if (expiresAt) {
 
+    localStorage.setItem(
+      'expiresAt',
+      expiresAt
+    );
 
-    // ===================================================
-    // GET DATA
-    // ===================================================
+  }
+  else if (
+    responseData?.expiresIn !== undefined &&
+    responseData?.expiresIn !== null
+  ) {
 
-    const data =
-      response?.data || response;
+    const expiresInSeconds =
+      Number(
+        responseData.expiresIn
+      );
 
-
-    // ===================================================
-    // GET USER
-    // ===================================================
-
-    const user =
-      data?.user || data;
-
-
-    // ===================================================
-    // GET ACCESS TOKEN
-    // ===================================================
-
-    const accessToken =
-      data?.accessToken ||
-      response?.accessToken ||
-      '';
-
-
-    // ===================================================
-    // GET REFRESH TOKEN
-    // ===================================================
-
-    const refreshToken =
-      data?.refreshToken ||
-      response?.refreshToken ||
-      '';
-
-
-    // ===================================================
-    // GET USERNAME
-    // ===================================================
-
-    const username =
-      user?.userName ||
-      user?.username ||
-      data?.userName ||
-      data?.username ||
-      fallbackUsername ||
-      '';
-
-
-    // ===================================================
-    // GET EMAIL
-    // ===================================================
-
-    const email =
-      user?.email ||
-      data?.email ||
-      fallbackEmail ||
-      '';
-
-
-    // ===================================================
-    // SAVE ACCESS TOKEN
-    // ===================================================
-
-    if (accessToken) {
+    if (
+      !Number.isNaN(
+        expiresInSeconds
+      )
+    ) {
 
       localStorage.setItem(
-        'accessToken',
-        accessToken
-      );
-
-      console.log(
-        'JWT access token saved.'
-      );
-
-    } else {
-
-      console.error(
-        'WARNING: Access token was not found.'
+        'expiresAt',
+        new Date(
+          Date.now() +
+          expiresInSeconds * 1000
+        ).toISOString()
       );
 
     }
 
-
-    // ===================================================
-    // SAVE REFRESH TOKEN
-    // ===================================================
-
-    if (refreshToken) {
-
-      localStorage.setItem(
-        'refreshToken',
-        refreshToken
-      );
-
-    }
+  }
 
 
-    // ===================================================
-    // SAVE USERNAME
-    // ===================================================
+  // ============================================================
+  // SAVE USERNAME
+  // ============================================================
+
+  if (username) {
 
     this.username =
       username;
@@ -362,10 +283,18 @@ export class AuthService {
       username
     );
 
+    this.usernameSubject.next(
+      username
+    );
 
-    // ===================================================
-    // SAVE EMAIL
-    // ===================================================
+  }
+
+
+  // ============================================================
+  // SAVE EMAIL
+  // ============================================================
+
+  if (email) {
 
     this.userEmail =
       email;
@@ -375,167 +304,192 @@ export class AuthService {
       email
     );
 
+  }
 
-    // ===================================================
-    // SAVE COMPLETE USER
-    // ===================================================
+
+  // ============================================================
+  // SAVE AVAILABLE CREDITS
+  // ============================================================
+
+  if (
+    availableCredits !== undefined &&
+    availableCredits !== null
+  ) {
 
     localStorage.setItem(
-      'user',
-      JSON.stringify(user)
-    );
-
-
-    // ===================================================
-    // UPDATE USER STATE
-    // ===================================================
-
-    this.usernameSubject.next(
-      username
-    );
-
-
-    console.log(
-      'Authenticated user:',
-      {
-        username: username,
-        email: email,
-        hasToken: !!accessToken
-      }
+      'availableCredits',
+      String(
+        availableCredits
+      )
     );
 
   }
 
 
-  // =====================================================
-  // GET ACCESS TOKEN
-  // =====================================================
+  // ============================================================
+  // SAVE COMPLETE AUTH RESPONSE
+  // ============================================================
 
-  getToken(): string | null {
-
-    return localStorage.getItem(
-      'accessToken'
-    );
-
-  }
-
-
-  // =====================================================
-  // GET REFRESH TOKEN
-  // =====================================================
-
-  getRefreshToken(): string | null {
-
-    return localStorage.getItem(
-      'refreshToken'
-    );
-
-  }
+  localStorage.setItem(
+    'user',
+    JSON.stringify(
+      response
+    )
+  );
 
 
-  // =====================================================
-  // GET SAVED USER
-  // =====================================================
+  // ============================================================
+  // DEBUG
+  // ============================================================
 
-  getUser(): any {
-
-    const user =
-      localStorage.getItem('user');
-
-
-    if (!user) {
-
-      return null;
-
+  console.log(
+    'AUTHENTICATION SAVED:',
+    {
+      username,
+      email,
+      hasAccessToken:
+        !!accessToken,
+      hasRefreshToken:
+        !!refreshToken,
+      availableCredits
     }
-
-
-    try {
-
-      return JSON.parse(user);
-
-    } catch {
-
-      return null;
-
-    }
-
-  }
-
-
-  // =====================================================
-  // LOGIN CHECK
-  // =====================================================
-
-  isLoggedIn(): boolean {
-
-    return !!localStorage.getItem(
-      'accessToken'
-    );
-
-  }
-
-
-  // =====================================================
-  // LOGOUT
-  // =====================================================
-
-  logout(): void {
-
-    this.username = '';
-
-    this.userEmail = '';
-
-
-    localStorage.removeItem(
-      'accessToken'
-    );
-
-    localStorage.removeItem(
-      'refreshToken'
-    );
-
-    localStorage.removeItem(
-      'username'
-    );
-
-    localStorage.removeItem(
-      'user'
-    );
-
-    localStorage.removeItem(
-      'userEmail'
-    );
-
-
-    this.usernameSubject.next('');
-
-
-    console.log(
-      'User logged out.'
-    );
-
-  }
-
-
-  // =====================================================
-  // AUTH REQUIRED
-  // =====================================================
-
-  openAuthRequired(): void {
-
-    this.showAuthRequired =
-      true;
-
-  }
-
-
-  closeAuthRequired(): void {
-
-    this.showAuthRequired =
-      false;
-
-  }
+  );
 
 }
 
+  refreshToken(): Observable<AuthResponseDto> {
+    const savedRefreshToken = localStorage.getItem('refreshToken');
+
+    if (!savedRefreshToken) {
+      return throwError(() => new Error('Refresh token not found.'));
+    }
+
+    const request: RefreshTokenRequestDto = {
+      refreshToken: savedRefreshToken
+    };
+
+    return this.http.post<AuthResponseDto>(`${this.apiUrl}/refresh-token`, request).pipe(
+      tap((response) => {
+        const raw: any = response;
+        const newAccessToken = raw?.accessToken || raw?.data?.accessToken || '';
+        const newRefreshToken = raw?.refreshToken || raw?.data?.refreshToken || '';
+
+        if (newAccessToken) {
+          localStorage.setItem('accessToken', newAccessToken);
+        }
+
+        if (newRefreshToken) {
+          localStorage.setItem('refreshToken', newRefreshToken);
+        }
+
+        if (raw?.expiresAt) {
+          localStorage.setItem('expiresAt', raw.expiresAt);
+        } else if (raw?.expiresIn !== undefined) {
+          localStorage.setItem(
+            'expiresAt',
+            new Date(Date.now() + Number(raw.expiresIn) * 1000).toISOString()
+          );
+        }
+
+        console.log('ACCESS TOKEN REFRESHED SUCCESSFULLY.');
+      })
+    );
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refreshToken');
+  }
+
+  getUsername(): string {
+    return localStorage.getItem('username') || this.username || '';
+  }
+
+  getEmail(): string {
+    return localStorage.getItem('userEmail') || this.userEmail || '';
+  }
+
+  getExpiresAt(): string | null {
+    return localStorage.getItem('expiresAt');
+  }
+
+  getUser(): any {
+    const savedUser = localStorage.getItem('user');
+    if (!savedUser) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(savedUser);
+    } catch {
+      return null;
+    }
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  updateStoredUsername(newUsername: string): void {
+    const username = newUsername.trim();
+
+    if (!username) {
+      return;
+    }
+
+    this.username = username;
+    localStorage.setItem('username', username);
+
+    const savedUser = localStorage.getItem('user');
+
+    if (savedUser) {
+      try {
+        const user = JSON.parse(savedUser);
+        user.userName = username;
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (error) {
+        console.error('Unable to update saved username:', error);
+      }
+    }
+
+    this.usernameSubject.next(username);
+  }
+
+  updateStoredCredits(credits: number): void {
+    const value = Number(credits);
+
+    if (!Number.isNaN(value)) {
+      localStorage.setItem('availableCredits', String(value));
+    }
+  }
+
+  logout(): void {
+    [
+      'accessToken',
+      'refreshToken',
+      'expiresAt',
+      'expiresIn',
+      'username',
+      'userEmail',
+      'user',
+      'availableCredits'
+    ].forEach((key) => localStorage.removeItem(key));
+
+    this.username = '';
+    this.userEmail = '';
+    this.usernameSubject.next('');
+
+    console.log('USER LOGGED OUT.');
+  }
+
+  openAuthRequired(): void {
+    this.showAuthRequired = true;
+  }
+
+  closeAuthRequired(): void {
+    this.showAuthRequired = false;
+  }
+}

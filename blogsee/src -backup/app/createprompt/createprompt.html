@@ -1,0 +1,145 @@
+
+<div class="regenerate-prompt-page">
+
+  <div class="prompt-overlay"></div>
+
+  <section class="prompt-card">
+
+    <!-- Robotic decorative elements -->
+    <span class="tech-line tech-line-left"></span>
+    <span class="tech-line tech-line-right"></span>
+    <span class="tech-corner"></span>
+
+
+    <!-- Header -->
+    <div class="prompt-header">
+
+      <div class="prompt-icon">
+        ✦
+      </div>
+
+      <div class="prompt-heading">
+
+        <span class="prompt-label">
+          AI REGENERATION
+        </span>
+
+        <h1>
+          Refine your blog
+        </h1>
+
+        <p>
+          Tell the AI what you would like to change in your blog.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Prompt Input -->
+    <div class="prompt-body">
+
+      <label for="regeneratePrompt">
+        Your instructions
+      </label>
+
+      <div class="textarea-wrapper">
+
+        <textarea
+          id="regeneratePrompt"
+          [(ngModel)]="prompt"
+          placeholder="Describe how you want your blog to be regenerated..."
+          rows="6"
+          maxlength="1000"
+        ></textarea>
+
+        <span class="character-count">
+          {{ prompt.length }}/1000
+        </span>
+
+      </div>
+
+      <span
+        class="validation-message"
+        *ngIf="showValidation"
+      >
+        Please describe what you want to change.
+      </span>
+
+    </div>
+
+
+    <!-- Quick suggestions -->
+    <div class="suggestions">
+
+      <span class="suggestion-label">
+        QUICK IDEAS
+      </span>
+
+      <div class="suggestion-list">
+
+        <button
+          type="button"
+          (click)="useSuggestion('Make the tone more professional and engaging.')"
+        >
+          More professional
+        </button>
+
+        <button
+          type="button"
+          (click)="useSuggestion('Make the blog shorter and more concise.')"
+        >
+          Make it concise
+        </button>
+
+        <button
+          type="button"
+          (click)="useSuggestion('Add more detailed examples and explanations.')"
+        >
+          Add details
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Actions -->
+    <div class="prompt-actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="regenerate-btn"
+        [disabled]="isGenerating"
+        (click)="regenerate()"
+      >
+
+        <span
+          class="button-loader"
+          *ngIf="isGenerating"
+        ></span>
+
+        <span *ngIf="!isGenerating">
+          ✦
+        </span>
+
+        {{ isGenerating ? 'Generating...' : 'Regenerate Blog' }}
+
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+

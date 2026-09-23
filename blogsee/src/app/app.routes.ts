@@ -3,17 +3,19 @@ import { Routes } from '@angular/router';
 import { Dashboard } from './features/dashboard/pages/dashboard/dashboard';
 import { UserDashboardComponent } from './features/user-dashboard/user-dashboard';
 import { BlogDetails } from './features/blog-details/blog-details';
-import { UpdateProfile } from './update-profile/update-profile';
+import { UpdateProfileComponent } from './update-profile/update-profile';
 import { Feedback } from './feedback/feedback';
 import { RaiseQueryComponent } from './raise-query/raise-query';
 import { NotificationsComponent } from './notification/notification';
 import { CreateBlogComponent } from './create-blog/create-blog';
-import { Createdblog } from './createdblog/createdblog';
+import { CreatedblogComponent } from './createdblog/createdblog';
 import { Topup } from './topup/topup';
 import { Followers } from './followers/followers';
 import { Following } from './following/following';
 import { UserProfile } from './user-profile/user-profile';
 import { Likedblog } from './likedblog/likedblog';
+import{ Createprompt } from './createprompt/createprompt';
+import { UserBlogs } from './userblogs/userblogs';
 
 export const routes: Routes = [
 
@@ -28,12 +30,12 @@ export const routes: Routes = [
   },
 
   {
-    path: 'blog',
+    path: 'blog-details/:id',
     component: BlogDetails
   },
   {
     path: 'update-profile',
-    component: UpdateProfile
+    component: UpdateProfileComponent
   },
 
   {
@@ -58,7 +60,7 @@ export const routes: Routes = [
 
   {
     path: 'createdblog',
-    component: Createdblog
+    component: CreatedblogComponent
   },
 
   {
@@ -80,5 +82,17 @@ export const routes: Routes = [
   {
     path: 'likedblog',
     component: Likedblog
+  },
+ {
+    path: 'createdblog/:blogId',
+    component: CreatedblogComponent
+  },
+  {
+    path: 'create-prompt',
+    component: Createprompt
+  },
+   {
+    path: 'userblogs',
+    component: UserBlogs
   }
 ];

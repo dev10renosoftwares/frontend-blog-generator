@@ -1,0 +1,578 @@
+.generated-blog-page {
+min-height: calc(100vh - 72px);
+padding: 40px 45px 70px;
+margin-top: 72px;
+
+background:
+radial-gradient(
+circle at 10% 10%,
+rgba(139, 92, 246, 0.10),
+transparent 30%
+),
+radial-gradient(
+circle at 90% 20%,
+rgba(168, 85, 247, 0.08),
+transparent 28%
+),
+#f7f5fc;
+
+font-family: "Inter", "Segoe UI", sans-serif;
+color: #1f2937;
+}
+
+/* =====================================================
+BLOG CARD
+===================================================== */
+
+.blog-card {
+width: 100%;
+max-width: 1100px;
+margin: 0 auto;
+
+background: rgba(255, 255, 255, 0.96);
+
+border: 1px solid rgba(124, 58, 237, 0.12);
+border-radius: 24px;
+
+padding: 35px 40px 40px;
+
+box-shadow:
+0 20px 50px rgba(76, 29, 149, 0.08),
+0 4px 15px rgba(0, 0, 0, 0.03);
+
+position: relative;
+overflow: hidden;
+}
+
+/* Subtle robotic glow */
+
+.blog-card::before {
+content: "";
+position: absolute;
+
+top: -100px;
+right: -100px;
+
+width: 250px;
+height: 250px;
+
+background: rgba(139, 92, 246, 0.08);
+
+border-radius: 50%;
+
+filter: blur(50px);
+
+pointer-events: none;
+}
+
+/* =====================================================
+VERSION
+===================================================== */
+
+.version {
+display: inline-flex;
+align-items: center;
+
+padding: 7px 14px;
+
+border-radius: 20px;
+
+background: #f3efff;
+border: 1px solid #ddd2fe;
+
+color: #6d28d9;
+
+font-size: 13px;
+font-weight: 600;
+
+letter-spacing: 0.3px;
+
+margin-bottom: 25px;
+}
+
+/* =====================================================
+BLOG HEADER
+===================================================== */
+
+.blog-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+
+gap: 30px;
+}
+
+.title-area {
+flex: 1;
+}
+
+.title-area h1 {
+margin: 0 0 18px;
+
+font-size: 34px;
+line-height: 1.25;
+
+font-weight: 700;
+
+color: #1e1b4b;
+
+letter-spacing: -0.5px;
+}
+
+/* =====================================================
+BLOG META
+===================================================== */
+
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+
+gap: 12px;
+
+font-size: 14px;
+}
+
+.blog-meta span {
+display: inline-flex;
+align-items: center;
+
+padding: 8px 13px;
+
+background: #faf9ff;
+
+border: 1px solid #e9e4f7;
+
+border-radius: 10px;
+
+color: #6b7280;
+}
+
+.blog-meta strong {
+margin-left: 5px;
+
+color: #5b21b6;
+
+font-weight: 600;
+}
+
+/* =====================================================
+STATUS
+===================================================== */
+
+.status-area {
+padding-top: 4px;
+}
+
+.status {
+display: inline-flex;
+align-items: center;
+
+padding: 8px 16px;
+
+border-radius: 20px;
+
+font-size: 13px;
+font-weight: 700;
+
+letter-spacing: 0.3px;
+}
+
+/* Draft */
+
+.status.draft {
+background: #fff7ed;
+color: #c2410c;
+border: 1px solid #fed7aa;
+}
+
+/* Published */
+
+.status.published {
+background: #ecfdf5;
+color: #047857;
+border: 1px solid #a7f3d0;
+}
+
+/* =====================================================
+DIVIDER
+===================================================== */
+
+.divider {
+height: 1px;
+
+margin: 28px 0 30px;
+
+background: linear-gradient(
+to right,
+rgba(124, 58, 237, 0.20),
+rgba(124, 58, 237, 0.04),
+transparent
+);
+}
+
+/* =====================================================
+BLOG CONTENT
+===================================================== */
+
+.blog-content {
+max-width: 950px;
+
+margin: 0 auto;
+
+font-size: 16px;
+line-height: 1.9;
+
+color: #374151;
+}
+
+.blog-content p {
+margin: 0 0 22px;
+
+white-space: pre-line;
+}
+
+.blog-content p:last-child {
+margin-bottom: 0;
+}
+
+/* =====================================================
+EDITING ACTIONS
+===================================================== */
+
+.editing-actions {
+display: flex;
+flex-wrap: wrap;
+gap: 11px;
+
+margin-top: 35px;
+padding-top: 25px;
+
+border-top: 1px solid #eeeaf7;
+}
+
+.action-btn {
+border: 1px solid #ddd2fe;
+
+background: #ffffff;
+
+color: #6d28d9;
+
+padding: 10px 17px;
+
+border-radius: 11px;
+
+font-size: 13px;
+font-weight: 600;
+
+cursor: pointer;
+
+transition:
+background 0.2s ease,
+color 0.2s ease,
+transform 0.2s ease,
+box-shadow 0.2s ease;
+
+font-family: inherit;
+}
+
+.action-btn:hover {
+background: #7c3aed;
+
+color: #ffffff;
+
+border-color: #7c3aed;
+
+transform: translateY(-2px);
+
+box-shadow:
+0 7px 18px rgba(124, 58, 237, 0.22);
+}
+
+.action-btn:active {
+transform: translateY(0);
+}
+
+.action-icon {
+margin-right: 5px;
+
+color: #8b5cf6;
+
+font-size: 14px;
+}
+
+.action-btn:hover .action-icon {
+color: #ffffff;
+}
+
+/* =====================================================
+PUBLISH SECTION
+===================================================== */
+
+.publish-section {
+margin-top: 35px;
+
+padding: 25px 28px;
+
+border-radius: 18px;
+
+background:
+linear-gradient(
+135deg,
+#faf8ff,
+#f5f1ff
+);
+
+border: 1px solid #e5dcfb;
+
+display: flex;
+
+justify-content: space-between;
+align-items: center;
+
+gap: 25px;
+}
+
+.publish-info h3 {
+margin: 0 0 7px;
+
+color: #312e81;
+
+font-size: 18px;
+font-weight: 700;
+}
+
+.publish-info p {
+margin: 0;
+
+color: #6b7280;
+
+font-size: 14px;
+
+line-height: 1.6;
+}
+
+.publish-actions {
+display: flex;
+
+gap: 10px;
+
+flex-shrink: 0;
+}
+
+/* =====================================================
+DRAFT BUTTON
+===================================================== */
+
+.draft-btn {
+padding: 11px 18px;
+
+border-radius: 11px;
+
+border: 1px solid #d8d2e8;
+
+background: #ffffff;
+
+color: #4b5563;
+
+font-size: 13px;
+font-weight: 600;
+
+cursor: pointer;
+
+font-family: inherit;
+
+transition: all 0.2s ease;
+}
+
+.draft-btn:hover {
+border-color: #8b5cf6;
+
+color: #6d28d9;
+
+background: #faf8ff;
+
+transform: translateY(-2px);
+}
+
+/* =====================================================
+PUBLISH BUTTON
+===================================================== */
+
+.publish-btn {
+padding: 11px 22px;
+
+border-radius: 11px;
+
+border: 1px solid #7c3aed;
+
+background: linear-gradient(
+135deg,
+#7c3aed,
+#8b5cf6
+);
+
+color: #ffffff;
+
+font-size: 13px;
+font-weight: 700;
+
+cursor: pointer;
+
+font-family: inherit;
+
+box-shadow:
+0 6px 18px rgba(124, 58, 237, 0.22);
+
+transition:
+transform 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+.publish-btn:hover {
+transform: translateY(-2px);
+
+box-shadow:
+0 9px 24px rgba(124, 58, 237, 0.32);
+}
+
+.publish-btn:active {
+transform: translateY(0);
+}
+
+/* =====================================================
+ACTION MESSAGE
+===================================================== */
+
+.action-message {
+margin-top: 18px;
+
+padding: 12px 16px;
+
+border-radius: 11px;
+
+background: #f3efff;
+
+border: 1px solid #ddd2fe;
+
+color: #6d28d9;
+
+font-size: 13px;
+font-weight: 600;
+
+text-align: center;
+
+animation: messageAppear 0.25s ease;
+}
+
+@keyframes messageAppear {
+from {
+opacity: 0;
+transform: translateY(5px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* =====================================================
+BUTTON FOCUS
+===================================================== */
+
+.action-btn:focus,
+.draft-btn:focus,
+.publish-btn:focus {
+outline: none;
+
+box-shadow:
+0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media (max-width: 850px) {
+
+.generated-blog-page {
+padding: 30px 20px 50px;
+}
+
+.blog-card {
+padding: 28px 25px 32px;
+}
+
+.blog-header {
+flex-direction: column;
+}
+
+.status-area {
+padding-top: 0;
+}
+
+.title-area h1 {
+font-size: 28px;
+}
+
+.publish-section {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.publish-actions {
+width: 100%;
+}
+
+.draft-btn,
+.publish-btn {
+flex: 1;
+}
+}
+
+@media (max-width: 550px) {
+
+.generated-blog-page {
+padding: 20px 12px 40px;
+}
+
+.blog-card {
+padding: 22px 18px 25px;
+
+
+border-radius: 18px;
+
+
+}
+
+.title-area h1 {
+font-size: 24px;
+}
+
+.blog-meta {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.editing-actions {
+gap: 8px;
+}
+
+.action-btn {
+flex: 1 1 auto;
+}
+
+.publish-actions {
+flex-direction: column;
+}
+
+.draft-btn,
+.publish-btn {
+width: 100%;
+}
+
+.blog-content {
+font-size: 15px;
+line-height: 1.8;
+}
+}

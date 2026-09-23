@@ -1,354 +1,685 @@
 
-<div class="blog-page">
+<div class="blog-details-page">
 
-  <!-- Back Button -->
-  <a href="#" class="back-home">
-    <i class="fa-solid fa-arrow-left"></i>
-    Back to Home
-  </a>
+    <!-- ==================== TOP BAR ==================== -->
+    <div class="details-topbar">
 
-  <div class="blog-layout">
+        <button
+            type="button"
+            class="back-btn"
+            (click)="goBack()">
 
-    <!-- LEFT ACTION BAR -->
-    <aside class="action-sidebar">
+            <span>←</span>
+            <span>Back to Feed</span>
 
-      <button class="action-btn" title="Like">
-        <i class="fa-regular fa-heart" ></i>
-       
-      </button>
-
-      <button class="action-btn" title="Comment">
-        <i class="fa-regular fa-comment"></i>
-       
-      </button>
-
-      <button class="action-btn" title="Repost">
-        <i class="fa-solid fa-retweet"></i>
-       
-      </button>
-
-      <button class="action-btn" title="Save">
-        <i class="fa-regular fa-bookmark"></i>
-     
-      </button>
-
-    </aside>
-
-
-    <!-- MAIN BLOG -->
-    <main class="blog-content">
-
-      <!-- Blog Header -->
-      <div class="blog-header">
-
-        <span class="category">
-          TECHNOLOGY
-        </span>
-
-        <h1>
-          How Artificial Intelligence Is Changing
-          the Way We Create
-        </h1>
-
-        <p class="subtitle">
-          Exploring how AI is transforming creativity, productivity,
-          and the way people work in the digital world.
-        </p>
-
-
-        <!-- Author -->
-        <div class="blog-author">
-
-          <div class="author-avatar">
-            A
-          </div>
-
-          <div>
-            <h6>Ayesha Khan</h6>
-
-            <p>
-              Published on August 12, 2026
-              <span>•</span>
-              8 min read
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <hr>
-
-
-      <!-- Blog Image Placeholder -->
-      <div class="blog-image">
-
-        <i class="bi bi-image"></i>
-
-        <span>Blog Cover Image</span>
-
-      </div>
-
-
-      <!-- Blog Body -->
-      <article class="blog-body">
-
-        <p>
-          Artificial intelligence has rapidly become one of the most
-          influential technologies of our generation. From generating
-          content to helping people solve complex problems, AI is
-          changing the way we approach everyday tasks.
-        </p>
-
-
-        <h2>The Rise of AI</h2>
-
-        <p>
-          Over the last few years, artificial intelligence has moved
-          beyond research laboratories and into our everyday lives.
-          Developers, designers, writers and businesses are using AI
-          tools to improve their workflows and explore new ideas.
-        </p>
-
-        <p>
-          What makes this transformation particularly interesting is
-          that AI is not simply replacing existing tools. It is creating
-          completely new ways of working and collaborating with
-          technology.
-        </p>
-
-
-        <h2>AI and Creativity</h2>
-
-        <p>
-          One of the most interesting applications of AI is creative
-          work. People can now use AI to generate ideas, create visual
-          concepts, write drafts and experiment with different
-          possibilities in a matter of minutes.
-        </p>
-
-        <p>
-          However, creativity still depends heavily on human thinking.
-          AI can provide suggestions and accelerate the process, but
-          the final ideas, decisions and emotions come from people.
-        </p>
-
-
-        <h2>The Future</h2>
-
-        <p>
-          As artificial intelligence continues to evolve, the most
-          successful approach may not be choosing between humans and
-          machines, but learning how to work alongside them.
-        </p>
-
-        <p>
-          The future of AI is therefore not only about smarter
-          technology. It is also about how we choose to use that
-          technology to create better experiences.
-        </p>
-
-      </article>
-
-
-      <!-- Author Bottom -->
-      <div class="author-footer">
-
-        <div class="author-avatar large">
-          A
-        </div>
-
-        <div>
-          <small>Written by</small>
-
-          <h5>Ayesha Khan</h5>
-
-          <p>
-            Content creator and technology enthusiast.
-          </p>
-        </div>
-
-      </div>
-
-    </main>
-
-
-    <!-- RIGHT SIDEBAR -->
-    <aside class="right-sidebar">
-
-
-      <!-- ABOUT AUTHOR -->
-      <div class="side-card">
-
-        <h3>About the Author</h3>
-
-        <div class="author-profile">
-
-          <div class="author-avatar large">
-            A
-          </div>
-
-          <div>
-            <h5>Ayesha Khan</h5>
-
-            <p>
-              Content creator and technology enthusiast.
-            </p>
-          </div>
-
-        </div>
-
-
-        <p class="author-description">
-          Ayesha writes about emerging technologies, productivity
-          and digital tools. She enjoys breaking down complex topics
-          into simple ideas.
-        </p>
-
-
-        <button class="follow-btn">
-          <i class="bi bi-person-plus"></i>
-          Follow
         </button>
 
-
-        <div class="author-stats">
-
-          <div>
-            <strong>128</strong>
-            <span>Followers</span>
-          </div>
-
-          <div>
-            <strong>24</strong>
-            <span>Following</span>
-          </div>
-
-        </div>
-
-      </div>
+    </div>
 
 
-      <!-- TOP COMMENTS -->
-      <div class="side-card comments-card">
-
-        <h3>Top Comments</h3>
+    <!-- ==================== MAIN LAYOUT ==================== -->
+    <div class="blog-layout">
 
 
-        <!-- Comment 1 -->
-        <div class="comment">
+        <!-- ==================== LEFT INTERACTION RAIL ==================== -->
+        <aside class="interaction-rail">
 
-          <div class="comment-avatar">
-            R
-          </div>
+            <!-- LIKE -->
+            <button
+                type="button"
+                class="interaction-btn"
+                [class.active]="isLiked"
+                (click)="likeBlog()">
 
-          <div class="comment-content">
+                <span class="interaction-icon">
+                    {{ isLiked ? '♥' : '♡' }}
+                </span>
 
-            <div class="comment-header">
-              <strong>Rohan Mehta</strong>
-              <span>2h</span>
-            </div>
+                <span class="interaction-count">
+                    {{ blog?.likeCount || 0 }}
+                </span>
 
-            <p>
-              Great insights! AI really is reshaping how we create
-              and solve problems.
-            </p>
+                <span class="interaction-label">
+                    {{ isLiked ? 'Liked' : 'Like' }}
+                </span>
 
-            <div class="comment-footer">
-
-              <a href="#">Reply</a>
-
-              <span>
-                <i class="bi bi-heart"></i>
-                12
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
+            </button>
 
 
-        <!-- Comment 2 -->
-        <div class="comment">
+            <!-- COMMENT -->
+            <button
+                type="button"
+                class="interaction-btn"
+                (click)="focusCommentBox()">
 
-          <div class="comment-avatar">
-            S
-          </div>
+                <span class="interaction-icon">
+                    💬
+                </span>
 
-          <div class="comment-content">
+                <span class="interaction-count">
+                    {{ blog?.commentCount || 0 }}
+                </span>
 
-            <div class="comment-header">
-              <strong>Sara Ali</strong>
-              <span>4h</span>
-            </div>
+                <span class="interaction-label">
+                    Comment
+                </span>
 
-            <p>
-              Well written. The balance between human creativity
-              and AI is so important.
-            </p>
-
-            <div class="comment-footer">
-
-              <a href="#">Reply</a>
-
-              <span>
-                <i class="bi bi-heart"></i>
-                8
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
+            </button>
 
 
-        <!-- Comment 3 -->
-        <div class="comment">
+            <!-- REPOST -->
+            <button
+                type="button"
+                class="interaction-btn"
+                [class.active]="isReposted"
+                (click)="repostBlog()">
 
-          <div class="comment-avatar">
-            D
-          </div>
+                <span class="interaction-icon">
+                    ↻
+                </span>
 
-          <div class="comment-content">
+                <span class="interaction-label">
+                    {{ isReposted ? 'Reposted' : 'Repost' }}
+                </span>
 
-            <div class="comment-header">
-              <strong>Dev Patel</strong>
-              <span>6h</span>
-            </div>
+            </button>
 
-            <p>
-              Excited to see where AI takes us in the coming years!
-            </p>
 
-            <div class="comment-footer">
+            <!-- SAVE -->
+            <button
+                type="button"
+                class="interaction-btn"
+                [class.active]="isSaved"
+                (click)="saveBlog()">
 
-              <a href="#">Reply</a>
+                <span class="interaction-icon">
+                    {{ isSaved ? '★' : '☆' }}
+                </span>
 
-              <span>
-                <i class="bi bi-heart"></i>
-                5
-              </span>
+                <span class="interaction-label">
+                    {{ isSaved ? 'Saved' : 'Save' }}
+                </span>
+
+            </button>
+
+        </aside>
+
+
+
+        <!-- ==================== BLOG CONTENT ==================== -->
+        <main class="blog-main">
+
+
+            <!-- ERROR -->
+            <div
+                *ngIf="blogError"
+                class="error-box">
+
+                <div class="error-icon">
+                    !
+                </div>
+
+                <div>
+                    {{ blogError }}
+                </div>
 
             </div>
 
-          </div>
-
-        </div>
 
 
-        <a class="view-comments">
-          View all comments
-          <i class="bi bi-arrow-right"></i>
-        </a>
+            <!-- BLOG -->
+            <article
+                *ngIf="blog"
+                class="blog-card">
 
-      </div>
 
-    </aside>
+                <!-- CATEGORY -->
+                <div class="category-row">
 
-  </div>
+                    <span class="category-badge">
+                        {{ blog.categoryName || 'General' }}
+                    </span>
+
+                </div>
+
+
+
+                <!-- TITLE -->
+                <h1 class="blog-title">
+                    {{ blog.title || 'Untitled Blog' }}
+                </h1>
+
+
+
+                <!-- AUTHOR -->
+                <div class="author-row">
+
+                    <div class="author-avatar">
+                        {{ getAuthorInitial() }}
+                    </div>
+
+
+                    <div class="author-details">
+
+                        <span class="author-name">
+                            {{ blog.authorName || 'User' }}
+                        </span>
+
+
+                        <div class="author-meta">
+
+                            <span>
+                                {{ formatDate(blog.publishedAt) }}
+                            </span>
+
+                            <span>•</span>
+
+                            <span>
+                                {{ getReadTime() }} min read
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COVER IMAGE -->
+                <div
+                    class="blog-cover"
+                    *ngIf="blog.coverImageUrl">
+
+                    <img
+                        [src]="blog.coverImageUrl"
+                        [alt]="blog.title || 'Blog cover image'"
+                        class="cover-image">
+
+                </div>
+
+
+
+                <!-- EXCERPT -->
+                <p
+                    *ngIf="blog.excerpt"
+                    class="blog-excerpt">
+
+                    {{ blog.excerpt }}
+
+                </p>
+
+
+
+                <!-- CONTENT -->
+                <div
+                    *ngIf="blog.content"
+                    class="blog-content">
+
+                    {{ blog.content }}
+
+                </div>
+
+
+
+                <!-- EMPTY CONTENT -->
+                <div
+                    *ngIf="!blog.content"
+                    class="content-empty">
+
+                    <div class="empty-content-icon">
+                        ◉
+                    </div>
+
+                    <p>
+                        Blog content is not available.
+                    </p>
+
+                </div>
+
+
+
+                <!-- TAGS -->
+                <div
+                    *ngIf="blog.tags && blog.tags.length > 0"
+                    class="tags-section">
+
+                    <span
+                        *ngFor="let tag of blog.tags"
+                        class="tag">
+
+                        #{{ tag }}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- BLOG STATS -->
+                <div class="blog-stats">
+
+                    <span>
+                        👁
+                        {{ blog.viewCount || 0 }}
+                        views
+                    </span>
+
+                    <span>
+                        ♥
+                        {{ blog.likeCount || 0 }}
+                        likes
+                    </span>
+
+                    <span>
+                        💬
+                        {{ blog.commentCount || 0 }}
+                        comments
+                    </span>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- NO BLOG -->
+            <div
+                *ngIf="!blog && !blogError"
+                class="empty-state">
+
+                <div class="robot-icon">
+                    ◉
+                </div>
+
+                <h2>
+                    Blog could not be displayed
+                </h2>
+
+                <p>
+                    The blog request completed, but no blog data was found.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==================== COMMENTS ==================== -->
+            <section
+                *ngIf="blog"
+                class="comments-section">
+
+
+                <!-- COMMENTS HEADER -->
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            COMMUNITY
+                        </span>
+
+                        <h2>
+                            Comments
+                        </h2>
+
+                    </div>
+
+
+                    <span class="comment-count">
+                        {{ comments.length }}
+                    </span>
+
+                </div>
+
+
+
+                <!-- COMMENT INPUT -->
+                <div class="comment-input-card">
+
+
+                    <!-- CURRENT USER -->
+                    <div class="current-user-avatar">
+                        U
+                    </div>
+
+
+                    <div class="comment-input-wrapper">
+
+                        <textarea
+                            #commentTextArea
+                            [(ngModel)]="commentText"
+                            placeholder="Share your thoughts..."
+                            rows="3">
+                        </textarea>
+
+
+                        <div class="comment-input-footer">
+
+                            <span>
+                                Be respectful and constructive.
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="purple-btn"
+                                (click)="addComment()"
+                                [disabled]="!commentText.trim()">
+
+                                Post Comment
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMMENT ERROR -->
+                <div
+                    *ngIf="commentError"
+                    class="comment-error">
+
+                    {{ commentError }}
+
+                </div>
+
+
+
+                <!-- COMMENTS LIST -->
+                <div class="comments-list">
+
+
+                    <!-- COMMENT -->
+                    <div
+                        *ngFor="let comment of comments; trackBy: trackComment"
+                        class="comment-card">
+
+
+                        <!-- COMMENT AVATAR -->
+                        <div class="comment-avatar">
+
+                            {{ getCommentInitial(comment) }}
+
+                        </div>
+
+
+                        <!-- COMMENT BODY -->
+                        <div class="comment-body">
+
+
+                            <!-- COMMENT HEADER -->
+                            <div class="comment-header">
+
+                                <div>
+
+                                    <span class="comment-user">
+                                        {{ comment.userName || 'User' }}
+                                    </span>
+
+                                    <span class="comment-date">
+                                        {{ formatCommentDate(comment.createdAt) }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- NORMAL COMMENT -->
+                            <p
+                                *ngIf="editingCommentId !== comment.commentId"
+                                class="comment-text">
+
+                                {{ comment.content }}
+
+                            </p>
+
+
+
+                            <!-- EDIT COMMENT -->
+                            <div
+                                *ngIf="editingCommentId === comment.commentId"
+                                class="edit-comment-box">
+
+
+                                <textarea
+                                    [(ngModel)]="editingCommentText"
+                                    rows="3">
+                                </textarea>
+
+
+                                <div class="edit-actions">
+
+                                    <button
+                                        type="button"
+                                        class="purple-btn"
+                                        (click)="updateComment()">
+
+                                        Update
+
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="cancel-btn"
+                                        (click)="cancelEditComment()">
+
+                                        Cancel
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- COMMENT ACTIONS -->
+                            <div
+                                *ngIf="editingCommentId !== comment.commentId"
+                                class="comment-actions">
+
+
+                                <button
+                                    type="button"
+                                    (click)="likeComment(comment)">
+
+                                    ♡ Like
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    (click)="startEditComment(comment)">
+
+                                    Edit
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    (click)="deleteComment(comment.commentId)">
+
+                                    Delete
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- NO COMMENTS -->
+                    <div
+                        *ngIf="comments.length === 0"
+                        class="no-comments">
+
+                        <div class="no-comments-icon">
+                            ✦
+                        </div>
+
+                        <h3>
+                            Start the conversation
+                        </h3>
+
+                        <p>
+                            Be the first person to share your thoughts.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+
+        <!-- ==================== RIGHT SIDEBAR ==================== -->
+        <aside
+            *ngIf="blog"
+            class="blog-sidebar">
+
+
+            <!-- AUTHOR CARD -->
+            <div class="author-card">
+
+                <div class="robot-glow"></div>
+
+
+                <div class="sidebar-author-avatar">
+                    {{ getAuthorInitial() }}
+                </div>
+
+
+                <span class="author-label">
+                    WRITTEN BY
+                </span>
+
+
+                <h3>
+                    {{ blog.authorName || 'User' }}
+                </h3>
+
+
+                <p>
+                    Creator of this blog
+                </p>
+
+
+                <button
+                    type="button"
+                    class="follow-btn"
+                    [class.following]="isFollowingAuthor"
+                    (click)="followAuthor()">
+
+                    {{ isFollowingAuthor ? '✓ Following' : '+ Follow' }}
+
+                </button>
+
+            </div>
+
+
+
+            <!-- BLOG INFO -->
+            <div class="sidebar-card">
+
+                <span class="sidebar-kicker">
+                    BLOG INFO
+                </span>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Category
+                    </span>
+
+                    <strong>
+                        {{ blog.categoryName || 'General' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Words
+                    </span>
+
+                    <strong>
+                        {{ blog.wordCount || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Reading time
+                    </span>
+
+                    <strong>
+                        {{ getReadTime() }} min
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Views
+                    </span>
+
+                    <strong>
+                        {{ blog.viewCount || 0 }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK ROBOT CARD -->
+            <div class="sidebar-card robot-info-card">
+
+                <div class="robot-small">
+                    ◉
+                </div>
+
+                <div>
+
+                    <span class="sidebar-kicker">
+                        BLOGSEE AI
+                    </span>
+
+                    <p>
+                        Discover ideas, insights and stories from the BLOGSEE community.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
 
 </div>

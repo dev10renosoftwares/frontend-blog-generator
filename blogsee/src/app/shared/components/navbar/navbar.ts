@@ -1,35 +1,85 @@
-
 import {
   Component,
   OnInit,
   OnDestroy
 } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule
+} from '@angular/common';
 
 import {
+  CreditPricingResponseDto
+} from '../../../ServiceModels/v1/Credit/CreditPricingResponseDto';
+
+import {
+  GetCreditsResponseDto
+} from '../../../ServiceModels/v1/Credit/GetCreditsResponseDto';
+
+import {
+  ReactiveFormsModule,
   FormBuilder,
   FormGroup,
-  ReactiveFormsModule,
-  Validators
+  Validators,
+  AbstractControl,
+  ValidationErrors
 } from '@angular/forms';
 
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import {
+  Subscription
+} from 'rxjs';
 
-import { AuthService } from '../../../core/services/auth';
+import {
+  AuthService
+} from '../../../core/services/auth';
 
-import { CreditService } from '../../../services/credit';
+import {
+  CreditService
+} from '../../../services/credit';
 
+
+// =====================================================
+// PASSWORD VALIDATOR
+// =====================================================
+
+function passwordsMatchValidator(
+  group: AbstractControl
+): ValidationErrors | null {
+
+  const password =
+    group.get('password')?.value;
+
+  const confirmPassword =
+    group.get('confirmPassword')?.value;
+
+  return password === confirmPassword
+    ? null
+    : {
+        passwordMismatch: true
+      };
+
+}
+
+
+// =====================================================
+// COMPONENT
+// =====================================================
 
 @Component({
 
   selector: 'app-navbar',
 
+  standalone: true,
+
   imports: [
+    CommonModule,
     ReactiveFormsModule,
-    CommonModule
+    RouterLink
   ],
 
   templateUrl: './navbar.html',
@@ -42,21 +92,35 @@ export class Navbar
 
 
   // =====================================================
-  // FORMS
+  // AUTH POPUPS
   // =====================================================
+
+  showLogin = false;
+
+  showRegister = false;
 
   loginForm!: FormGroup;
 
   registerForm!: FormGroup;
+
+  loginError = '';
+
+  registerError = '';
+
+  isLoggingIn = false;
+
+  isRegistering = false;
 
 
   // =====================================================
   // USER
   // =====================================================
 
+  isLoggedIn = false;
+
   username = '';
 
-  isLoggedIn = false;
+  showUserMenu = false;
 
 
   // =====================================================
@@ -65,51 +129,29 @@ export class Navbar
 
   availableCredits = 0;
 
-  totalCredits = 100;
-
   creditPercentage = 0;
 
-  /*
-   * This is only used internally.
-   *
-   * DO NOT use it in HTML to show "..."
-   */
-
-  isLoadingCredits = false;
-
-  creditError = '';
-
 
   // =====================================================
-  // AUTH POPUPS
+  // CREDIT PRICING
   // =====================================================
 
-  showLogin = false;
+  showCreditPricing = false;
 
-  showRegister = false;
+  isLoadingCreditPricing = false;
 
+  creditPricingError = '';
 
-  // =====================================================
-  // USER MENU
-  // =====================================================
-
-  showUserMenu = false;
-
-
-  // =====================================================
-  // ERRORS
-  // =====================================================
-
-  loginError = '';
-
-  registerError = '';
+  creditPricing:
+    CreditPricingResponseDto[] = [];
 
 
   // =====================================================
   // SUBSCRIPTION
   // =====================================================
 
-  private usernameSubscription?: Subscription;
+  private usernameSubscription?:
+    Subscription;
 
 
   // =====================================================
@@ -120,11 +162,11 @@ export class Navbar
 
     private fb: FormBuilder,
 
+    private router: Router,
+
     private authService: AuthService,
 
-    private creditService: CreditService,
-
-    private router: Router
+    private creditService: CreditService
 
   ) {}
 
@@ -191,407 +233,165 @@ export class Navbar
             Validators.required,
             Validators.minLength(6)
           ]
+        ],
+
+        confirmPassword: [
+          '',
+          [
+            Validators.required
+          ]
         ]
+
+      }, {
+
+        validators:
+          passwordsMatchValidator
 
       });
 
 
     // ===================================================
-    // RESTORE USER
+    // RESTORE LOGIN
     // ===================================================
 
     this.username =
-      this.authService.username;
+      this.authService.getUsername();
 
 
     this.isLoggedIn =
       this.authService.isLoggedIn();
 
 
-    console.log(
-      'NAVBAR USER:',
-      this.username
-    );
-
-
-    console.log(
-      'NAVBAR LOGGED IN:',
-      this.isLoggedIn
-    );
-
-
     // ===================================================
-    // RESTORE SAVED CREDITS FIRST
+    // LOAD CREDITS
     // ===================================================
 
     if (this.isLoggedIn) {
 
-      this.loadSavedCredits();
-
-      /*
-       * After displaying the saved value,
-       * get the latest value from the API.
-       */
-
-      this.loadCredits();
+      this.getAvailableCredits();
 
     }
 
 
     // ===================================================
-    // LISTEN FOR LOGIN / LOGOUT
+    // LISTEN FOR USERNAME CHANGES
     // ===================================================
 
     this.usernameSubscription =
       this.authService.username$
         .subscribe(
-
           (username: string) => {
 
             this.username =
               username;
-
 
             this.isLoggedIn =
               this.authService.isLoggedIn();
 
 
             console.log(
-              'NAVBAR USER CHANGED:',
+              'NAVBAR USER:',
               this.username
             );
 
 
-            // =========================================
-            // USER LOGGED IN
-            // =========================================
-
             if (this.isLoggedIn) {
 
-              /*
-               * First show saved credits.
-               */
-
-              this.loadSavedCredits();
-
-
-              /*
-               * Then update them from API.
-               */
-
-              this.loadCredits();
-
-            }
-
-
-            // =========================================
-            // USER LOGGED OUT
-            // =========================================
-
-            else {
-
-              this.availableCredits = 0;
-
-              this.creditPercentage = 0;
-
-              this.isLoadingCredits = false;
-
-              this.creditError = '';
+              this.getAvailableCredits();
 
             }
 
           }
-
         );
 
   }
 
 
   // =====================================================
-  // LOAD SAVED CREDITS
+  // LOGIN STATUS
   // =====================================================
 
-  loadSavedCredits(): void {
+  checkLoginStatus(): void {
 
-    const savedCredits =
-      localStorage.getItem(
-        'availableCredits'
-      );
-
-
-    console.log(
-      'SAVED CREDITS:',
-      savedCredits
-    );
-
-
-    if (
-      savedCredits !== null
-    ) {
-
-      const credits =
-        Number(savedCredits);
-
-
-      if (
-        !Number.isNaN(credits)
-      ) {
-
-        this.availableCredits =
-          credits;
-
-
-        this.updateCreditPercentage();
-
-
-        console.log(
-          'RESTORED CREDITS:',
-          this.availableCredits
-        );
-
-      }
-
-    }
+    this.isLoggedIn =
+      this.authService.isLoggedIn();
 
   }
 
 
   // =====================================================
-  // LOAD CREDITS FROM API
+  // OPEN LOGIN
   // =====================================================
 
-  loadCredits(): void {
+  openLogin(): void {
 
+    this.showLogin = true;
 
-    // ===================================================
-    // CHECK JWT
-    // ===================================================
+    this.showRegister = false;
 
-    const token =
-      this.authService.getToken();
-
-
-    if (!token) {
-
-      console.log(
-        'No JWT token available.'
-      );
-
-
-      /*
-       * IMPORTANT:
-       *
-       * Do NOT erase saved credits here.
-       */
-
-      return;
-
-    }
-
-
-    // ===================================================
-    // START REQUEST
-    // ===================================================
-
-    this.isLoadingCredits =
-      true;
-
-    this.creditError =
-      '';
-
-
-    console.log(
-      'REQUESTING CREDITS API...'
-    );
-
-
-    // ===================================================
-    // API REQUEST
-    // ===================================================
-
-    this.creditService
-      .getCredits()
-      .subscribe({
-
-        // ===============================================
-        // SUCCESS
-        // ===============================================
-
-        next: (response: any) => {
-
-          console.log(
-            '===================================='
-          );
-
-          console.log(
-            'CREDITS API RESPONSE:'
-          );
-
-          console.log(
-            response
-          );
-
-          console.log(
-            '===================================='
-          );
-
-
-          // =============================================
-          // GET CREDITS
-          // =============================================
-
-          const credits =
-            Number(
-              response
-                ?.data
-                ?.availableCredits ?? 0
-            );
-
-
-          console.log(
-            'API AVAILABLE CREDITS:',
-            credits
-          );
-
-
-          // =============================================
-          // SAVE IN COMPONENT
-          // =============================================
-
-          this.availableCredits =
-            credits;
-
-
-          // =============================================
-          // SAVE IN LOCAL STORAGE
-          // =============================================
-
-          localStorage.setItem(
-            'availableCredits',
-            String(
-              this.availableCredits
-            )
-          );
-
-
-          // =============================================
-          // UPDATE PROGRESS
-          // =============================================
-
-          this.updateCreditPercentage();
-
-
-          // =============================================
-          // FINISHED
-          // =============================================
-
-          this.isLoadingCredits =
-            false;
-
-
-          console.log(
-            'FINAL NAVBAR CREDITS:',
-            this.availableCredits
-          );
-
-
-          console.log(
-            'FINAL CREDIT PERCENTAGE:',
-            this.creditPercentage
-          );
-
-        },
-
-
-        // ===============================================
-        // ERROR
-        // ===============================================
-
-        error: (error: any) => {
-
-          console.error(
-            'CREDITS API ERROR:',
-            error
-          );
-
-
-          /*
-           * IMPORTANT:
-           *
-           * DO NOT set availableCredits = 0.
-           *
-           * If we already have saved credits,
-           * keep showing them.
-           */
-
-          this.creditError =
-            error
-              ?.error
-              ?.message ||
-            'Unable to load credits.';
-
-
-          this.isLoadingCredits =
-            false;
-
-
-          /*
-           * Keep the existing value.
-           */
-
-          this.updateCreditPercentage();
-
-        }
-
-      });
+    this.loginError = '';
 
   }
 
 
   // =====================================================
-  // UPDATE CREDIT PERCENTAGE
+  // OPEN REGISTER
   // =====================================================
 
-  updateCreditPercentage(): void {
+  openRegister(): void {
+
+    this.showRegister = true;
+
+    this.showLogin = false;
+
+    this.registerError = '';
+
+  }
 
 
-    if (
-      this.totalCredits <= 0
-    ) {
+  // =====================================================
+  // CLOSE AUTH
+  // =====================================================
 
-      this.creditPercentage =
-        0;
+  closeAuth(): void {
 
-      return;
+    this.showLogin = false;
 
-    }
+    this.showRegister = false;
 
+    this.loginError = '';
 
-    this.creditPercentage =
-      (
-        this.availableCredits /
-        this.totalCredits
-      ) * 100;
+    this.registerError = '';
+
+  }
 
 
-    // ================================================
-    // KEEP BETWEEN 0 AND 100
-    // ================================================
+  // =====================================================
+  // SWITCH REGISTER
+  // =====================================================
 
-    this.creditPercentage =
-      Math.max(
+  switchToRegister(): void {
 
-        0,
+    this.showLogin = false;
 
-        Math.min(
+    this.showRegister = true;
 
-          100,
+    this.loginError = '';
 
-          this.creditPercentage
+  }
 
-        )
 
-      );
+  // =====================================================
+  // SWITCH LOGIN
+  // =====================================================
+
+  switchToLogin(): void {
+
+    this.showRegister = false;
+
+    this.showLogin = true;
+
+    this.registerError = '';
 
   }
 
@@ -603,13 +403,7 @@ export class Navbar
   onLogin(): void {
 
 
-    this.loginError =
-      '';
-
-
-    if (
-      this.loginForm.invalid
-    ) {
+    if (this.loginForm.invalid) {
 
       this.loginForm.markAllAsTouched();
 
@@ -618,12 +412,21 @@ export class Navbar
     }
 
 
+    this.loginError = '';
+
+    this.isLoggingIn = true;
+
+
     const email =
-      this.loginForm.value.email;
+      this.loginForm.get(
+        'email'
+      )?.value;
 
 
     const password =
-      this.loginForm.value.password;
+      this.loginForm.get(
+        'password'
+      )?.value;
 
 
     this.authService
@@ -633,64 +436,38 @@ export class Navbar
       )
       .subscribe({
 
-        next: (response: any) => {
+        next: () => {
 
-          console.log(
-            'LOGIN SUCCESS:',
-            response
-          );
+          this.isLoggingIn = false;
 
+          this.isLoggedIn = true;
 
-          /*
-           * AuthService has already saved:
-           *
-           * accessToken
-           * refreshToken
-           * username
-           * email
-           * user
-           *
-           * and emitted username$
-           */
-
-
-          this.showLogin =
-            false;
-
+          this.showLogin = false;
 
           this.loginForm.reset();
 
 
           /*
-           * Get latest credits after login.
-           *
-           * username$ will also trigger this,
-           * but this guarantees it happens here.
+           * AuthService has already stored
+           * username and tokens.
            */
 
-          this.loadCredits();
+          this.username =
+            this.authService.getUsername();
 
 
-          this.router.navigate([
-            '/dashboard'
-          ]);
+          this.getAvailableCredits();
 
         },
 
 
-        error: (error: any) => {
+        error: (error) => {
 
-          console.error(
-            'LOGIN ERROR:',
-            error
-          );
-
+          this.isLoggingIn = false;
 
           this.loginError =
-            error
-              ?.error
-              ?.message ||
-            'Login failed. Please check your email and password.';
+            error?.error?.message ||
+            'Invalid email or password.';
 
         }
 
@@ -706,13 +483,7 @@ export class Navbar
   onRegister(): void {
 
 
-    this.registerError =
-      '';
-
-
-    if (
-      this.registerForm.invalid
-    ) {
+    if (this.registerForm.invalid) {
 
       this.registerForm.markAllAsTouched();
 
@@ -721,16 +492,27 @@ export class Navbar
     }
 
 
+    this.registerError = '';
+
+    this.isRegistering = true;
+
+
     const username =
-      this.registerForm.value.username;
+      this.registerForm.get(
+        'username'
+      )?.value;
 
 
     const email =
-      this.registerForm.value.email;
+      this.registerForm.get(
+        'email'
+      )?.value;
 
 
     const password =
-      this.registerForm.value.password;
+      this.registerForm.get(
+        'password'
+      )?.value;
 
 
     this.authService
@@ -741,52 +523,60 @@ export class Navbar
       )
       .subscribe({
 
-        next: (response: any) => {
+        next: () => {
 
-          console.log(
-            'REGISTER SUCCESS:',
-            response
-          );
+          this.isRegistering = false;
 
 
-          this.showRegister =
-            false;
+          /*
+           * IMPORTANT:
+           *
+           * Registration already returns
+           * accessToken + refreshToken.
+           *
+           * Therefore the user is already
+           * logged in.
+           */
+
+          this.isLoggedIn = true;
+
+
+          this.username =
+            this.authService.getUsername();
+
+
+          this.showRegister = false;
+
+          this.showLogin = false;
+
+          this.showUserMenu = false;
 
 
           this.registerForm.reset();
 
 
           /*
-           * AuthService already saves
-           * the JWT and user information.
+           * Load the user's initial
+           * 100 credits.
            */
 
-
-          this.loadSavedCredits();
-
-
-          this.loadCredits();
+          this.getAvailableCredits();
 
 
-          this.router.navigate([
-            '/'
-          ]);
+          console.log(
+            'REGISTRATION LOGIN SUCCESS:',
+            this.username
+          );
 
         },
 
 
-        error: (error: any) => {
+        error: (error) => {
 
-          console.error(
-            'REGISTER ERROR:',
-            error
-          );
-
+          this.isRegistering = false;
 
           this.registerError =
-            error
-              ?.error
-              ?.message ||
+            error?.error?.message ||
             'Registration failed. Please try again.';
 
         }
@@ -797,98 +587,243 @@ export class Navbar
 
 
   // =====================================================
-  // OPEN LOGIN
+  // GET AVAILABLE CREDITS
   // =====================================================
 
-  openLogin(): void {
 
-    this.showLogin =
-      true;
 
-    this.showRegister =
-      false;
+getAvailableCredits(): void {
 
-    this.loginError =
-      '';
+  if (!this.authService.getToken()) {
+
+    this.availableCredits = 0;
+
+    this.creditPercentage = 0;
+
+    return;
+
+  }
+
+
+  this.creditService
+    .getCredits()
+    .subscribe({
+
+      next: (response) => {
+
+        console.log(
+          'AVAILABLE CREDITS RESPONSE:',
+          response
+        );
+
+
+        const credits =
+          Number(
+            (response as any)?.data?.availableCredits ??
+            (response as any)?.availableCredits ??
+            0
+          );
+
+
+        this.availableCredits =
+          credits;
+
+
+        this.creditPercentage =
+          Math.min(
+            Math.max(
+              credits,
+              0
+            ),
+            100
+          );
+
+
+        localStorage.setItem(
+          'availableCredits',
+          String(
+            credits
+          )
+        );
+
+      },
+
+
+      error: (error) => {
+
+        console.error(
+          'AVAILABLE CREDITS ERROR:',
+          error
+        );
+
+      }
+
+    });
+
+}
+
+
+
+
+
+  // =====================================================
+  // OPEN CREDIT PRICING
+  // =====================================================
+
+  openCreditPricing(): void {
+
+    this.showCreditPricing = true;
+
+    this.creditPricingError = '';
+
+    this.creditPricing = [];
+
+    this.getCreditPricing();
 
   }
 
 
   // =====================================================
-  // OPEN REGISTER
+  // CLOSE CREDIT PRICING
   // =====================================================
 
-  openRegister(): void {
+  closeCreditPricing(): void {
 
-    this.showRegister =
-      true;
-
-    this.showLogin =
-      false;
-
-    this.registerError =
-      '';
+    this.showCreditPricing = false;
 
   }
 
 
   // =====================================================
-  // CLOSE AUTH
+  // GET CREDIT PRICING
   // =====================================================
 
-  closeAuth(): void {
-
-    this.showLogin =
-      false;
-
-    this.showRegister =
-      false;
-
-    this.loginForm.reset();
-
-    this.registerForm.reset();
-
-    this.loginError =
-      '';
-
-    this.registerError =
-      '';
-
-  }
+  getCreditPricing(): void {
 
 
-  // =====================================================
-  // SWITCH TO REGISTER
-  // =====================================================
+    this.isLoadingCreditPricing = true;
 
-  switchToRegister(): void {
-
-    this.showLogin =
-      false;
-
-    this.showRegister =
-      true;
-
-    this.loginError =
-      '';
-
-  }
+    this.creditPricingError = '';
 
 
-  // =====================================================
-  // SWITCH TO LOGIN
-  // =====================================================
+    this.creditService
+      .getCreditPricing()
+      .subscribe({
 
-  switchToLogin(): void {
+        next: (
+          response: any
+        ) => {
 
-    this.showRegister =
-      false;
+          console.log(
+            'CREDIT PRICING RESPONSE:',
+            response
+          );
 
-    this.showLogin =
-      true;
 
-    this.registerError =
-      '';
+          /*
+           * Support:
+           *
+           * [
+           *   {...}
+           * ]
+           *
+           * OR:
+           *
+           * {
+           *   data: [...]
+           * }
+           */
+
+          let pricing: any[] = [];
+
+
+          if (
+            Array.isArray(response)
+          ) {
+
+            pricing =
+              response;
+
+          }
+          else if (
+            Array.isArray(
+              response?.data
+            )
+          ) {
+
+            pricing =
+              response.data;
+
+          }
+
+
+          this.creditPricing =
+            pricing;
+
+
+          if (
+            pricing.length === 0
+          ) {
+
+            this.creditPricingError =
+              'Credit pricing is currently unavailable.';
+
+          }
+          else {
+
+            this.creditPricingError =
+              '';
+
+          }
+
+
+          this.isLoadingCreditPricing =
+            false;
+
+        },
+
+
+        error: (error) => {
+
+          console.error(
+            'CREDIT PRICING ERROR:',
+            error
+          );
+
+
+          this.creditPricing = [];
+
+          this.isLoadingCreditPricing =
+            false;
+
+
+          if (
+            error?.status === 401
+          ) {
+
+            this.creditPricingError =
+              'You are not authorized to view credit pricing.';
+
+          }
+          else if (
+            error?.status === 404
+          ) {
+
+            this.creditPricingError =
+              'Credit pricing API was not found.';
+
+          }
+          else {
+
+            this.creditPricingError =
+              error?.error?.message ||
+              'Unable to load credit pricing.';
+
+          }
+
+        }
+
+      });
 
   }
 
@@ -906,14 +841,12 @@ export class Navbar
 
 
   // =====================================================
-  // PROFILE
+  // OPEN PROFILE
   // =====================================================
 
   openProfile(): void {
 
-    this.showUserMenu =
-      false;
-
+    this.showUserMenu = false;
 
     this.router.navigate([
       '/user-dashboard'
@@ -931,35 +864,28 @@ export class Navbar
     this.authService.logout();
 
 
-    this.username =
-      '';
-
     this.isLoggedIn =
       false;
+
+
+    this.username =
+      '';
 
 
     this.availableCredits =
       0;
 
+
     this.creditPercentage =
       0;
 
 
-    this.isLoadingCredits =
+    this.creditPricing =
+      [];
+
+
+    this.showCreditPricing =
       false;
-
-
-    this.creditError =
-      '';
-
-
-    /*
-     * Remove saved credits too.
-     */
-
-    localStorage.removeItem(
-      'availableCredits'
-    );
 
 
     this.showUserMenu =
@@ -979,8 +905,13 @@ export class Navbar
 
   ngOnDestroy(): void {
 
-    this.usernameSubscription
-      ?.unsubscribe();
+    if (
+      this.usernameSubscription
+    ) {
+
+      this.usernameSubscription.unsubscribe();
+
+    }
 
   }
 

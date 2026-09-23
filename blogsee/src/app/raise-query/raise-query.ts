@@ -148,7 +148,9 @@ export class RaiseQueryComponent {
 
   ];
 
-
+  goBack(): void {
+    window.history.back();
+  }
   /* ========================= */
   /* OPEN NEW QUERY */
   /* ========================= */

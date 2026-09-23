@@ -1,0 +1,31 @@
+<section class="credit-dashboard">
+  <div class="credit-dashboard-header">
+    <div>
+      <span class="eyebrow">CREDIT DASHBOARD</span>
+      <h1>Your AI Credit Usage</h1>
+      <p>See your current balance and the credits required for each service.</p>
+    </div>
+
+    <div class="credit-balance">
+      <strong>{{ availableCredits }}</strong>
+      <span>available credits</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="credit-error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="loading" class="credit-loading">
+    Loading credit pricing...
+  </div>
+
+  <div *ngIf="!loading && creditPricing.length > 0" class="pricing-grid">
+    <article class="pricing-card" *ngFor="let pricing of creditPricing">
+      <div class="pricing-icon">⚡</div>
+      <h2>{{ pricing.serviceName }}</h2>
+      <p>{{ pricing.description }}</p>
+      <strong>{{ pricing.creditsRequired }} credits</strong>
+    </article>
+  </div>
+</section>

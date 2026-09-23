@@ -1,0 +1,315 @@
+ <div class="user-blogs-page">
+
+  <!-- ================================= -->
+
+  <!-- HEADER -->
+
+  <!-- ================================= -->
+<button
+  type="button"
+  class="home-nav-btn"
+  (click)="goback()"
+  aria-label="Go back to home"
+>
+  <span class="home-nav-icon">
+    <i class="fa-solid fa-arrow-left"></i>
+  </span>
+</button>
+
+
+  <!-- ================================= -->
+  <!-- HEADER -->
+  <!-- ================================= -->
+
+  <div class="blogs-header">
+
+    <div class="header-left">
+
+      <div class="robot-icon">
+        ✦
+      </div>
+
+      <div>
+
+        <h1>
+          My Blogs
+        </h1>
+
+        <p>
+          Manage and view all your generated blogs
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================================= -->
+  <!-- FILTER BAR -->
+  <!-- ================================= -->
+
+  <div class="filter-section">
+
+    <div class="filter-tabs">
+
+
+      <!-- ALL -->
+
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="selectedFilter === 'all'"
+        (click)="selectFilter('all')"
+      >
+
+        <span>
+          All
+        </span>
+
+        <span class="count">
+          {{ blogs.length }}
+        </span>
+
+      </button>
+
+
+      <!-- DRAFTS -->
+
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="selectedFilter === 'draft'"
+        (click)="selectFilter('draft')"
+      >
+
+        <span>
+          Drafts
+        </span>
+
+        <span class="count">
+          {{ getDraftCount() }}
+        </span>
+
+      </button>
+
+
+      <!-- PUBLISHED -->
+
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="selectedFilter === 'published'"
+        (click)="selectFilter('published')"
+      >
+
+        <span>
+          Published
+        </span>
+
+        <span class="count">
+          {{ getPublishedCount() }}
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================================= -->
+  <!-- ERROR -->
+  <!-- ================================= -->
+
+  <div
+    class="error-message"
+    *ngIf="errorMessage"
+  >
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- ================================= -->
+  <!-- BLOG GRID -->
+  <!-- ================================= -->
+
+  <div
+    class="blogs-grid"
+    *ngIf="getFilteredBlogs().length > 0"
+  >
+
+    <div
+      class="blog-card"
+      *ngFor="
+        let blog of getFilteredBlogs()
+      "
+      (click)="openBlog(blog.blogId)"
+    >
+
+
+      <!-- ================================= -->
+      <!-- BLOG IMAGE -->
+      <!-- ================================= -->
+
+      <div
+        class="blog-card-image"
+        *ngIf="getBlogImage(blog.blogId)"
+      >
+
+        <img
+          [src]="getBlogImage(blog.blogId)"
+          alt="Generated blog image"
+        >
+
+      </div>
+
+
+      <!-- ================================= -->
+      <!-- CARD HEADER -->
+      <!-- ================================= -->
+
+      <div class="card-header">
+
+        <span class="category">
+
+          {{
+            blog.category ||
+            'General'
+          }}
+
+        </span>
+
+
+        <span
+          class="status"
+          [class.published]="isPublished(blog.blogId)"
+          [class.draft]="!isPublished(blog.blogId)"
+        >
+
+          {{ getStatusLabel(blog.blogId) }}
+
+        </span>
+
+      </div>
+
+
+      <!-- ================================= -->
+      <!-- TITLE -->
+      <!-- ================================= -->
+
+      <h2 class="blog-title">
+
+        {{ blog.title }}
+
+      </h2>
+
+
+      <!-- ================================= -->
+      <!-- DETAILS -->
+      <!-- ================================= -->
+
+      <div class="blog-details">
+
+        <div class="detail">
+
+          <span class="detail-label">
+            Words
+          </span>
+
+          <span class="detail-value">
+            {{ blog.wordCount }}
+          </span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <span class="detail-label">
+            Created
+          </span>
+
+          <span class="detail-value">
+
+            {{
+              blog.createdAt
+                | date:'mediumDate'
+            }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================= -->
+      <!-- FOOTER -->
+      <!-- ================================= -->
+
+      <div class="card-footer">
+
+        <span>
+          View Blog
+        </span>
+
+        <span class="arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================================= -->
+  <!-- EMPTY STATE -->
+  <!-- ================================= -->
+
+  <div
+    class="empty-state"
+    *ngIf="
+      getFilteredBlogs().length === 0 &&
+      !errorMessage
+    "
+  >
+
+    <div class="empty-icon">
+      ✦
+    </div>
+
+
+    <h2>
+      No blogs found
+    </h2>
+
+
+    <p
+      *ngIf="selectedFilter === 'all'"
+    >
+      Generate your first AI blog to see it here.
+    </p>
+
+
+    <p
+      *ngIf="selectedFilter === 'draft'"
+    >
+      You don't have any draft blogs.
+    </p>
+
+
+    <p
+      *ngIf="selectedFilter === 'published'"
+    >
+      You don't have any published blogs.
+    </p>
+
+  </div>
+
+</div>

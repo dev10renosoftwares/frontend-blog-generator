@@ -1,0 +1,102 @@
+.credit-dashboard {
+  min-height: 100%;
+  padding: 36px;
+  background: #f7f5fc;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.credit-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #7c3aed;
+}
+
+h1 {
+  margin: 7px 0;
+  color: #151e2f;
+}
+
+.credit-dashboard-header p {
+  margin: 0;
+  color: #64748b;
+}
+
+.credit-balance {
+  min-width: 170px;
+  padding: 22px;
+  text-align: center;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.08);
+}
+
+.credit-balance strong {
+  display: block;
+  font-size: 34px;
+  color: #7c3aed;
+}
+
+.credit-balance span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.pricing-card {
+  padding: 22px;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.pricing-icon {
+  font-size: 24px;
+}
+
+.pricing-card h2 {
+  margin: 12px 0 7px;
+  color: #151e2f;
+}
+
+.pricing-card p {
+  min-height: 42px;
+  color: #64748b;
+}
+
+.pricing-card strong {
+  color: #7c3aed;
+}
+
+.credit-error,
+.credit-loading {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: white;
+  color: #64748b;
+}
+
+@media (max-width: 700px) {
+  .credit-dashboard {
+    padding: 22px;
+  }
+
+  .credit-dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

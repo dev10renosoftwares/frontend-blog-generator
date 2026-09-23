@@ -1,0 +1,1031 @@
+
+/* =====================================================
+   REGENERATE PROMPT PAGE
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.regenerate-prompt-page {
+
+  position: relative;
+
+  width: 100%;
+
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      color-mix(
+        in srgb,
+        var(--primary-color, #31558f) 8%,
+        transparent
+      ),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      color-mix(
+        in srgb,
+        var(--secondary-color, #667eea) 6%,
+        transparent
+      ),
+      transparent 32%
+    ),
+    var(--background-color, #f5f7fb);
+
+  color: var(--text-color, #172033);
+
+  overflow: hidden;
+
+  font-family:
+    var(
+      --font-family,
+      'Lucida Sans',
+      'Lucida Sans Regular',
+      'Lucida Grande',
+      'Lucida Sans Unicode',
+      Geneva,
+      Verdana,
+      sans-serif
+    );
+}
+
+
+/* =====================================================
+   SUBTLE OVERLAY
+===================================================== */
+
+.prompt-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 49.5%,
+      rgba(70, 100, 150, 0.025) 50%,
+      transparent 50.5%
+    );
+
+  background-size: 60px 60px;
+
+  opacity: 0.5;
+}
+
+
+/* =====================================================
+   PROMPT CARD
+===================================================== */
+
+.prompt-card {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 570px;
+
+  padding: 34px 38px 32px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--card-background, #ffffff) 97%,
+      transparent
+    );
+
+  border:
+    1px solid
+    var(--border-color, #dce3ed);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 25px 65px rgba(25, 42, 70, 0.12),
+    0 5px 18px rgba(25, 42, 70, 0.05);
+
+  overflow: hidden;
+
+  animation:
+    promptCardEnter 0.45s ease-out both;
+}
+
+
+/* =====================================================
+   ROBOTIC TOP BAR
+===================================================== */
+
+.prompt-card::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary-color, #31558f),
+      var(--secondary-color, #667eea),
+      #3b82c4,
+      var(--primary-color, #31558f)
+    );
+
+  background-size: 250% 100%;
+
+  animation:
+    roboticLine 5s linear infinite;
+}
+
+
+/* =====================================================
+   TECH CORNER
+===================================================== */
+
+.tech-corner {
+
+  position: absolute;
+
+  top: 17px;
+
+  right: 18px;
+
+  width: 42px;
+
+  height: 42px;
+
+  border-top:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--primary-color, #31558f) 20%,
+      transparent
+    );
+
+  border-right:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--primary-color, #31558f) 20%,
+      transparent
+    );
+
+  animation:
+    cornerPulse 3s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   TECH LINES
+===================================================== */
+
+.tech-line {
+
+  position: absolute;
+
+  width: 1px;
+
+  height: 55px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(70, 100, 150, 0.13),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+.tech-line-left {
+
+  left: 12px;
+
+  top: 30%;
+
+  animation:
+    lineFloat 4s ease-in-out infinite;
+}
+
+
+.tech-line-right {
+
+  right: 12px;
+
+  bottom: 25%;
+
+  animation:
+    lineFloat 4s ease-in-out 1s infinite;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.prompt-header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  padding-right: 35px;
+
+  animation:
+    contentEnter 0.55s ease-out 0.1s both;
+}
+
+
+.prompt-icon {
+
+  width: 42px;
+
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    1px solid
+    var(--border-color, #dce3ed);
+
+  border-radius: 10px;
+
+  background:
+    var(--soft-background, #f4f7fb);
+
+  color:
+    var(--primary-color, #31558f);
+
+  font-size: 18px;
+
+  box-shadow:
+    inset 0 0 15px rgba(70, 100, 150, 0.04);
+
+  animation:
+    iconPulse 3s ease-in-out infinite;
+}
+
+
+.prompt-heading {
+
+  min-width: 0;
+}
+
+
+.prompt-label {
+
+  display: block;
+
+  margin-bottom: 5px;
+
+  color:
+    var(--primary-color, #5275aa);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+}
+
+
+.prompt-heading h1 {
+
+  margin: 0 0 6px;
+
+  color:
+    var(--heading-color, #172033);
+
+  font-size: 24px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
+}
+
+
+.prompt-heading h1::before {
+
+  content: '// ';
+
+  color:
+    var(--primary-color, #5275aa);
+
+  font-weight: 500;
+}
+
+
+.prompt-heading p {
+
+  margin: 0;
+
+  color:
+    var(--muted-text-color, #8993a5);
+
+  font-size: 11px;
+
+  line-height: 1.65;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+.prompt-body {
+
+  margin-top: 28px;
+
+  animation:
+    contentEnter 0.6s ease-out 0.2s both;
+}
+
+
+.prompt-body label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color:
+    var(--heading-color, #344158);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.textarea-wrapper {
+
+  position: relative;
+}
+
+
+.textarea-wrapper textarea {
+
+  width: 100%;
+
+  min-height: 145px;
+
+  display: block;
+
+  resize: vertical;
+
+  padding: 14px 15px 30px;
+
+  border:
+    1px solid
+    var(--border-color, #dce3ed);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(--input-background, #fafbfd);
+
+  color:
+    var(--text-color, #344158);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.textarea-wrapper textarea::placeholder {
+
+  color:
+    var(--placeholder-color, #aab2c0);
+}
+
+
+.textarea-wrapper textarea:hover {
+
+  border-color:
+    #c8d2e1;
+}
+
+
+.textarea-wrapper textarea:focus {
+
+  border-color:
+    var(--primary-color, #5275aa);
+
+  background:
+    var(--card-background, #ffffff);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--primary-color, #31558f) 9%,
+      transparent
+    );
+}
+
+
+/* =====================================================
+   CHARACTER COUNT
+===================================================== */
+
+.character-count {
+
+  position: absolute;
+
+  right: 12px;
+
+  bottom: 9px;
+
+  color:
+    var(--muted-text-color, #a0a8b7);
+
+  font-size: 9px;
+}
+
+
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+.validation-message {
+
+  display: block;
+
+  margin-top: 7px;
+
+  color: #a65c64;
+
+  font-size: 10px;
+
+  animation:
+    validationEnter 0.25s ease-out;
+}
+
+
+/* =====================================================
+   SUGGESTIONS
+===================================================== */
+
+.suggestions {
+
+  margin-top: 18px;
+
+  animation:
+    contentEnter 0.6s ease-out 0.3s both;
+}
+
+
+.suggestion-label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color:
+    var(--muted-text-color, #9aa3b5);
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.suggestion-list {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+
+.suggestion-list button {
+
+  padding: 6px 10px;
+
+  border:
+    1px solid
+    var(--border-color, #dce3ed);
+
+  border-radius: 6px;
+
+  background:
+    var(--soft-background, #f7f9fc);
+
+  color:
+    var(--muted-text-color, #69768b);
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.suggestion-list button:hover {
+
+  background:
+    var(--card-background, #ffffff);
+
+  border-color:
+    #bdcbe0;
+
+  color:
+    var(--primary-color, #31558f);
+
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.prompt-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 28px;
+
+  padding-top: 20px;
+
+  border-top:
+    1px solid
+    #edf0f4;
+
+  animation:
+    contentEnter 0.6s ease-out 0.4s both;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.cancel-btn,
+.regenerate-btn {
+
+  min-height: 38px;
+
+  padding: 8px 16px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.cancel-btn {
+
+  border:
+    1px solid
+    var(--border-color, #d5dde8);
+
+  background:
+    var(--card-background, #ffffff);
+
+  color:
+    var(--muted-text-color, #68758a);
+}
+
+
+.cancel-btn:hover {
+
+  background:
+    var(--soft-background, #f3f6fa);
+
+  transform: translateY(-1px);
+}
+
+
+.regenerate-btn {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  border:
+    1px solid
+    var(--primary-color, #31558f);
+
+  background:
+    var(--primary-color, #31558f);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 5px 14px
+    color-mix(
+      in srgb,
+      var(--primary-color, #31558f) 17%,
+      transparent
+    );
+}
+
+
+.regenerate-btn:hover:not(:disabled) {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+    color-mix(
+      in srgb,
+      var(--primary-color, #31558f) 23%,
+      transparent
+    );
+}
+
+
+.regenerate-btn:disabled {
+
+  opacity: 0.7;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+.button-loader {
+
+  width: 11px;
+
+  height: 11px;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.35);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation:
+    buttonSpin 0.7s linear infinite;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes promptCardEnter {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(20px)
+      scale(0.97);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes contentEnter {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes roboticLine {
+
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 250% 50%;
+  }
+}
+
+
+@keyframes cornerPulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+
+@keyframes lineFloat {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: translateY(12px);
+  }
+}
+
+
+@keyframes iconPulse {
+
+  0%,
+  100% {
+    box-shadow:
+      inset 0 0 15px rgba(70, 100, 150, 0.04);
+  }
+
+  50% {
+    box-shadow:
+      inset 0 0 20px rgba(70, 100, 150, 0.1);
+  }
+}
+
+
+@keyframes validationEnter {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(-3px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes buttonSpin {
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .regenerate-prompt-page {
+
+    padding: 25px 18px;
+  }
+
+
+  .prompt-card {
+
+    max-width: 520px;
+
+    padding:
+      30px
+      30px
+      28px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 520px) {
+
+  .regenerate-prompt-page {
+
+    min-height: calc(100vh - 65px);
+
+    padding:
+      18px
+      12px;
+  }
+
+
+  .prompt-card {
+
+    padding:
+      27px
+      20px
+      23px;
+
+    border-radius: 12px;
+  }
+
+
+  .prompt-header {
+
+    padding-right: 25px;
+
+    gap: 11px;
+  }
+
+
+  .prompt-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    font-size: 15px;
+  }
+
+
+  .prompt-heading h1 {
+
+    font-size: 20px;
+  }
+
+
+  .prompt-heading p {
+
+    font-size: 10px;
+  }
+
+
+  .prompt-body {
+
+    margin-top: 23px;
+  }
+
+
+  .textarea-wrapper textarea {
+
+    min-height: 130px;
+  }
+
+
+  .suggestion-list {
+
+    gap: 6px;
+  }
+
+
+  .prompt-actions {
+
+    margin-top: 23px;
+  }
+
+
+  .cancel-btn,
+  .regenerate-btn {
+
+    flex: 1;
+
+    padding:
+      8px
+      10px;
+  }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .prompt-card,
+  .prompt-card::before,
+  .tech-corner,
+  .tech-line,
+  .prompt-header,
+  .prompt-icon,
+  .prompt-body,
+  .suggestions,
+  .prompt-actions,
+  .validation-message {
+
+    animation: none;
+  }
+
+
+  .suggestion-list button:hover,
+  .cancel-btn:hover,
+  .regenerate-btn:hover {
+
+    transform: none;
+  }
+}
+

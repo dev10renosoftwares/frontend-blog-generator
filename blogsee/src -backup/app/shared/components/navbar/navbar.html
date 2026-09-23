@@ -1,0 +1,921 @@
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<header class="navbar">
+
+
+  <!-- ===================================================== -->
+  <!-- LEFT — LOGO -->
+  <!-- ===================================================== -->
+
+  <div class="navbar-left">
+
+    <div class="blogsee-logo">
+
+      <!-- AI ROBOT -->
+
+      <div class="ai-robot">
+
+        <!-- Antenna -->
+
+        <div class="antenna">
+          <span></span>
+        </div>
+
+
+        <!-- Robot Head -->
+
+        <div class="robot-head">
+
+          <div class="robot-ear left"></div>
+
+          <div class="robot-ear right"></div>
+
+
+          <div class="robot-face">
+
+            <span class="robot-eye left-eye"></span>
+
+            <span class="robot-eye right-eye"></span>
+
+            <div class="robot-mouth"></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Robot Body -->
+
+        <div class="robot-body">
+
+          <div class="robot-chest">
+            <span>AI</span>
+          </div>
+
+        </div>
+
+
+        <!-- Arms -->
+
+        <div class="robot-arm left-arm"></div>
+
+        <div class="robot-arm right-arm"></div>
+
+      </div>
+
+
+      <!-- BLOGSEE TEXT -->
+
+      <span class="blogsee-text">
+        BLOGSEE
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ===================================================== -->
+  <!-- CREDIT DASHBOARD -->
+  <!-- ===================================================== -->
+
+  <div
+    class="credit-widget"
+    (click)="openCreditPricing()"
+  >
+
+    <span class="credit-title">
+      ⚡ Credit Dashboard
+    </span>
+
+
+    <span class="credit-count">
+      {{ availableCredits }}
+    </span>
+
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        [style.width.%]="creditPercentage"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ===================================================== -->
+  <!-- CREDIT PRICING POPUP -->
+  <!-- ===================================================== -->
+
+  @if (showCreditPricing) {
+
+    <div
+      class="credit-pricing-overlay"
+      (click)="closeCreditPricing()"
+    >
+
+      <div
+        class="credit-pricing-window"
+        (click)="$event.stopPropagation()"
+      >
+
+
+        <!-- ================================================= -->
+        <!-- HEADER -->
+        <!-- ================================================= -->
+
+        <div class="credit-pricing-header">
+
+          <div>
+
+            <span class="pricing-label">
+              CREDIT USAGE
+            </span>
+
+
+            <h2>
+              Credit Pricing
+            </h2>
+
+
+            <p>
+              Credits required for each AI service
+            </p>
+
+          </div>
+
+
+          <!-- CLOSE -->
+
+          <button
+            type="button"
+            class="pricing-close"
+            (click)="closeCreditPricing()"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- ERROR -->
+        <!-- ================================================= -->
+
+        @if (creditPricingError) {
+
+          <div class="pricing-error">
+
+            <span class="error-icon">
+              !
+            </span>
+
+            <span>
+              {{ creditPricingError }}
+            </span>
+
+          </div>
+
+        }
+
+
+
+        <!-- ================================================= -->
+        <!-- PRICING LIST -->
+        <!-- ================================================= -->
+
+        @if (
+          creditPricing.length > 0 &&
+          !creditPricingError
+        ) {
+
+          <div class="pricing-list">
+
+            @for (
+              pricing of creditPricing;
+              track pricing.serviceName
+            ) {
+
+              <div class="pricing-item">
+
+
+                <!-- ICON -->
+
+                <div class="pricing-icon">
+
+                  <span>
+                    ⚡
+                  </span>
+
+                </div>
+
+
+                <!-- DETAILS -->
+
+                <div class="pricing-details">
+
+                  <h3>
+                    {{ pricing.serviceName }}
+                  </h3>
+
+
+                  <p>
+                    {{ pricing.description }}
+                  </p>
+
+                </div>
+
+
+                <!-- COST -->
+
+                <div class="pricing-cost">
+
+                  <strong>
+                    {{ pricing.creditsRequired }}
+                  </strong>
+
+
+                  <span>
+                    credits
+                  </span>
+
+                </div>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
+
+
+
+        <!-- ================================================= -->
+        <!-- EMPTY STATE -->
+        <!-- ================================================= -->
+
+        @if (
+          creditPricing.length === 0 &&
+          !creditPricingError
+        ) {
+
+          <div class="pricing-empty">
+
+            <div class="empty-icon">
+              ⚡
+            </div>
+
+            <p>
+              Pricing information is currently unavailable.
+            </p>
+
+          </div>
+
+        }
+
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER -->
+        <!-- ================================================= -->
+
+        <div class="credit-pricing-footer">
+
+          <span>
+            Your current balance
+          </span>
+
+
+          <strong>
+            {{ availableCredits }} credits
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+
+
+  <!-- ===================================================== -->
+  <!-- RIGHT SIDE -->
+  <!-- ===================================================== -->
+
+  <div class="navbar-right">
+
+
+    <!-- ================================================= -->
+    <!-- NOTIFICATION -->
+    <!-- ================================================= -->
+
+    <button
+      class="notification-btn"
+      type="button"
+      routerLink="/notification"
+    >
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path
+          d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"
+        ></path>
+
+        <path
+          d="M13.73 21a2 2 0 0 1-3.46 0"
+        ></path>
+
+      </svg>
+
+    </button>
+
+
+
+    <!-- ================================================= -->
+    <!-- NOT LOGGED IN -->
+    <!-- ================================================= -->
+
+    @if (!isLoggedIn) {
+
+      <button
+        class="login-btn"
+        type="button"
+        (click)="openLogin()"
+      >
+        Login
+      </button>
+
+
+      <button
+        class="register-btn"
+        type="button"
+        (click)="openRegister()"
+      >
+        Register
+      </button>
+
+    }
+
+
+
+    <!-- ================================================= -->
+    <!-- LOGGED IN -->
+    <!-- ================================================= -->
+
+    @else {
+
+      <div
+        class="profile"
+        (click)="toggleUserMenu()"
+      >
+
+
+        <!-- ================================================= -->
+        <!-- PROFILE INITIAL -->
+        <!-- ================================================= -->
+
+        <div class="profile-initial">
+
+          @if (username) {
+
+            {{ username.charAt(0).toUpperCase() }}
+
+          } @else {
+
+            ?
+
+          }
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- USERNAME -->
+        <!-- ================================================= -->
+
+        <span class="username">
+
+          @if (username) {
+
+            {{ username }}
+
+          } @else {
+
+            Username unavailable
+
+          }
+
+        </span>
+
+
+
+        <!-- ================================================= -->
+        <!-- ARROW -->
+        <!-- ================================================= -->
+
+        <span class="dropdown-arrow"></span>
+
+      </div>
+
+
+
+      <!-- ================================================= -->
+      <!-- USER DROPDOWN -->
+      <!-- ================================================= -->
+
+      @if (showUserMenu) {
+
+        <div class="user-dropdown">
+
+
+          <!-- PROFILE -->
+
+          <button
+            type="button"
+            (click)="openProfile()"
+          >
+            Profile
+          </button>
+
+
+          <!-- LOGOUT -->
+
+          <button
+            type="button"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+
+        </div>
+
+      }
+
+    }
+
+  </div>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- LOGIN OVERLAY -->
+<!-- ========================================================= -->
+
+@if (showLogin) {
+
+  <div
+    class="login-overlay"
+    (click)="closeAuth()"
+  >
+
+    <div
+      class="login-window"
+      (click)="$event.stopPropagation()"
+    >
+
+
+      <!-- ================================================= -->
+      <!-- CLOSE -->
+      <!-- ================================================= -->
+
+      <button
+        class="close-login"
+        type="button"
+        (click)="closeAuth()"
+      >
+        ×
+      </button>
+
+
+
+      <!-- ================================================= -->
+      <!-- HEADER -->
+      <!-- ================================================= -->
+
+      <div class="login-header">
+
+        <h2>
+          Welcome Back
+        </h2>
+
+        <p>
+          Login to continue to Blogsee
+        </p>
+
+      </div>
+
+
+
+      <!-- ================================================= -->
+      <!-- LOGIN FORM -->
+      <!-- ================================================= -->
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onLogin()"
+      >
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="loginEmail">
+            Email
+          </label>
+
+
+          <input
+            id="loginEmail"
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+          />
+
+          @if (
+            loginForm.get('email')?.invalid &&
+            loginForm.get('email')?.touched
+          ) {
+
+            <small class="error-message">
+              Please enter a valid email address.
+            </small>
+
+          }
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="loginPassword">
+            Password
+          </label>
+
+
+          <input
+            id="loginPassword"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+
+          @if (
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          ) {
+
+            <small class="error-message">
+              Password must be at least 6 characters.
+            </small>
+
+          }
+
+        </div>
+
+
+
+        <!-- LOGIN ERROR -->
+
+        @if (loginError) {
+
+          <small class="error-message">
+            {{ loginError }}
+          </small>
+
+        }
+
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+          type="submit"
+          class="modal-login-btn"
+          [disabled]="isLoggingIn"
+        >
+
+          @if (isLoggingIn) {
+
+            Signing in...
+
+          } @else {
+
+            Login
+
+          }
+
+        </button>
+
+      </form>
+
+
+
+      <!-- ================================================= -->
+      <!-- REGISTER OPTION -->
+      <!-- ================================================= -->
+
+      <div class="register-option">
+
+        <span>
+          Don't have an account?
+        </span>
+
+
+        <button
+          type="button"
+          class="register-link"
+          (click)="switchToRegister()"
+        >
+          Register
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
+
+
+
+<!-- ========================================================= -->
+<!-- REGISTER OVERLAY -->
+<!-- ========================================================= -->
+
+@if (showRegister) {
+
+  <div
+    class="register-overlay"
+    (click)="closeAuth()"
+  >
+
+    <div
+      class="register-window"
+      (click)="$event.stopPropagation()"
+    >
+
+
+      <!-- ================================================= -->
+      <!-- CLOSE -->
+      <!-- ================================================= -->
+
+      <button
+        class="close-register"
+        type="button"
+        (click)="closeAuth()"
+      >
+        ×
+      </button>
+
+
+
+      <!-- ================================================= -->
+      <!-- HEADER -->
+      <!-- ================================================= -->
+
+      <div class="register-header">
+
+        <h2>
+          Create Account
+        </h2>
+
+
+        <p>
+          Join Blogsee and start creating blogs
+        </p>
+
+      </div>
+
+
+
+      <!-- ================================================= -->
+      <!-- REGISTER FORM -->
+      <!-- ================================================= -->
+
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="onRegister()"
+      >
+
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+          <label for="registerUsername">
+            Username
+          </label>
+
+
+          <input
+            id="registerUsername"
+            type="text"
+            formControlName="username"
+            placeholder="Enter your username"
+            autocomplete="username"
+          />
+
+          @if (
+            registerForm.get('username')?.invalid &&
+            registerForm.get('username')?.touched
+          ) {
+
+            <small class="error-message">
+              Username must be at least 3 characters.
+            </small>
+
+          }
+
+        </div>
+
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="registerEmail">
+            Email
+          </label>
+
+
+          <input
+            id="registerEmail"
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+          />
+
+          @if (
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+          ) {
+
+            <small class="error-message">
+              Please enter a valid email address.
+            </small>
+
+          }
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="registerPassword">
+            Password
+          </label>
+
+
+          <input
+            id="registerPassword"
+            type="password"
+            formControlName="password"
+            placeholder="Create a password"
+            autocomplete="new-password"
+          />
+
+          @if (
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+          ) {
+
+            <small class="error-message">
+              Password must be at least 6 characters.
+            </small>
+
+          }
+
+        </div>
+
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="registerConfirmPassword">
+            Confirm Password
+          </label>
+
+
+          <input
+            id="registerConfirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            autocomplete="new-password"
+          />
+
+          @if (
+            registerForm.get('confirmPassword')?.touched &&
+            registerForm.hasError('passwordMismatch')
+          ) {
+
+            <small class="error-message">
+              Passwords do not match.
+            </small>
+
+          }
+
+        </div>
+
+
+
+        <!-- REGISTER ERROR -->
+
+        @if (registerError) {
+
+          <small class="error-message">
+            {{ registerError }}
+          </small>
+
+        }
+
+
+
+        <!-- REGISTER BUTTON -->
+
+        <button
+          type="submit"
+          class="modal-register-btn"
+          [disabled]="isRegistering"
+        >
+
+          @if (isRegistering) {
+
+            Creating account...
+
+          } @else {
+
+            Register
+
+          }
+
+        </button>
+
+      </form>
+
+
+
+      <!-- ================================================= -->
+      <!-- LOGIN OPTION -->
+      <!-- ================================================= -->
+
+      <div class="register-option">
+
+        <span>
+          Already have an account?
+        </span>
+
+
+        <button
+          type="button"
+          class="register-link"
+          (click)="switchToLogin()"
+        >
+          Login
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

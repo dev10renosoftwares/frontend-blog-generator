@@ -1,0 +1,708 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-container">
+
+    <!-- Left Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Center Content -->
+   <main class="dashboard-content">
+
+   <div class="search-bar">
+    
+        <input type="text" placeholder="Search blogs...">
+        <button type="submit" class="search-btn">
+       
+ <span class="search-icon">⌕</span>
+        </button>
+    </div>
+  
+
+    <!-- Category Chips -->
+<!-- Categories -->
+<section class="categories-section">
+
+
+
+  <div class="categories-list">
+
+    <button class="category-btn active">
+      All
+    </button>
+
+    <button class="category-btn">
+      Technology
+    </button>
+
+    <button class="category-btn">
+      Education
+    </button>
+
+    <button class="category-btn">
+      Business
+    </button>
+    <button class="category-btn">
+     Love
+    </button>
+    <button class="category-btn">
+      History
+    </button>
+    <button class="category-btn">
+        Science
+    </button>
+    <button class="category-btn">
+        Travel
+    </button>
+    <button class="category-btn">
+        Food
+    </button>
+    <button class="category-btn">
+        Lifestyle
+    </button>
+
+  </div>
+
+</section>
+
+
+
+    <!-- Blog Feed -->
+<!-- Blog Feed -->
+<section class="blog-section">
+  <div class="blog-grid">
+
+    <!-- Blog Card 1 -->
+    <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name" routerLink="/userprofile">Tamanna</span>
+            <span class="read-time">5 min read</span>
+            
+          </div>
+          <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+      
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+         Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+          Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- Blog Card 2 -->
+    <article class="blog-card"  (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">A</div>
+
+          <div class="author-info">
+            <span class="author-name" routerLink="/userprofile">Ayesha</span>
+            <span class="read-time">4 min read</span>
+          </div>
+           <div class="blog-card-header">
+        <span class="blog-category">Design</span>
+        <span class="blog-date">Aug 6, 2026</span>
+      </div>
+        </div>
+
+     
+
+      <h3>Principles of Modern UI Design</h3>
+
+      <p>
+        Learn how spacing, typography, color and consistency can
+        help you create clean and professional user interfaces.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- Blog Card 3 -->
+    <article class="blog-card" (click)="readBlog()">
+<div class="author">
+          <div class="author-avatar">R</div>
+
+          <div class="author-info">
+            <span class="author-name" routerLink="/userprofile">Rahul</span>
+            <span class="read-time">6 min read</span>
+          </div>
+             <div class="blog-card-header">
+        <span class="blog-category">Programming</span>
+        <span class="blog-date">Aug 5, 2026</span>
+      </div>
+        </div>
+   
+
+      <h3>Understanding Angular Components</h3>
+
+      <p>
+        Components are one of the most important building blocks
+        of Angular applications. Here's how they work.
+      </p>
+
+      <div class="blog-card-footer">
+
+        
+
+        <button class="read-btn" (click)="readBlog()"> 
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+     <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name" routerLink="/userprofile">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+            <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+    
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+     <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+          <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+      
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+     <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+           <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+     
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+     <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+            <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+    
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+    <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+           <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+     
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+    <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+          <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+      
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+    <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+           <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+     
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+    <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+            <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+    
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn" (click)="readBlog()">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+     <article class="blog-card" (click)="readBlog()">
+ <div class="author">
+          <div class="author-avatar">T</div>
+
+          <div class="author-info">
+            <span class="author-name">Tamanna</span>
+            <span class="read-time">5 min read</span>
+          </div>
+          <div class="blog-card-header">
+        <span class="blog-category">Technology</span>
+        <span class="blog-date">Aug 7, 2026</span>
+      </div>
+        </div>
+      
+
+      <h3>How Artificial Intelligence Is Changing Our Future</h3>
+
+      <p>
+        Artificial intelligence is transforming the way we solve complex problems in our everyday lives.
+      </p>
+
+      <div class="blog-card-footer">
+
+       
+
+        <button class="read-btn">
+          Read
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+</main>
+
+    
+<!-- Right Trending Panel -->
+<aside class="trending-panel">
+
+    <div class="trending-header">
+        <h2>Trending Blogs</h2>
+    </div>
+
+    <div class="trending-list">
+
+        <!-- Trending Blog 1 -->
+        <article class="trending-blog" (click)="readBlog()">
+
+            <span class="trending-number">01</span>
+
+            <div class="trending-content">
+                <h3>
+                    The Future of Artificial Intelligence
+                </h3>
+
+                <div class="trending-meta" >
+                    <span>Technology</span>
+                    <span>•</span>
+                    <span>8 min read</span>
+                </div>
+            </div>
+
+        </article>
+
+
+        <!-- Trending Blog 2 -->
+        <article class="trending-blog" (click)="readBlog()">
+
+            <span class="trending-number">02</span>
+
+            <div class="trending-content">
+                <h3>
+                    How Modern UI Design Is Evolving
+                </h3>
+
+                <div class="trending-meta">
+                    <span>Design</span>
+                    <span>•</span>
+                    <span>5 min read</span>
+                </div>
+            </div>
+
+        </article>
+
+
+        <!-- Trending Blog 3 -->
+        <article class="trending-blog" (click)="readBlog()">
+
+            <span class="trending-number">03</span>
+
+            <div class="trending-content">
+                <h3>
+                    Understanding Angular in 2026
+                </h3>
+
+                <div class="trending-meta" >
+                    <span>Programming</span>
+                    <span>•</span>
+                    <span>6 min read</span>
+                </div>
+            </div>
+
+        </article>
+
+
+        <!-- Trending Blog 4 -->
+        <article class="trending-blog" (click)="readBlog()">
+
+            <span class="trending-number">04</span>
+
+            <div class="trending-content">
+                <h3>
+                    The Importance of Good UX
+                </h3>
+
+                <div class="trending-meta">
+                    <span>Design</span>
+                    <span>•</span>
+                    <span>4 min read</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- Trending Blog 5 -->
+        <article class="trending-blog" (click)="readBlog()">
+
+            <span class="trending-number">05</span>
+
+            <div class="trending-content">
+                <h3>
+                    Technology Trends You Should Know
+                </h3>
+
+                <div class="trending-meta">
+                    <span>Technology</span>
+                    <span>•</span>
+                    <span>7 min read</span>
+                </div>
+            </div>
+
+        </article>
+
+    </div>
+    <!-- COMMUNITY FEEDBACK -->
+<div class="community-feedback">
+
+  <div class="feedback-header">
+
+    <div>
+      <h3>Community Feedback</h3>
+      <p>What other users are saying</p>
+    </div>
+
+    <span class="feedback-icon">
+      ★
+    </span>
+
+  </div>
+
+
+  <!-- Feedback 1 -->
+  <div class="feedback-item">
+
+    <div class="feedback-user">
+
+      <div class="user-avatar">
+        AK
+      </div>
+
+      <div class="user-details">
+
+        <h4>Ayesha Khan</h4>
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+      </div>
+
+    </div>
+
+    <p>
+      Really helpful tool for creating blog content quickly.
+    </p>
+
+  </div>
+
+
+  <!-- Feedback 2 -->
+  <div class="feedback-item">
+
+    <div class="feedback-user">
+
+      <div class="user-avatar">
+        RS
+      </div>
+
+      <div class="user-details">
+
+        <h4>Rahul Sharma</h4>
+
+        <div class="stars">
+          ★★★★☆
+        </div>
+
+      </div>
+
+    </div>
+
+    <p>
+      The generator is easy to use and saves a lot of time.
+    </p>
+
+  </div>
+
+
+  <!-- Feedback 3 -->
+  <div class="feedback-item">
+
+    <div class="feedback-user">
+
+      <div class="user-avatar">
+        SM
+      </div>
+
+      <div class="user-details">
+
+        <h4>Sara Malik</h4>
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+      </div>
+
+    </div>
+
+    <p>
+      Clean interface and great results. Really enjoyed using it.
+    </p>
+
+  </div>
+
+
+  <button
+    class="view-feedback-btn"
+    routerLink="/feedback">
+
+    View All Feedback
+    <span>→</span>
+
+  </button>
+
+</div>
+
+</aside>
+        <!-- Trending Cards will go here -->
+
+
+
+</div>

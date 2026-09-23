@@ -1,3 +1,15 @@
+<button
+  type="button"
+  class="home-nav-btn"
+  (click)="goback()"
+  aria-label="Go back to home"
+>
+  <span class="home-nav-icon">
+    <i class="fa-solid fa-arrow-left"></i>
+  </span>
+</button>
+
+
 <form
   (ngSubmit)="generateBlog()"
   #blogForm="ngForm"
@@ -5,14 +17,19 @@
   class="blog-generator-card"
 >
 
-  <!-- Header -->
+  <!-- ===================================================== -->
+  <!-- HEADER -->
+  <!-- ===================================================== -->
+
   <div class="page-header">
 
     <div class="header-content">
 
       <div class="title-section">
 
-        <h1>Blog Generator</h1>
+        <h1>
+          Blog Generator
+        </h1>
 
         <p>
           Powered by
@@ -21,7 +38,9 @@
 
       </div>
 
-      <!-- Language -->
+
+      <!-- LANGUAGE -->
+
       <div class="language-selector">
 
         <label for="language">
@@ -37,14 +56,19 @@
           [class.invalid]="language.invalid && language.touched"
         >
 
-          <option value="" disabled>
+          <option
+            value=""
+            disabled
+          >
             Select language...
           </option>
 
-          <option value="English">English</option>
-          <option value="Hindi">Hindi</option>
-          <option value="Urdu">Urdu</option>
-          <option value="Arabic">Arabic</option>
+          <option
+            *ngFor="let languageItem of languages"
+            [value]="languageItem"
+          >
+            {{ languageItem }}
+          </option>
 
         </select>
 
@@ -62,10 +86,15 @@
   </div>
 
 
-  <!-- Category + Tone -->
+  <!-- ===================================================== -->
+  <!-- CATEGORY + TONE -->
+  <!-- ===================================================== -->
+
   <div class="form-row">
 
-    <!-- Category -->
+
+    <!-- CATEGORY -->
+
     <div class="form-group">
 
       <label for="category">
@@ -81,15 +110,18 @@
         [class.invalid]="category.invalid && category.touched"
       >
 
-        <option value="" disabled>
-          Select category...
+        <option
+          value=""
+          disabled
+        >
+          Select Category
         </option>
 
         <option
-          *ngFor="let item of categories"
-          [value]="item"
+          *ngFor="let categoryItem of categories"
+          [value]="categoryItem.name"
         >
-          {{ item }}
+          {{ categoryItem.name }}
         </option>
 
       </select>
@@ -104,48 +136,45 @@
     </div>
 
 
-    <!-- Tone -->
+    <!-- TONE -->
+
     <div class="form-group">
 
       <label for="tone">
-        Writing Tone <span>*</span>
+        Tone
       </label>
 
       <select
         id="tone"
         name="tone"
         [(ngModel)]="blog.tone"
-        #tone="ngModel"
-        required
-        [class.invalid]="tone.invalid && tone.touched"
       >
 
-        <option value="" disabled>
-          Choose tone...
+        <option
+          value=""
+          disabled
+        >
+          Select Tone
         </option>
 
         <option
-          *ngFor="let item of tones"
-          [value]="item"
+          *ngFor="let toneItem of tones"
+          [value]="toneItem"
         >
-          {{ item }}
+          {{ toneItem }}
         </option>
 
       </select>
-
-      <small
-        class="error"
-        *ngIf="tone.invalid && tone.touched"
-      >
-        Please select a writing tone.
-      </small>
 
     </div>
 
   </div>
 
 
-  <!-- Blog Topic -->
+  <!-- ===================================================== -->
+  <!-- BLOG TOPIC -->
+  <!-- ===================================================== -->
+
   <div class="form-group full-width">
 
     <label for="topic">
@@ -161,7 +190,7 @@
       required
       minlength="5"
       maxlength="150"
-      placeholder="e.g; Artificial Intelligence etc...."
+      placeholder="e.g. Artificial Intelligence"
       [class.invalid]="topic.invalid && topic.touched"
     />
 
@@ -189,92 +218,84 @@
   </div>
 
 
-  <!-- Audience + Word Count -->
+  <!-- ===================================================== -->
+  <!-- AUDIENCE + WORD COUNT -->
+  <!-- ===================================================== -->
+
   <div class="form-row">
 
-    <!-- Audience -->
+
+    <!-- AUDIENCE -->
+
     <div class="form-group">
 
       <label for="audience">
-        Target Audience <span>*</span>
+        Audience
       </label>
 
-      <input
+      <select
         id="audience"
-        type="text"
         name="audience"
         [(ngModel)]="blog.audience"
-        #audience="ngModel"
-        required
-        minlength="3"
-        maxlength="100"
-        placeholder="e.g; students, professionals etc..."
-        [class.invalid]="audience.invalid && audience.touched"
-      />
-
-      <small
-        class="error"
-        *ngIf="audience.errors?.['required'] && audience.touched"
       >
-        Target audience is required.
-      </small>
 
-      <small
-        class="error"
-        *ngIf="audience.errors?.['minlength'] && audience.touched"
-      >
-        Please enter at least 3 characters.
-      </small>
+        <option
+          value=""
+          disabled
+        >
+          Select Audience
+        </option>
 
-      <small
-        class="error"
-        *ngIf="audience.errors?.['maxlength'] && audience.touched"
-      >
-        Target audience cannot exceed 100 characters.
-      </small>
+        <option
+          *ngFor="let audienceItem of audiences"
+          [value]="audienceItem"
+        >
+          {{ audienceItem }}
+        </option>
+
+      </select>
 
     </div>
 
 
-    <!-- Word Count -->
+    <!-- WORD COUNT -->
+
     <div class="form-group">
 
       <label for="wordCount">
         Word Count <span>*</span>
       </label>
 
-      <input
+      <select
         id="wordCount"
-        type="number"
         name="wordCount"
         [(ngModel)]="blog.wordCount"
         #wordCount="ngModel"
         required
-        min="100"
-        max="5000"
-        placeholder="e.g; 100 words....."
         [class.invalid]="wordCount.invalid && wordCount.touched"
-      />
+      >
+
+        <option
+          [ngValue]="null"
+          disabled
+        >
+          Select Word Count
+        </option>
+
+        <option
+          *ngFor="let count of wordCounts"
+          [ngValue]="count"
+        >
+          {{ count }} words
+        </option>
+
+      </select>
 
       <small
         class="error"
-        *ngIf="wordCount.errors?.['required'] && wordCount.touched"
+        *ngIf="wordCount.invalid && wordCount.touched"
       >
-        Word count is required.
-      </small>
-
-      <small
-        class="error"
-        *ngIf="wordCount.errors?.['min'] && wordCount.touched"
-      >
-        Word count must be at least 100.
-      </small>
-
-      <small
-        class="error"
-        *ngIf="wordCount.errors?.['max'] && wordCount.touched"
-      >
-        Word count cannot exceed 5000.
+        Please select a word count.
       </small>
 
     </div>
@@ -282,37 +303,40 @@
   </div>
 
 
-  <!-- Generate -->
+  <!-- ===================================================== -->
+  <!-- GENERATE -->
+  <!-- ===================================================== -->
+
   <div class="button-container">
 
     <button
       type="submit"
       class="generate-btn"
-      [disabled]="blogForm.invalid || isGenerating"
-      (click)="generateBlog()"
-  
+      [disabled]="isGenerating"
     >
 
-      <span *ngIf="!isGenerating">
-        Generate
-        <span class="sparkle">✦</span>
-      </span>
-
-      <span *ngIf="isGenerating">
-        Generating...
-      </span>
+      {{
+        isGenerating
+          ? 'Generating...'
+          : 'Generate Blog'
+      }}
 
     </button>
 
   </div>
 
 
-  <!-- Temporary message -->
+  <!-- ===================================================== -->
+  <!-- MESSAGE -->
+  <!-- ===================================================== -->
+
   <div
     class="success-message"
-    *ngIf="showMessage"
+    *ngIf="showMessage && (successMessage || errorMessage)"
   >
-    Blog details saved temporarily. API integration will be added later.
+
+    {{ successMessage || errorMessage }}
+
   </div>
 
 </form>

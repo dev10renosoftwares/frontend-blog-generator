@@ -1,56 +1,27 @@
-
 import { Injectable } from '@angular/core';
-
-import {
-  HttpClient,
-  HttpHeaders
-} from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment.development';
+import { CreditPricingResponseDto } from '../ServiceModels/v1/Credit/CreditPricingResponseDto';
+import { GetCreditsResponseDto } from '../ServiceModels/v1/Credit/GetCreditsResponseDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreditService {
 
-  private apiUrl =
-    'http://192.168.29.71:5229';
+  private readonly baseUrl = `${environment.apiUrl}/Credits`;
 
+  constructor(private http: HttpClient) {}
 
-  constructor(
-    private http: HttpClient
-  ) {}
-
-
-  getCredits(): Observable<any> {
-
-    const token =
-      localStorage.getItem(
-        'accessToken'
-      );
-
-
-    const headers =
-      new HttpHeaders({
-
-        Authorization:
-          `Bearer ${token}`
-
-      });
-
-
-    return this.http.get<any>(
-
-      `${this.apiUrl}/api/v1/Credits`,
-
-      {
-        headers
-      }
-
-    );
-
+  getCredits(): Observable<GetCreditsResponseDto | { data: GetCreditsResponseDto }> {
+    return this.http.get<GetCreditsResponseDto | { data: GetCreditsResponseDto }>(this.baseUrl);
   }
 
+  getCreditPricing(): Observable<CreditPricingResponseDto[] | { data: CreditPricingResponseDto[] }> {
+    return this.http.get<CreditPricingResponseDto[] | { data: CreditPricingResponseDto[] }>(
+      `${this.baseUrl}/pricing`
+    );
+  }
 }
-
